@@ -1,0 +1,25 @@
+{
+  "name": "jobportal",
+  "version": "1.0.0",
+  "description": "Job Portal for searching and applying for jobs",
+  "scripts": {
+    "start": "parcel ./Public/index.html",
+    "build": "parcel build ./Public/index.html"
+  },
+  "keywords": [
+    "frontend",
+    "React",
+    "Job"
+  ],
+  "author": "Robin",
+  "license": "ISC",
+  "browserslist": "last 2 versions, not dead",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  }
+}
