@@ -1,0 +1,34 @@
+.featured-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+
+  &>div:first-of-type {
+    display: flex;
+    align-items: center;
+
+    & button {
+      padding: 0;
+    }
+
+  }
+}
+
+.featured-job-box {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+  justify-content: center;
+
+
+  @media (min-width:700px) {
+    gap: var(--gap-xl);
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width:1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

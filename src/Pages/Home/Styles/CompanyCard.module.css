@@ -1,0 +1,46 @@
+.companyCard {
+  display: flex;
+  flex-direction: column;
+  padding: var(--p-lg);
+  border-radius: var(--br-sm);
+  box-shadow: 0px 0px 2px 2px var(--bg-light-2);
+
+  &>div:first-child {
+    display: flex;
+    margin-block-end: var(--m-lg);
+    align-items: center;
+    gap: var(--gap-md);
+    justify-content: space-between;
+
+    &>div:has(img) {
+      width: 52px;
+      height: 52px;
+      aspect-ratio: 1;
+      border-radius: var(--br-sm);
+      background-color: var(--bg-light-2);
+      padding: var(--p-sm);
+
+      &>img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &>div:nth-of-type(2) {
+      flex: auto;
+
+      &>div {
+        display: flex;
+        gap: var(--gap-md);
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-x-light);
+      }
+    }
+  }
+
+  &>button {
+    background-color: var(--text-x-light);
+  }
+}
