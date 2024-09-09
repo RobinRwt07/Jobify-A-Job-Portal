@@ -1,0 +1,65 @@
+.jobContainer {
+  margin-block: var(--m-md);
+  position: relative;
+  display: block;
+  gap: var(--gap-lg);
+
+  &>div:last-child {
+    flex: auto;
+  }
+
+  @media (min-width:700px) {
+    margin-block: var(--m-xl);
+  }
+
+  @media (min-width:1024px) {
+    display: flex;
+    margin-block: var(--m-xl);
+  }
+}
+
+.jobCardContainer {
+  flex: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+  justify-content: center;
+
+
+  @media (min-width:700px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width:1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.JobSearchBar {
+  border: 2px solid var(--bg-light-3);
+  background-color: var(--bg-light-2);
+  display: flex;
+  margin-block-end: var(--m-lg);
+  flex-direction: column;
+  padding: var(--p-md) var(--p-lg);
+  border-radius: var(--br-sm);
+  gap: var(--gap-md);
+
+  @media (min-width:600px) {
+    flex-direction: row;
+
+    &>*:not(hr, button) {
+      flex: auto;
+    }
+  }
+
+  &>label {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+
+    &>input {
+      border: none;
+    }
+  }
+}

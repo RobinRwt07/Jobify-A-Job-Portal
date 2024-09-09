@@ -46,7 +46,7 @@
   flex-direction: column;
   margin-block-start: var(--m-xl);
   padding-block-start: var(--p-xl);
-  border-top: 3px solid var(--bg-light-2);
+  border-top: 3px solid var(--bg-light-3);
 
   @media (min-width:600px) {
     flex-direction: row;
@@ -60,7 +60,7 @@
     gap: var(--gap-md);
 
     &>a {
-      background-color: var(--bg-light);
+      background-color: var(--bg-white);
       width: 32px;
       height: 32px;
       aspect-ratio: 1;
@@ -68,7 +68,7 @@
       border-radius: 50%;
 
       &:hover {
-        background-color: var(--bg-light-2);
+        background-color: var(--bg-light-3);
       }
     }
   }

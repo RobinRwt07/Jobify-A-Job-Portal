@@ -1,12 +1,15 @@
-import Logo from '../Assest/Images/Logo.svg';
-export default Logo = () => {
+import logo from '../Assest/Images/Logo.svg';
+import { Link } from 'react-router-dom';
+const Logo = () => {
 	const style = {
 		maxWidth: "150px",
 		height: "35px"
 	}
 	return (
-		<div >
-			<img src={Logo} alt="logo" style={style} />
-		</div>
+		<Link to={'/'}>
+			<img src={logo} alt="logo" style={style} />
+		</Link>
 	)
 }
+
+export default Logo;

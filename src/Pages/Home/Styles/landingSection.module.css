@@ -37,7 +37,7 @@
     margin-block: var(--m-md);
   }
 
-  &>form {
+  &>div:first-of-type {
     margin-block-start: var(--m-2xl);
     display: flex;
     flex-direction: column;
@@ -55,18 +55,19 @@
     &>hr {
       border: 1px solid var(--text-light);
     }
-  }
 
-  & div:has(input) {
-    display: flex;
-    align-items: center;
+    & div:has(input) {
+      display: flex;
+      align-items: center;
 
-    &>input {
-      width: 100%;
-      border: none;
-      border-radius: 0;
+      &>input {
+        width: 100%;
+        border: none;
+        border-radius: 0;
+      }
     }
   }
+
 
 
 }

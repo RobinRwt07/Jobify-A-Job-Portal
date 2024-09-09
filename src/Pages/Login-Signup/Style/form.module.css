@@ -1,0 +1,50 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+
+  & span {
+    color: red;
+    font-size: 11px;
+  }
+
+  &>label:not(.checkbox) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.forgetPassword {
+  &>a {
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+.checkbox {
+  display: flex;
+  gap: var(--gap-md);
+  align-items: center;
+  font-size: 12px;
+  margin-block: var(--m-md);
+  accent-color: var(--primary);
+
+  &>input {
+    width: auto;
+  }
+}
+
+.parentFormBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+
+  @media (min-width:800px) {
+    flex-direction: row;
+
+    &>* {
+      flex: 1 1;
+    }
+  }
+}

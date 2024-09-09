@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faLocationDot,
@@ -8,13 +9,17 @@ import {
 import style from "../Styles/landingSection.module.css";
 import landingImage from "../../../Assest/Images/landingImage.png";
 
+
 export default LandingSection = () => {
 	const [jobTitle, setJobTitle] = useState("");
 	const [jobLocation, setJobLocation] = useState("");
+	const navigate = useNavigate();
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		console.log(jobLocation, jobTitle);
+	function handleSearch() {
+		if (jobTitle.length == 0 && jobLocation.length == 0) {
+			return;
+		}
+		navigate(`/jobs?title=${jobTitle}&location=${jobLocation}`);
 	}
 	return (
 		<div className={style.landingSection}>
@@ -29,7 +34,7 @@ export default LandingSection = () => {
 						<p>
 							Great platform for the job seeker that searching for new career heights and passionate about startups.
 						</p>
-						<form onSubmit={handleSubmit}>
+						<div >
 							<div>
 								<FontAwesomeIcon icon={faMagnifyingGlass} />
 								<input type="text" placeholder="Job Title, Keyword" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
@@ -39,8 +44,8 @@ export default LandingSection = () => {
 								<FontAwesomeIcon icon={faLocationDot} />
 								<input type="text" placeholder="Search location" value={jobLocation} onChange={(e) => setJobLocation(e.target.value)} />
 							</div>
-							<Button type="btn-primary">Search </Button>
-						</form>
+							<Button type="btn-primary" handler={handleSearch}>Search</Button>
+						</div>
 						<p className="suggestion">
 							Popular : UI Designer, UX Researcher, Android, Frontend Developer
 						</p>

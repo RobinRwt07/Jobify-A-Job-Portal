@@ -37,18 +37,24 @@ html {
   font-family: "Poppins";
 }
 
+/*
+main {
+  max-width: 1400px;
+  margin-inline: auto;
+} */
+
 :root {
   /* colors */
   --success: #0BA02C;
   --primary: #4640DE;
   --bg-light: #F9F9F9;
-  --bg-light-2: #F0F0F0;
+  --bg-light-2: #F8F8Fa;
   --bg-light-3: #E0E0E0;
   --bg-white: #FFFFFF;
   --bg-dark: #040a1b;
   --text-dark: #202020;
   --text-light: #545454;
-  --text-x-light: #8D8D8D;
+  --text-x-light: #777676;
   --text-white: #FFFFFF;
 
   /* border-radius */
@@ -123,17 +129,27 @@ img {
   }
 }
 
-input {
+input,
+select {
   background-color: transparent;
   outline: none;
   font-size: 15px;
-  border: 1px solid var(--text-x-light);
+  width: 100%;
+  border: 1.5px solid var(--text-x-light);
   border-radius: var(--br-sm);
   padding: var(--p-md) var(--p-lg);
 
   &::placeholder {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-x-light)
+  }
+
+  &:focus {
+    border: 1.5px solid var(--bg-dark);
+  }
+
+  @media (min-width:1024px) {
+    font-size: 1rem;
   }
 }
 
@@ -147,6 +163,12 @@ input {
   padding: .5rem 1rem;
   border-radius: var(--br-sm);
   background-color: transparent;
+
+  &:disabled {
+    background-color: var(--bg-light-3);
+    color: var(--text-dark);
+  }
+
 }
 
 .btn-primary {
@@ -155,7 +177,12 @@ input {
 
   &:hover {
     background-color: var(--bg-dark);
+    color: var(--text-white);
   }
+}
+
+.tx-center {
+  text-align: center;
 }
 
 .btn-secondary {
@@ -170,4 +197,19 @@ input {
 .btn-tertiary {
   color: var(--primary);
   padding: 0;
+}
+
+.card {
+  padding: var(--p-md);
+  border-radius: var(--br-sm);
+  background-color: var(--bg-light-2);
+}
+
+.active-btn {
+  background-color: var(--bg-dark) !important;
+  color: var(--text-white) !important;
+}
+
+.active {
+  color: var(--primary);
 }

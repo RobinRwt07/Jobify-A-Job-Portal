@@ -1,0 +1,63 @@
+.filterBar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  padding: var(--p-lg);
+  background-color: var(--bg-white);
+  border-radius: var(--br-sm);
+  background-color: var(--bg-light-2);
+
+  @media (min-width:1024px) {
+    position: static;
+    z-index: 0;
+  }
+}
+
+.filterCloseBtn {
+  display: flex;
+  justify-content: end;
+}
+
+.applyBtn {
+  margin-block: var(--m-lg);
+  display: flex;
+  justify-content: center;
+  gap: var(--gap-xl)
+}
+
+.fitlerOptionGroup {
+  padding-block: var(--m-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  border-bottom: 2px solid var(--bg-light-3);
+
+  &>h3 {
+    font-size: 1rem;
+    color: var(--primary);
+  }
+
+  &>label {
+    padding-inline: var(--p-md);
+    border-radius: var(--br-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+
+    &:hover {
+      background-color: rgb(209, 230, 255);
+    }
+
+    &>input {
+      width: fit-content;
+      accent-color: var(--primary);
+    }
+
+    &>span {
+      flex: auto;
+    }
+  }
+}

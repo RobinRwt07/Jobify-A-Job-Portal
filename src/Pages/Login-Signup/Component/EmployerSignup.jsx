@@ -1,0 +1,116 @@
+import { useState } from 'react';
+import style from '../Style/form.module.css';
+import { validateEmail, validatePassword } from '../../../../Public/utils';
+const EmployerSignup = () => {
+	const [companyData, setCompanyData] = useState({
+		companyName: "",
+		companyLocation: "",
+		companyEmail: "",
+		companyType: "",
+		password: "",
+		confirmPassword: ""
+	});
+	const [errors, setErrors] = useState({});
+	const [isChecked, setChecked] = useState(false);
+
+	const industryType = ["Company Type", "IT and Services", "Marketing", 'CyberSecurity'];
+	function handleFormChange(e) {
+		setCompanyData({
+			...companyData,
+			[e.target.name]: e.target.value
+		})
+	}
+	function handleFormSubmit() {
+		console.log("submit");
+	}
+
+	function handleCheckBoxClick(e) {
+		setChecked(e.target.checked);
+	}
+
+	function handleFormSubmit(e) {
+		e.preventDefault();
+		const validationError = {};
+
+		if (companyData.companyName.length === 0) {
+			validationError.name = "Please provide company name";
+		}
+		if (companyData.companyLocation.length === 0) {
+			validationError.location = "Please provide company location";
+		}
+
+		if (companyData.companyType == "" || companyData.companyType == "Company Type") {
+			validationError.type = "Select Valid type";
+		}
+		const emailError = validateEmail(companyData.companyEmail);
+		if (emailError) {
+			validationError.email = emailError;
+		}
+
+		const passwordError = validatePassword(companyData.password);
+		if (passwordError) {
+			validationError.password = passwordError;
+		}
+		if (companyData.confirmPassword !== companyData.password) {
+			validationError.confirmPassword = "Password not matched";
+		}
+
+		setErrors(validationError);
+
+		if (Object.keys(validationError).length == 0) {
+			console.log(companyData);
+			// send form data
+		}
+	}
+
+	return (
+		<form className={style.form} onSubmit={handleFormSubmit}>
+			<label>
+				<input type="text" name="companyName" placeholder="Organization Name" value={companyData.companyName} onChange={handleFormChange} />
+				{errors.name && <span> {errors.name}</span>}
+			</label>
+			<label>
+				<input type="email" name="companyEmail" placeholder="Company Email" value={companyData.companyEmail} onChange={handleFormChange} />
+				{errors.email && <span> {errors.email}</span>}
+			</label>
+			<div className={style.parentFormBox}>
+				<label>
+					<input type="text" name="companyLocation" placeholder="Company Location" value={companyData.companyLocation} onChange={handleFormChange} />
+					{errors.location && <span> {errors.location}</span>}
+				</label>
+				<label>
+					<select name="companyType" onChange={handleFormChange} value={companyData.companyType}>
+						{
+							industryType.map((type, index) => <Option key={index} value={type} />)
+						}
+					</select>
+					{errors.type && <span> {errors.type}</span>}
+				</label>
+			</div>
+			<div className={style.parentFormBox}>
+				<label>
+					<input type="password" name="password" placeholder="Password" value={companyData.password} onChange={handleFormChange} />
+					{errors.password && <span> {errors.password}</span>}
+				</label>
+				<label>
+					<input type="password" name="confirmPassword" placeholder="Confirm Password" value={companyData.confirmPassword} onChange={handleFormChange} />
+					{errors.confirmPassword && <span> {errors.confirmPassword}</span>}
+				</label>
+			</div>
+			<label className={style.checkbox}>
+				<input type="checkbox" name="tc" onClick={handleCheckBoxClick} />
+				I've read and agree with you Term and Condition
+			</label>
+			<button className="btn btn-primary" disabled={!isChecked}>Create Account</button>
+		</form >
+	)
+}
+
+export default EmployerSignup
+
+
+function Option({ value }) {
+	return (
+		<option value={value}>{value}</option>
+	)
+}
