@@ -6,10 +6,13 @@ import { faBuildingUser, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate, useLocation, Outlet } from "react-router-dom";
 import style from './Style/signup.module.css';
 import bgImage from '../../Assest/Images/bgImageLogin.jpg';
+import { useCandidateAuth } from "../../hooks/useCandidateAuth";
+import { useEmployerAuth } from "../../hooks/useEmployerAuth";
 
-Button
 const Login = () => {
 	const [activeForm, setActiveFrom] = useState('');
+	const { candidateAuthed } = useCandidateAuth();
+	const { employerAuthed } = useEmployerAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -31,6 +34,9 @@ const Login = () => {
 	function handleCandidateClick() {
 		navigate('/login/candidate')
 		setActiveFrom("candidate");
+	}
+	if (candidateAuthed || employerAuthed) {
+		navigate('/', { replace: true });
 	}
 	return (
 		<section className={`${style.loginBox} container`}>

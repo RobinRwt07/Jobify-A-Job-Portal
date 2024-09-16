@@ -46,6 +46,7 @@ main {
 :root {
   /* colors */
   --success: #0BA02C;
+  --error: #ff6347;
   --primary: #4640DE;
   --bg-light: #F9F9F9;
   --bg-light-2: #F8F8Fa;
@@ -53,7 +54,7 @@ main {
   --bg-white: #FFFFFF;
   --bg-dark: #040a1b;
   --text-dark: #202020;
-  --text-light: #545454;
+  --text-light: #494949;
   --text-x-light: #777676;
   --text-white: #FFFFFF;
 
@@ -211,5 +212,15 @@ select {
 }
 
 .active {
-  color: var(--primary);
+  color: var(--primary) !important;
+}
+
+.activePage {
+  background-color: var(--bg-dark) !important;
+  color: var(--text-white) !important;
+}
+
+.activeTab {
+  background-color: #d4eaff;
+  border-left: 5px solid var(--primary);
 }

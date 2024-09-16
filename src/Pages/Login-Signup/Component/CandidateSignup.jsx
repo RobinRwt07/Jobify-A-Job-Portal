@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import style from '../Style/form.module.css';
-import { validateEmail, validateName, validatePassword } from '../../../../Public/utils';
+import { generateRandom, validateEmail, validateName, validatePassword } from '../../../../Public/utils';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const CandidateSignup = () => {
 	const [candidateData, setCandidateData] = useState({
@@ -12,6 +14,7 @@ const CandidateSignup = () => {
 	});
 	const [isChecked, setChecked] = useState(false);
 	const [errors, setErrors] = useState({});
+	const navigate = useNavigate();
 
 	function handleFormChange(e) {
 		setCandidateData({
@@ -45,13 +48,30 @@ const CandidateSignup = () => {
 		setErrors(validationError);
 
 		if (Object.keys(validationError).length == 0) {
-			console.log(candidateData);
-			// send form data
+			signupCandidate(candidateData);
 		}
 	}
 
 	function handleCheckBoxClick(e) {
 		setChecked(e.target.checked);
+	}
+
+	function signupCandidate(newCandidate) {
+		const registeredCandidate = JSON.parse(localStorage.getItem('registeredCandidate')) || [];
+		if (registeredCandidate.length > 0) {
+			if (registeredCandidate.find((candidate) => candidate.candidateEmail === newCandidate.candidateEmail)) {
+				toast.error("Email already registered");
+				return false;
+			}
+		}
+		else {
+			newCandidate.candidateId = "CND" + generateRandom(10000, 99999);
+			delete newCandidate.candidateConfirmPassword;
+			registeredCandidate.push(newCandidate);
+			localStorage.setItem('registeredCandidate', JSON.stringify(registeredCandidate));
+			toast.success("Successfully registered");
+			navigate('/login/candidate');
+		}
 	}
 
 	return (

@@ -1,15 +1,55 @@
 import style from '../Style/filterbar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { FilterContext } from '../context';
+import CheckBox from '../../../Component/Checkbox';
 
 const FilterBar = ({ handleFilterChange }) => {
-	const [jobTypes, setJobTypes] = useState({
+	const [jobType, setJobTypes] = useState({
 		fullTime: false,
 		partTime: false,
 		internship: false
 	});
-	const [appliedChecks, setAppliedChecks] = useState([]);
+	const [workMode, setWorkMode] = useState({
+		onsite: false,
+		hybrid: false,
+		remote: false,
+	})
+
+	const filterContext = useContext(FilterContext);
+
+	function handleJobChange(e) {
+		setJobTypes({
+			...jobType,
+			[e.target.name]: e.target.checked
+		})
+		filterContext.handler({
+			workMode: {
+				...filterContext.tags.workMode
+			},
+			jobType: {
+				...filterContext.tags.jobType,
+				[e.target.name]: e.target.checked,
+			}
+		})
+	}
+	function handleWorkModeChange(e) {
+		setWorkMode({
+			...workMode,
+			[e.target.name]: e.target.checked
+		})
+
+		filterContext.handler({
+			jobType: {
+				...filterContext.tags.jobType
+			},
+			workMode: {
+				...filterContext.tags.workMode,
+				[e.target.name]: e.target.checked,
+			}
+		})
+	}
 	return (
 		<div className={style.filterBar}>
 			<div className={style.filterCloseBtn}>
@@ -20,33 +60,29 @@ const FilterBar = ({ handleFilterChange }) => {
 			<div>
 				<div className={style.fitlerOptionGroup}>
 					<h3>Job Type</h3>
-					<label>
-						<input type="checkbox" name="fullTime" checked={jobTypes.fullTime} />
-						<span>Full Time</span>
-					</label>
-					<label>
-						<input type="checkbox" name="partTime" checked={jobTypes.partTime} />
-						<span>Part Time</span>
-					</label>
-					<label>
-						<input type="checkbox" name="Internship" checked={jobTypes.internship} />
-						<span>Intership</span>
-					</label>
+					<CheckBox name={'fullTime'} checked={jobType.fullTime} onChangeHandler={handleJobChange}>
+						Full Time
+					</CheckBox>
+
+					<CheckBox name={"partTime"} checked={jobType.partTime} onChangeHandler={handleJobChange}>
+						Part Time
+					</CheckBox>
+
+					<CheckBox name={"intership"} checked={jobType.internship} onChangeHandler={handleJobChange}>
+						Internship
+					</CheckBox>
 				</div>
 				<div className={style.fitlerOptionGroup}>
 					<h3>Work Mode</h3>
-					<label>
-						<input type="checkbox" name="Onsite" />
-						<span>On-Site</span>
-					</label>
-					<label>
-						<input type="checkbox" name="Remote" />
-						<span>Remote</span>
-					</label>
-					<label>
-						<input type="checkbox" name="Hybrid" />
-						<span>Hybrid</span>
-					</label>
+					<CheckBox name={"onsite"} checked={workMode.onsite} onChangeHandler={handleWorkModeChange}>
+						Onsite
+					</CheckBox>
+					<CheckBox name={"remote"} checked={workMode.remote} onChangeHandler={handleWorkModeChange}>
+						Remote
+					</CheckBox>
+					<CheckBox name={"hybrid"} checked={workMode.hybrid} onChangeHandler={handleWorkModeChange}>
+						Hybrid
+					</CheckBox>
 				</div>
 			</div>
 			<div className={style.applyBtn}>

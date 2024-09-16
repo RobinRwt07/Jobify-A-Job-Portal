@@ -6,6 +6,7 @@ import BottomPanel from "./Components/BottomPanel";
 import Footer from "../../Component/Footer";
 
 const Home = () => {
+
 	return (
 		<>
 			<main>

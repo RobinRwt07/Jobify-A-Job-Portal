@@ -6,9 +6,14 @@ import Card from "../../Component/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBuildingUser } from "@fortawesome/free-solid-svg-icons";
 import backgroundImage from '../../Assest/Images/bgImageLogin.jpg';
+import { useCandidateAuth } from "../../hooks/useCandidateAuth";
+import { useEmployerAuth } from "../../hooks/useEmployerAuth";
+
 
 const SignUp = () => {
 	const [activeForm, setActiveFrom] = useState('');
+	const { candidateAuthed } = useCandidateAuth();
+	const { employerAuthed } = useEmployerAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -32,6 +37,9 @@ const SignUp = () => {
 		setActiveFrom("candidate");
 	}
 
+	if (candidateAuthed || employerAuthed) {
+		navigate('/', { replace: true });
+	}
 	return (
 		<section className={`${style.loginBox} container`}>
 			<div className={style.signup}>

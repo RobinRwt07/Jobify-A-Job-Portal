@@ -27,7 +27,7 @@ const JobSearchBar = ({ handleSearchData, handleFilterChange }) => {
 				<FontAwesomeIcon icon={faLocationDot} />
 				<input type="text" placeholder="Search location..." value={jobLocation} onChange={(e) => { setJobLocation(e.target.value) }} />
 			</label>
-			<Button type="btn-primary" handler={handleSearch} disabled={jobTitle || jobLocation ? false : true}>Search</Button>
+			<Button type="btn-primary" handler={handleSearch} >Search</Button>
 			<Button type="btn-primary" handler={handleFilterBtnClick}>Filter</Button>
 		</div>
 	)

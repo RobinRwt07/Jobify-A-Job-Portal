@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import style from '../Style/form.module.css';
-import { validateEmail, validatePassword } from '../../../../Public/utils';
+import { validateEmail, validatePassword, generateRandom } from '../../../../Public/utils';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const EmployerSignup = () => {
 	const [companyData, setCompanyData] = useState({
 		companyName: "",
@@ -12,6 +14,7 @@ const EmployerSignup = () => {
 	});
 	const [errors, setErrors] = useState({});
 	const [isChecked, setChecked] = useState(false);
+	const navigate = useNavigate();
 
 	const industryType = ["Company Type", "IT and Services", "Marketing", 'CyberSecurity'];
 	function handleFormChange(e) {
@@ -58,8 +61,22 @@ const EmployerSignup = () => {
 		setErrors(validationError);
 
 		if (Object.keys(validationError).length == 0) {
-			console.log(companyData);
-			// send form data
+			employerSignup(companyData);
+		}
+	}
+
+	function employerSignup(newOrgDetails) {
+		const registeredOrg = JSON.parse(localStorage.getItem('registeredOrg')) || [];
+		if (registeredOrg.find(org => org.companyName == newOrgDetails.companyName || org.companyEmail === newOrgDetails.companyEmail)) {
+			toast.error("Company already registered with this name.");
+		}
+		else {
+			newOrgDetails.companyId = "CMP" + generateRandom(10000, 99999);
+			delete newOrgDetails.confirmPassword;
+			registeredOrg.push(newOrgDetails);
+			localStorage.setItem('registeredOrg', JSON.stringify(registeredOrg));
+			toast.success("Successfully registered");
+			navigate('/login/employer');
 		}
 	}
 

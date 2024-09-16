@@ -1,0 +1,67 @@
+.recentActivity {
+  &>div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &>h3 {
+      font-size: 18px;
+      color: var(--text-light);
+    }
+  }
+
+  &>div:last-child {
+    overflow-x: scroll;
+    scrollbar-width: none;
+  }
+
+  & table {
+    min-width: 100%;
+    width: 800px;
+    border-collapse: collapse;
+    margin-block: var(--m-lg);
+    table-layout: auto;
+
+
+    & thead th {
+      text-align: left;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      padding: var(--p-lg);
+    }
+
+    & tbody td {
+      text-align: left;
+      color: var(--text-light);
+      padding: var(--p-lg);
+
+      &>button {
+        padding: var(--p-md) var(--p-lg);
+        border-radius: var(--br-sm);
+        color: var(--primary);
+        border: none;
+        font-weight: bold;
+        margin-right: var(--m-md);
+        cursor: pointer;
+      }
+
+      & svg {
+        margin-inline: var(--m-sm);
+      }
+    }
+
+    & tbody>tr {
+      border-bottom: 2px solid var(--bg-light-2);
+    }
+
+    & tbody>tr>td:first-child {
+      &>div {
+        flex-shrink: 0;
+        font-size: 14px;
+        display: flex;
+        gap: var(--gap-md);
+      }
+    }
+
+  }
+}

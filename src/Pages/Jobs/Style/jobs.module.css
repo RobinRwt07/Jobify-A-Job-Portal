@@ -37,9 +37,9 @@
 
 .JobSearchBar {
   border: 2px solid var(--bg-light-3);
-  background-color: var(--bg-light-2);
+  background-color: var(--bg-white);
   display: flex;
-  margin-block-end: var(--m-lg);
+  margin-block-end: var(--m-xl);
   flex-direction: column;
   padding: var(--p-md) var(--p-lg);
   border-radius: var(--br-sm);
@@ -61,5 +61,28 @@
     &>input {
       border: none;
     }
+  }
+}
+
+.paginationBlock {
+  margin-block: var(--m-2xl);
+  display: flex;
+  gap: var(--gap-md);
+  align-items: center;
+  justify-content: center;
+
+  &>div {
+    width: 32px;
+    aspect-ratio: 1;
+    text-align: center;
+    padding: var(--p-sm);
+    border-radius: var(--br-round);
+    background-color: var(--bg-light-2);
+  }
+
+
+  &>button {
+    aspect-ratio: 1;
+    border-radius: var(--br-round);
   }
 }

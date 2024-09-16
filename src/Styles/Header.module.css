@@ -27,16 +27,18 @@
 .navigation {
   flex: auto;
   display: flex;
+  gap: var(--gap-xl);
   flex-direction: column;
   position: fixed;
   top: 0;
   right: 0;
-  width: 50vmax;
+  width: 40vmax;
   height: 100%;
   background-color: var(--bg-white);
 
   @media (width>=800px) {
     width: auto;
+    gap: 0;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -63,10 +65,11 @@
 
   & nav {
     margin: var(--m-lg);
-    flex: auto;
+
 
     @media (min-width:800px) {
       margin: 0;
+      flex: auto;
     }
 
     &>ul {

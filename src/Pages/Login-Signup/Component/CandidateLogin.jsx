@@ -1,13 +1,17 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import style from '../Style/form.module.css';
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../../../Public/utils.js";
+import { toast } from "react-toastify";
+import style from '../Style/form.module.css';
+import { useCandidateAuth } from "../../../hooks/useCandidateAuth.jsx";
 
 const CandidateLogin = () => {
 	const [candidateLoginData, setCandidateLoginData] = useState({
 		email: "", password: ""
 	});
 	const [errors, setErrors] = useState({});
+	const navigate = useNavigate();
+	const { candidateAuthed, setCandidateAuth } = useCandidateAuth();
 
 	function handleFormChange(e) {
 		setCandidateLoginData({
@@ -28,12 +32,40 @@ const CandidateLogin = () => {
 		setErrors(validationErrors);
 
 		if (Object.keys(validationErrors).length === 0) {
-			console.log("valid data");
+			candidateLogin(candidateLoginData);
+		}
+
+		function candidateLogin(loginData) {
+			const registeredCandidate = JSON.parse(localStorage.getItem("registeredCandidate")) || [];
+			if (registeredCandidate.length > 0) {
+				const matchedCandidate = registeredCandidate.find(candidate => candidate.candidateEmail === loginData.email);
+				if (matchedCandidate) {
+					if (matchedCandidate.candidatePassword === loginData.password) {
+						toast.success("success");
+						localStorage.setItem("loggedInCandidate", matchedCandidate.candidateId);
+						setCandidateAuth(true);
+						navigate('/');
+					}
+					else {
+						toast.error("Invalid Password");
+						return;
+					}
+
+				}
+				else {
+					toast.error("Email not registered");
+					return;
+				}
+			}
+			else {
+				toast.error("Email not registered");
+				return;
+			}
 		}
 	}
 	return (
-
 		<form className={style.form} onSubmit={handleFormSubmit}>
+
 			<label>
 				<input type="email" name="email" placeholder="Email Address" value={candidateLoginData.email} onChange={handleFormChange} />
 				{errors.email && <span> {errors.email}</span>}

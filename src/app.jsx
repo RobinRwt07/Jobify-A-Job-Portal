@@ -1,7 +1,7 @@
-import Footer from "./Component/Footer";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 import Header from "./Component/Header";
 import Home from './Pages/Home/Home';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUp from "./Pages/Login-Signup/SignUp";
 import CandidateSignup from "./Pages/Login-Signup/Component/CandidateSignup";
 import EmployerSignup from "./Pages/Login-Signup/Component/EmployerSignup";
@@ -10,30 +10,57 @@ import CandidateLogin from "./Pages/Login-Signup/Component/CandidateLogin";
 import EmployerLogin from "./Pages/Login-Signup/Component/EmployerLogin";
 import GlobalError from "./Component/GlobalError";
 import FindJobs from "./Pages/Jobs/FindJobs";
+import JobDetails from "./Pages/JobDetails/JobDetails";
+import 'react-toastify/dist/ReactToastify.css';
+import { CandidateAuthProvider } from "./hooks/useCandidateAuth";
+import Employer from "./Pages/Employer/Employer";
+import { EmployerAuthProvider } from "./hooks/useEmployerAuth";
+import ProtectedRoute from "./Component/ProtectedRoute";
+import EmployerProfile from "./Pages/Employer/Component/EmployerProfile";
+import Overview from './Pages/Employer/Component/OverView';
+import AddJob from './Pages/Employer/Component/AddJob';
+import MyJobs from "./Pages/Employer/Component/MyJobs";
+
 export const App = () => {
 	return (
 		<>
 			<BrowserRouter>
-				<Header />
-				<main>
-					<Routes>
-						<Route path="/" element={<Home />} errorElement={<GlobalError />} />
-						<Route path="/signup" element={<SignUp />}  >
-							<Route index element={<CandidateSignup />} />
-							<Route path='/signup/candidate' element={<CandidateSignup />} />
-							<Route path='/signup/employer' element={<EmployerSignup />} />
-						</Route>
-						<Route path="/login" element={<Login />} >
-							<Route index element={<CandidateLogin />} />
-							<Route path="/login/candidate" element={<CandidateLogin />} />
-							<Route path="/login/employer" element={<EmployerLogin />} />
-						</Route>
-						<Route path={'/jobs'} element={<FindJobs />} >
+				<EmployerAuthProvider>
+					<CandidateAuthProvider>
+						<Header />
+						<main>
+							<Routes>
+								<Route path="/" element={<Home />} errorElement={<GlobalError />} />
+								<Route path="/signup" element={<SignUp />}  >
+									<Route index element={<CandidateSignup />} />
+									<Route path='/signup/candidate' element={<CandidateSignup />} />
+									<Route path='/signup/employer' element={<EmployerSignup />} />
+								</Route>
 
-						</Route>
-					</Routes>
-				</main>
-			</BrowserRouter>
+								<Route path="/login" element={<Login />} >
+									<Route index element={<CandidateLogin />} />
+									<Route path="/login/candidate" element={<CandidateLogin />} />
+									<Route path="/login/employer" element={<EmployerLogin />} />
+								</Route>
+
+								<Route path={'/jobs'} element={<FindJobs />} />
+								<Route path={'/jobdetail/:jobid'} element={<JobDetails />} />
+								<Route element={<ProtectedRoute type={'candidate'} redirectTo={'/login/candidate'} />} />
+
+								<Route element={<ProtectedRoute type="employer" redirectTo={'/login/employer'} />}>
+									<Route path="/employer" element={<Employer />} >
+										<Route index element={<Overview />} />
+										<Route path="/employer/profile" element={<EmployerProfile />} />
+										<Route path="/employer/add_job" element={<AddJob />} />
+										<Route path="/employer/my_jobs" element={<MyJobs />} />
+									</Route>
+								</Route>
+							</Routes>
+						</main >
+						<ToastContainer autoClose={3000} />
+					</CandidateAuthProvider>
+				</EmployerAuthProvider>
+			</BrowserRouter >
 		</>
 	)
 }

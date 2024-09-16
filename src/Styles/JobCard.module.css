@@ -1,11 +1,16 @@
 .job-card {
-  justify-content: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: var(--p-lg);
   border-radius: var(--br-sm);
   background-image: linear-gradient(to right, #FFF6E6, #FFFFFF);
   box-shadow: 0px 0px 2px 1px var(--bg-light-3);
 
   &>h3 {
+    font-size: 18px;
+    font-weight: bold;
     color: var(--text-dark);
   }
 
@@ -16,7 +21,7 @@
     margin-block: var(--m-md);
 
     &>span {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
       color: var(--text-light)
     }

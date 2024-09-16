@@ -1,0 +1,27 @@
+.jobSideBar {
+  border-radius: var(--br-sm);
+  margin-block-end: var(--m-lg);
+  background-color: var(--bg-light-2);
+  width: 100%;
+  padding: var(--p-lg);
+
+  &>div:first-of-type {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-lg);
+    margin-block: var(--m-lg);
+
+    @media (min-width:700px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width:1024px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width:1024px) {
+    flex: none;
+    width: 350px;
+  }
+}

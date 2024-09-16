@@ -4,6 +4,7 @@ import style from '../Styles/FeaturedJob.module.css';
 import JobCard from '../../../Component/JobCard';
 import { jobs } from '../../../../Public/DummyData/Jobs';
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const FeaturedJob = () => {
 	return (
@@ -16,7 +17,12 @@ const FeaturedJob = () => {
 				</div>
 			</div>
 			<div className={`${style['featured-job-box']} inner-container `}>
-				{jobs.map(job => <JobCard key={job.jobId} jobData={job} />)}
+				{jobs.map(job => (
+					<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
+						<JobCard key={job.jobId} jobData={job} />
+					</Link>
+				))}
+
 			</div>
 		</div>
 	)
