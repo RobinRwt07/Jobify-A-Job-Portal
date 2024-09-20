@@ -1,21 +1,30 @@
-import { faCircleCheck, faUserGroup, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faUserGroup, faEllipsisV, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 
-const JobRow = ({ jobData }) => {
+const JobRow = ({ jobInfo: { jobTitle, jobType, expirationDate, postedOn } }) => {
+	const isActive = (new Date(expirationDate) > new Date()) ? true : false;
+	const posted = Math.floor((new Date() - new Date(postedOn)) / (60 * 60 * 24 * 1000));
 	return (
 		<tr>
 			<td>
-				<h4>Job Title</h4>
+				<h4>{jobTitle}</h4>
 				<div>
-					<span>Full Time</span>
-					<span>12 days ago</span>
+					<span>{jobType}</span>
+					<span>{posted} days ago</span>
 				</div>
 			</td>
 			<td>
-				<FontAwesomeIcon icon={faCircleCheck} color='green' />
-				{/* <FontAwesomeIcon icon={faCircleXmark} color='red' /> */}
-				<span>active</span>
+				{isActive ?
+					<>
+						<FontAwesomeIcon icon={faCircleCheck} color='green' />
+						<span>active</span>
+					</> :
+					<>
+						<FontAwesomeIcon icon={faCircleXmark} color='red' />
+						<span>expire</span>
+					</>
+				}
 			</td>
 			<td>
 				<FontAwesomeIcon icon={faUserGroup} />

@@ -9,8 +9,8 @@ const JobSearchBar = ({ handleSearchData, handleFilterChange }) => {
 
 	function handleSearch() {
 		handleSearchData({
-			title: jobTitle,
-			location: jobLocation,
+			title: jobTitle.trim(),
+			location: jobLocation.trim(),
 		})
 	}
 	function handleFilterBtnClick() {

@@ -1,35 +1,34 @@
 import { useContext, useEffect, useState } from 'react';
-import { jobs } from '../../../../Public/DummyData/Jobs';
 import JobCard from '../../../Component/JobCard';
 import style from '../Style/jobs.module.css';
 import { FilterContext } from '../context';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Message from '../../../Component/Message';
 
 const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
-	const [allJobs, setAllJobs] = useState([]);
+	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem("allJobs")) || []);
 	const [searchResult, setSearchResult] = useState([]);
 	const filterContext = useContext(FilterContext);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
-		setAllJobs(jobs);
 		if (title.length !== 0 || location.length !== 0) {
 			setSearchResult(allJobs.filter(job => {
 				if (title && location.length == 0) {
 					return job.jobTitle.toLowerCase().includes(title.toLowerCase()) && job;
 				}
 				if (location && title.length == 0) {
-					return job.location.toLowerCase().includes(location.toLowerCase()) && job
+					return job.jobLocation.toLowerCase().includes(location.toLowerCase()) && job
 				}
 				if (title && location) {
-					return (job.location.toLowerCase().includes(location.toLowerCase()) && job.jobTitle.toLowerCase().includes(title.toLowerCase())) && job;
+					return (job.jobLocation.toLowerCase().includes(location.toLowerCase()) && job.jobTitle.toLowerCase().includes(title.toLowerCase())) && job;
 				}
 			}));
 		}
 		else {
-			setSearchResult(jobs);
+			setSearchResult(allJobs);
 		}
 	}, [title, location]);
 
@@ -40,7 +39,6 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	const allItems = searchResult;
 
 	const currentPageItem = allItems.slice(firstItem, lastItem);
-
 	const totalPages = [];
 
 	for (let index = 1; index <= Math.ceil(allItems.length / itemPerPage); index++) {
@@ -59,9 +57,7 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	}
 
 	if (searchResult.length === 0) {
-		return <div>
-			<h1>Can not find jobs</h1>
-		</div>
+		return <Message>Can't Find Any Job</Message>
 	}
 
 	return (
@@ -70,28 +66,34 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 				<h3> Total Jobs : {allItems.length}</h3>
 			</div>
 			<div className={style.jobCardContainer}>
-				{currentPageItem.map(job => (
-					<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
-						<JobCard key={job.jobId} jobData={job} />
-					</Link>
-				))}
+				<div className={style.jobCards}>
+					{currentPageItem.map(job => (
+						<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
+							<JobCard key={job.jobId} jobData={job} />
+						</Link>
+					))}
+				</div>
 			</div>
-			<div className={style.paginationBlock}>
-				<Button type="btn btn-primary" handler={handlePreviousClick} disabled={currentPage == 1}>
-					<FontAwesomeIcon icon={faArrowLeft} />
-				</Button>
-				{
-					totalPages.map((page, index) => (
-						<div key={index} onClick={(e) => setCurrentPage(Number(e.target.textContent))} className={page == currentPage ? "activePage" : ''}  >
-							{page}
-						</div>
-					))
-				}
-				<Button type="btn btn-primary" handler={handleNextClick} disabled={currentPage == totalPages.length}>
-					<FontAwesomeIcon icon={faArrowRight} />
-				</Button>
 
-			</div>
+			{/* paginations */}
+			{
+				totalPages.length > 1 &&
+				<div className={style.paginationBlock}>
+					<Button type="btn btn-primary" handler={handlePreviousClick} disabled={currentPage == 1}>
+						<FontAwesomeIcon icon={faArrowLeft} />
+					</Button>
+					{
+						totalPages.map((page, index) => (
+							<div key={index} onClick={(e) => setCurrentPage(Number(e.target.textContent))} className={page == currentPage ? "activePage" : ''}  >
+								{page}
+							</div>
+						))
+					}
+					<Button type="btn btn-primary" handler={handleNextClick} disabled={currentPage == totalPages.length}>
+						<FontAwesomeIcon icon={faArrowRight} />
+					</Button>
+				</div>
+			}
 		</>
 	)
 }

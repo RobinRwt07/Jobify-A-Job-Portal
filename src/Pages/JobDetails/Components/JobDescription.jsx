@@ -1,49 +1,31 @@
 import React from 'react';
 import style from '../Style/jobdetail.module.css';
+import DOMPurify from 'dompurify';
 
-const JobDescription = () => {
+const JobDescription = ({ jobDescription: { jobDescription, education, workMode, jobType, skills } }) => {
+	const jd = DOMPurify.sanitize(jobDescription);
 	return (
 		<section className={style.JobDescription}>
+			<h3>Job Description</h3>
+			<div className={style.box} dangerouslySetInnerHTML={{ __html: jobDescription }} />
+			<h3>Education Detail</h3>
 			<div className={style.box}>
-				<h4>Job Description</h4>
 				<ul>
-					<li>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae id, adipisci consequuntur placeat sequi laboriosam architecto excepturi harum dignissimos consectetur quasi reiciendis quam at delectus, officiis ducimus maiores blanditiis quidem.
-					</li>
+					<li>{education}</li>
 				</ul>
 			</div>
-			<div className={style.box}>
-				<h4>Education Detail</h4>
-				<ul>
-					<li>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, autem.
-					</li>
-					<li>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, autem.
-					</li>
-				</ul>
-			</div>
-			<div className={style.box}>
-				<h4>Preferred Skills</h4>
-				<ul>
-					<li>Skills</li>
-					<li>Skills</li>
-					<li>Skills</li>
-					<li>Skills</li>
-				</ul>
-			</div>
-			<div className={style.box}>
-				<h4>Key Skills</h4>
-				<div className={style.keySkills}>
-					<span>skills</span>
-					<span>skills</span>
-					<span>skills</span>
-					<span>skills</span>
-				</div>
-			</div>
+			{
+				skills.length !== 0 &&
+				<>
+					<h3>Key Skills</h3>
+					<div className={`${style.box} ${style.keySkills}`}>
+						{skills.map(skill => <span>{skill}</span>)}
+					</div>
+				</>
+			}
 			<div>
-				<p>Role Type : <span>role </span></p>
-				<p>Employement Type : <span>Full Time </span></p>
+				<h3>Employement Type : <span>{jobType}</span></h3>
+				<h3>Work Mode : <span>{workMode}</span></h3>
 			</div>
 		</section>
 	)

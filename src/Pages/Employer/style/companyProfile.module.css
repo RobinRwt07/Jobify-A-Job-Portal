@@ -28,11 +28,5 @@
         object-fit: contain;
       }
     }
-
-    & h4,
-    p {
-      color: var(--text-light);
-      font-size: 15px;
-    }
   }
 }

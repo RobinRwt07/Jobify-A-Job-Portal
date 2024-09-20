@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../../Component/Button';
 import RecentActivity from './RecentActivity';
 import { useEmployerAuth } from '../../../hooks/useEmployerAuth';
@@ -8,32 +8,43 @@ import { useEmployerInfo } from '../useEmployerInfo';
 
 
 const OverView = () => {
+	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem('allJobs')) || []);
+	const [postedJobs, setPostedJobs] = useState([]);
 	const { employerAuthed } = useEmployerAuth();
-	const navigate = useNavigate();
 	const { companyInfo, setCompanyInfo } = useEmployerInfo();
+	const navigate = useNavigate();
+
+	function fetchAllPostedJobs(companyId) {
+		const allPostedJobs = allJobs.filter(job => job.companyId === companyId);
+		setPostedJobs(allPostedJobs);
+	}
+	useEffect(() => {
+		// fetch all job with the same company id
+		fetchAllPostedJobs(companyInfo.companyId);
+	}, []);
 
 	if (!companyInfo) {
-		return <h3>Loading...</h3>
+		return navigate('/login/employer');
 	}
-	function handleAddJobClick() {
-		navigate('/employer/add_job');
-	}
+	const recentJobs = allJobs.slice(-5);
 
 	return (
 		<div className={style.overview}>
 			<div>
-				<h2>Hello,{companyInfo.comapny}</h2>
-				<Button type='btn btn-primary' handler={handleAddJobClick}> Post A Job </Button>
+				<h2>Hello, {companyInfo.companyName}</h2>
+				<Button type='btn btn-primary' handler={() => navigate('/employer/add_job')}> Post A Job </Button>
 			</div >
-			<div>
-				<div >
-					234 Jobs
+			<div className='card'>
+				<div>
+					<span>{postedJobs.length}</span><br />
+					Jobs Posted
 				</div>
-				<div >
-					234 Jobs
+				<div style={{ backgroundColor: '#fafad2' }}>
+					<span>{postedJobs.length}</span><br />
+					Job
 				</div>
 			</div>
-			<RecentActivity employerId={employerAuthed} />
+			<RecentActivity recentJobs={recentJobs} />
 		</div>
 	)
 }

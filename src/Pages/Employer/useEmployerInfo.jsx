@@ -1,10 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import { useEmployerAuth } from "../../hooks/useEmployerAuth";
+import { useNavigate } from "react-router-dom";
 const EmployerInfoContext = createContext();
 
 export const EmployerInfoProvider = ({ children }) => {
 	const [companyInfo, setCompanyInfo] = useState(null);
 	const { employerAuthed } = useEmployerAuth();
+	const navigate = useNavigate();
 	useEffect(() => {
 		// request to get company info
 		if (employerAuthed) {
@@ -15,6 +17,9 @@ export const EmployerInfoProvider = ({ children }) => {
 					setCompanyInfo(result);
 				}
 			}
+		}
+		else {
+			navigate('/login/employer');
 		}
 	}, []);
 

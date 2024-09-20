@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import style from '../Styles/JobCard.module.css';
 
-const JobCard = ({ jobData: { jobTitle, jobType, salary, companyName, location } }) => {
+const JobCard = ({ jobData: { jobTitle, jobType, minSalary, maxSalary, companyName, jobLocation } }) => {
 	function handleSaveClick() {
 		console.log("save");
 	}
@@ -12,7 +12,7 @@ const JobCard = ({ jobData: { jobTitle, jobType, salary, companyName, location }
 			<h3>{jobTitle}</h3>
 			<div>
 				<span>{jobType}</span>
-				<span>Salary: {salary}</span>
+				<span>Salary: {`${(minSalary / 100000).toFixed(1)}-${(maxSalary / 100000).toFixed(1)}`} LPA </span>
 			</div>
 
 			<div className={style.companyInfo}>
@@ -23,7 +23,7 @@ const JobCard = ({ jobData: { jobTitle, jobType, salary, companyName, location }
 					<h4>{companyName}</h4>
 					<div>
 						<FontAwesomeIcon icon={faLocationDot} />
-						<span>{location}</span>
+						<span>{jobLocation}</span>
 					</div>
 				</div>
 				<div onClick={handleSaveClick} className={style.saveBtn}>

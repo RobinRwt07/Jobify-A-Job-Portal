@@ -9,12 +9,14 @@ const JobSideBar = ({ similerJobs, jobTitle }) => {
 			<h3>Similar Role </h3>
 			<div>
 				{
-					similerJobs.map((job) => (
-						<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
-							<JobCard jobData={job} />
-						</Link>
-					)
-					)}
+					similerJobs.length == 0 ?
+						<h3>No Similar Job Found</h3> :
+						similerJobs.map((job) => (
+							<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
+								<JobCard jobData={job} />
+							</Link>
+						))
+				}
 			</div>
 		</div>
 	)

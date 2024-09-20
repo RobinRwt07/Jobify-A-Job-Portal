@@ -1,7 +1,11 @@
-.JobDetailsHeader {
+.container {
   padding: var(--p-lg);
   border-radius: var(--br-md);
-  background-color: var(--bg-light-2);
+  background-color: var(--bg-lightblue);
+}
+
+.JobDetailsHeader {
+  composes: container;
 
   &>h3 {
     font-size: 18px;
@@ -20,7 +24,7 @@
   }
 
   & div:has(>svg) {
-    margin-block: var(--m-sm);
+    margin-block: var(--m-md);
     font-size: 14px;
     align-items: center;
     display: flex;
@@ -68,10 +72,8 @@
 }
 
 .JobDescription {
+  composes: container;
   margin-block: var(--m-lg);
-  padding: var(--p-lg);
-  border-radius: var(--br-md);
-  background-color: var(--bg-light-2);
 
   &>div:last-child {
     display: flex;
@@ -81,19 +83,17 @@
 
     & span {
       font-weight: 500;
+      text-transform: capitalize;
     }
   }
 }
 
 .box {
-  margin-block-end: var(--m-xl);
-
-  &>h4 {
-    font-size: 16px;
-  }
+  margin-block: var(--m-lg) var(--m-xl);
+  padding-inline: var(--p-lg);
 
   & ul {
-    margin: var(--m-lg) var(--m-2xl);
+    margin-inline: var(--m-lg);
 
     li {
       list-style-type: disc;
@@ -106,13 +106,12 @@
   flex-wrap: wrap;
   gap: var(--gap-md);
   align-items: center;
-  margin: var(--m-lg) var(--m-lg);
+  margin: var(--m-xl) var(--m-lg);
 
   &>span {
-    border: 2px solid var(--bg-light-3);
-    padding: var(--p-sm) var(--p-lg);
-    border-radius: var(--br-lg);
-
+    border: 2px solid var(--primary);
+    padding: var(--p-sm) var(--p-xl);
+    border-radius: 2rem;
   }
 }
 
@@ -123,6 +122,10 @@
 
   @media (min-width:1024px) {
     flex-direction: row;
+  }
+
+  &>div:first-child {
+    flex: auto;
   }
 }
 

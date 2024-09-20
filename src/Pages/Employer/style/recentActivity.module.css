@@ -1,19 +1,14 @@
-.recentActivity {
+.joblist {
   &>div:first-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    &>h3 {
-      font-size: 18px;
-      color: var(--text-light);
-    }
   }
+}
 
-  &>div:last-child {
-    overflow-x: scroll;
-    scrollbar-width: none;
-  }
+.jobsTable {
+  overflow-x: scroll;
+  scrollbar-width: none;
 
   & table {
     min-width: 100%;
@@ -56,10 +51,19 @@
 
     & tbody>tr>td:first-child {
       &>div {
+        margin-block-start: var(--m-sm);
         flex-shrink: 0;
         font-size: 14px;
+        font-weight: 500;
         display: flex;
+        align-items: center;
         gap: var(--gap-md);
+
+        &>span:first-child {
+          background-color: rgba(215, 235, 255, 0.81);
+          padding: var(--p-sm);
+          border-radius: var(--br-sm);
+        }
       }
     }
 

@@ -18,13 +18,19 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "dayjs": "^1.11.13",
+    "dompurify": "^3.1.6",
+    "formik": "^2.4.6",
     "jobportal": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.26.1",
-    "react-toastify": "^10.0.5"
+    "react-toastify": "^10.0.5",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
+    "buffer": "^6.0.3",
     "parcel": "^2.12.0",
     "process": "^0.11.10"
   }

@@ -1,19 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../../../Component/Button';
 import style from '../style/recentActivity.module.css';
-import { faArrowRight, faCircleCheck, faCircleXmark, faEllipsisV, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import JobRow from './JobRow';
+import Message from '../../../Component/Message';
+import { useNavigate } from 'react-router-dom';
 
-const RecentActivity = ({ employerId }) => {
+const RecentActivity = ({ recentJobs }) => {
+	const navigate = useNavigate();
 	return (
-		<div className={style.recentActivity}>
+		<div className={style.joblist}>
 			<div>
 				<h3>Recently Posted Jobs</h3>
-				<Button type='btn btn-tertiary'>View all
+				<Button type='btn btn-tertiary' handler={() => navigate('/employer/my_jobs')}>View all
 					<FontAwesomeIcon icon={faArrowRight} />
 				</Button>
 			</div>
-			<div>
+			<div className={style.jobsTable}>
 				<table>
 					<thead>
 						<tr>
@@ -24,10 +27,17 @@ const RecentActivity = ({ employerId }) => {
 						</tr>
 					</thead>
 					<tbody>
-						<JobRow />
-						<JobRow />
-						<JobRow />
-						<JobRow />
+						{
+							recentJobs.length === 0 ?
+								<tr>
+									<td style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center" }} colSpan={4}>
+										You have not posted any job
+									</td>
+								</tr> :
+								recentJobs.map(job => (
+									<JobRow jobInfo={job} key={job.jobId} />
+								))
+						}
 					</tbody>
 				</table>
 			</div>

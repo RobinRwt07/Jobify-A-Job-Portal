@@ -1,0 +1,49 @@
+.error {
+  font-size: 12px;
+  color: var(--error);
+}
+
+.addJobSection {
+  padding: var(--p-md);
+
+  &>h2 {
+    font-size: 24px;
+    margin-block-end: var(--m-md);
+  }
+
+  & h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-block: var(--m-lg) var(--m-md);
+  }
+
+  & form {
+    container-name: form;
+    container-type: inline-size;
+
+    & label {
+      font-size: 14px;
+    }
+
+    & div:has(>label) {
+      margin-block-end: var(--m-md);
+    }
+
+    &>button {
+      margin-block: var(--m-xl);
+      width: 100%;
+    }
+  }
+}
+
+@container form (width>700px) {
+  .inputBox {
+    display: flex;
+    gap: var(--gap-lg);
+    margin-bottom: var(--m-md);
+
+    &>* {
+      flex: 1 1;
+    }
+  }
+}

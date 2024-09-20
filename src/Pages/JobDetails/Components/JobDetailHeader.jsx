@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useCandidateAuth } from "../../../hooks/useCandidateAuth";
 
 
-const JobDetailsHeader = ({ jobInfo: { jobTitle, comapnyName, reqExp, salary = "Not Disclosed", location, opening, postingDate = "NA" } }) => {
+const JobDetailsHeader = ({ jobInfo: { jobTitle, companyName, experience, salary = "Not Disclosed", jobLocation, vacancies, postedOn = "NA" } }) => {
 	const { candidateAuthed, setCandidateAuth } = useCandidateAuth();
 
 	function handleClick() {
@@ -19,13 +19,12 @@ const JobDetailsHeader = ({ jobInfo: { jobTitle, comapnyName, reqExp, salary = "
 	}
 	return (
 		<div className={style.JobDetailsHeader}>
-			{console.log(candidateAuthed)}
 			<h3>{jobTitle}</h3>
-			<p>{comapnyName}</p>
+			<p>{companyName}</p>
 			<div>
 				<div>
 					<FontAwesomeIcon icon={faBriefcase} />
-					{reqExp} years
+					{experience} years
 				</div>
 				<div>
 					<FontAwesomeIcon icon={faIndianRupee} />
@@ -34,12 +33,12 @@ const JobDetailsHeader = ({ jobInfo: { jobTitle, comapnyName, reqExp, salary = "
 			</div>
 			<div>
 				<FontAwesomeIcon icon={faLocation} />
-				{location}
+				{jobLocation}
 			</div>
 			<div>
 				<div>
-					<p>Posted: <span>{postingDate}</span></p>
-					<p>Opening: <span>{opening}</span></p>
+					<p>Posted: <span>{postedOn}</span></p>
+					<p>Vacancies: <span>{vacancies}</span></p>
 				</div>
 				<Button type="btn btn-primary" handler={handleClick}>
 					Apply

@@ -6,7 +6,12 @@
   padding: var(--p-lg);
   border-radius: var(--br-sm);
   background-image: linear-gradient(to right, #FFF6E6, #FFFFFF);
-  box-shadow: 0px 0px 2px 1px var(--bg-light-3);
+  box-shadow: 0px 0px 3px 0px var(--bg-light-3);
+
+  &:hover {
+    background-image: linear-gradient(to right, #e1eeff, #FFFFFF);
+    box-shadow: 0px 0px 3px 1px var(--bg-light-3);
+  }
 
   &>h3 {
     font-size: 18px;

@@ -23,12 +23,12 @@
       margin-block: var(--m-md);
     }
 
-    & h3 {
+    h3 {
       font-size: 18px;
       margin-block-end: var(--m-md);
     }
 
-    & ul {
+    ul {
       display: flex;
       flex-direction: column;
       gap: var(--gap-sm);
