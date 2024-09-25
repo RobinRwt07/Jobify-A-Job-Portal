@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import JobDetailsShimmer from "./Components/JobDetailsShimmer";
 import Message from "../../Component/Message";
 import dayjs from "dayjs";
+import CompanyDetail from "./Components/CompanyDetail";
 
 const JobDetails = () => {
 	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem('allJobs')) || []);
@@ -54,12 +55,15 @@ const JobDetails = () => {
 		}
 	})
 
+	const allOrg = JSON.parse(localStorage.getItem("registeredOrg")) || [];
+	const companyInfo = allOrg.find(org => org.companyId === matchedJob.companyId) || {};
 	return (
 		<>
 			<section className={`${style.jobDetails} container`}>
 				<div>
 					<JobDetailsHeader jobInfo={jobInfo} />
 					<JobDescription jobDescription={jobDescription} />
+					<CompanyDetail companyInfo={companyInfo} />
 				</div>
 				<JobSideBar jobTitle={matchedJob.jobTitle} similerJobs={similerJobs.slice(0, 5)} />
 			</section>

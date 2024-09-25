@@ -1,5 +1,6 @@
 .jobSideBar {
-  border-radius: var(--br-sm);
+  box-shadow: 0px 0px 3px .2px var(--bg-light-3);
+  border-radius: var(--br-md);
   margin-block-end: var(--m-lg);
   background-color: var(--bg-lightblue);
   width: 100%;

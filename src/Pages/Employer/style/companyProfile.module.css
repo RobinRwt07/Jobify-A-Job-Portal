@@ -1,7 +1,7 @@
 .companyProfile {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-md);
+  gap: var(--gap-lg);
 
   &>div:first-child {
     display: flex;
@@ -9,9 +9,9 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-md);
-    background-color: var(--bg-light);
+    background-color: var(--bg-lightblue);
     border-radius: var(--br-sm);
-    padding: var(--p-md);
+    padding: var(--p-lg);
 
     &>div:has(img) {
       flex-shrink: 0;
@@ -27,6 +27,127 @@
         border-radius: inherit;
         object-fit: contain;
       }
+    }
+  }
+}
+
+.profileTabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  background-color: #eff8ff;
+  border-radius: var(--br-sm);
+  padding: var(--p-lg);
+
+  & h3 {
+    margin-block: var(--m-lg) var(--m-md);
+    font-size: 18px;
+  }
+
+  & input,
+  textarea {
+    background-color: var(--bg-white);
+  }
+}
+
+.companyInfo {
+  composes: profileTabs;
+  container-name: information;
+  container-type: inline-size;
+
+  &>div:first-child>h4 {
+    margin-block: var(--m-lg) var(--m-md);
+  }
+
+  &>div:not(div:first-child) {
+    display: flex;
+    flex-direction: column;
+
+    & span {
+      font-weight: 500;
+    }
+
+    &>* {
+      flex: 1 1;
+      margin-block: var(--m-sm);
+    }
+
+    @container information (width>700) {
+      flex-direction: row;
+    }
+  }
+}
+
+.accountSetting {
+  composes: profileTabs;
+  container-name: account;
+  container-type: inline-size;
+
+  &>form>div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-lg);
+
+    @container account (width>720px) {
+      flex-direction: row;
+
+      &>* {
+        flex: 1 1;
+      }
+    }
+  }
+
+  & label {
+    font-size: 14px;
+  }
+
+  & button {
+    margin-block: var(--m-lg);
+  }
+}
+
+.updateProfile {
+  composes: profileTabs;
+  composes: formSection from '../../../Styles/form.module.css';
+}
+
+
+.employerTabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+
+  &>div {
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    cursor: pointer;
+    padding: var(--p-md) var(--p-lg);
+    border-top-left-radius: var(--br-sm);
+    border-top-right-radius: var(--br-sm);
+
+    &:hover {
+      background-color: #bae1ff;
+    }
+  }
+}
+
+.deleteAccount {
+  svg {
+    font-size: 20px;
+  }
+
+  &>div {
+    margin-block: var(--m-lg);
+
+    &>div {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-lg);
     }
   }
 }

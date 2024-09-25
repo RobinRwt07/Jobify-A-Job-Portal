@@ -7,6 +7,7 @@ import Message from '../../../Component/Message';
 import { useNavigate } from 'react-router-dom';
 
 const RecentActivity = ({ recentJobs }) => {
+
 	const navigate = useNavigate();
 	return (
 		<div className={style.joblist}>

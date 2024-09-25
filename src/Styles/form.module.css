@@ -1,10 +1,5 @@
-.error {
-  font-size: 12px;
-  color: var(--error);
-}
-
-.addJobSection {
-  padding: var(--p-md);
+.formSection {
+  padding: var(--p-lg);
 
   &>h2 {
     font-size: 24px;
@@ -34,10 +29,11 @@
       width: 100%;
     }
   }
+
 }
 
-@container form (width>700px) {
-  .inputBox {
+.inputBox {
+  @container form (width>700px) {
     display: flex;
     gap: var(--gap-lg);
     margin-bottom: var(--m-md);

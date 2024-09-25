@@ -46,7 +46,7 @@ main {
 :root {
   /* colors */
   --success: #0BA02C;
-  --error: #ff6347;
+  --error: #ff2600;
   --primary: #4640DE;
   --bg-light: #F9F9F9;
   --bg-light-2: #F8F8Fa;
@@ -132,9 +132,11 @@ img {
 }
 
 input,
-select {
+select,
+textarea {
   background-color: transparent;
   outline: none;
+  resize: none;
   font-size: 15px;
   width: 100%;
   border: 1.5px solid rgb(188, 188, 188);
@@ -162,6 +164,10 @@ h3 {
 
 .btn {
   appearance: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-sm);
   cursor: pointer;
   border: none;
   text-align: center;
@@ -183,27 +189,44 @@ h3 {
   color: var(--text-white);
 
   &:hover {
-    background-color: var(--bg-dark);
+    background-color: #161286;
     color: var(--text-white);
+  }
+
+  &:focus {
+    outline: 1px solid var(--primary);
+    outline-offset: 2px;
   }
 }
 
-.tx-center {
-  text-align: center;
-}
+
 
 .btn-secondary {
   color: var(--primary);
   box-shadow: inset 0px 0px 0px 2px var(--primary);
-
-  &:hover {
-    box-shadow: inset 0px 0px 0px 2px var(--bg-dark);
-  }
 }
 
 .btn-tertiary {
   color: var(--primary);
-  padding: 0;
+}
+
+.btn-danger {
+  background-color: var(--error);
+  color: var(--text-white);
+
+  &:hover {
+    background-color: #d92303;
+  }
+
+  &:focus {
+    outline: 1px solid var(--error);
+    outline-offset: 2px;
+  }
+}
+
+
+.tx-center {
+  text-align: center;
 }
 
 .card {
@@ -229,4 +252,15 @@ h3 {
 .activeTab {
   background-color: #d4eaff;
   border-left: 5px solid var(--primary);
+}
+
+.flex-justify-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-lg);
+}
+
+.activeEmployerTab {
+  background-color: #eff8ff;
 }

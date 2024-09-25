@@ -20,6 +20,8 @@ import EmployerProfile from "./Pages/Employer/Component/EmployerProfile";
 import Overview from './Pages/Employer/Component/OverView';
 import AddJob from './Pages/Employer/Component/AddJob';
 import MyJobs from "./Pages/Employer/Component/MyJobs";
+import UpdateJob from './Pages/Employer/Component/UpdateJob';
+import Error from "./Component/Error";
 
 export const App = () => {
 	return (
@@ -53,8 +55,10 @@ export const App = () => {
 										<Route path="/employer/profile" element={<EmployerProfile />} />
 										<Route path="/employer/add_job" element={<AddJob />} />
 										<Route path="/employer/my_jobs" element={<MyJobs />} />
+										<Route path="/employer/update_job/:jobId" element={<UpdateJob />} />
 									</Route>
 								</Route>
+								<Route path="*" element={<Error />} />
 							</Routes>
 						</main >
 						<ToastContainer autoClose={3000} />

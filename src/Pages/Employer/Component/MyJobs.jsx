@@ -18,11 +18,11 @@ const MyJobs = () => {
 
 	const { companyInfo, setCompanyInfo } = useEmployerInfo();
 
+	console.log(allPostedJobs);
+
 	useEffect(() => {
 		setAllPostedJobs(allJobs.filter(job => job.companyId === companyInfo.companyId));
 		setFilteredJobs(allJobs.filter(job => job.companyId === companyInfo.companyId))
-		console.log("effect");
-
 	}, [])
 
 	if (allPostedJobs.length === 0) {
@@ -43,7 +43,7 @@ const MyJobs = () => {
 
 	function handleChangeStatus(e) {
 		jobStatus.current = e.target.value;
-		setFilteredJobs(allJobs.filter((job) => {
+		setFilteredJobs(allPostedJobs.filter((job) => {
 			const isExpire = new Date(job.expirationDate) < new Date();
 			if (jobStatus.current === 'all') {
 				return job;
@@ -92,7 +92,6 @@ const MyJobs = () => {
 	}
 	return (
 		<section className={`${style.joblist} ${style2.myJobs}`}>
-			{console.log(filteredJobs)}
 			<h2>My Jobs</h2>
 			<div className={style.jobsTable}>
 				<table>
@@ -132,7 +131,7 @@ const MyJobs = () => {
 				</table>
 			</div>
 			{
-				totalPages.length > 1 &&
+				(totalPages.length > 1) &&
 				<div className={style2.paginationBlock}>
 					<Button type="btn btn-primary" handler={handlePreviousClick} disabled={currentPage == 1}>
 						<FontAwesomeIcon icon={faArrowLeft} />

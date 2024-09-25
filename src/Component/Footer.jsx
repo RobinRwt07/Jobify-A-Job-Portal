@@ -23,8 +23,7 @@ const Footer = () => {
 							<h3>Quick Links</h3>
 							<ul>
 								<li><Link to={'/'}>Home </Link></li>
-								<li><Link to={'/'}>Contact </Link></li>
-								<li><Link to={'/'}>Admin </Link></li>
+								<li><Link to={'/about'}>Contact </Link></li>
 								<li><Link to={'/signup'}>Signup </Link></li>
 								<li><Link to={'/login'}>Login </Link></li>
 							</ul>
@@ -32,7 +31,7 @@ const Footer = () => {
 						<div>
 							<h3>Candidate</h3>
 							<ul>
-								<li><Link to={'/'}>Browse Jobs </Link></li>
+								<li><Link to={'/jobs'}>Browse Jobs </Link></li>
 								<li><Link to={'/'}>Candidate Dashboard </Link></li>
 								<li><Link to={'/'}>Saved Jobs </Link></li>
 							</ul>
@@ -40,9 +39,9 @@ const Footer = () => {
 						<div>
 							<h3>Employer</h3>
 							<ul>
-								<li><Link to={'/'}>Post a Job </Link></li>
-								<li><Link to={'/'}>Employer Dashboard </Link></li>
-								<li><Link to={'/'}>Application </Link></li>
+								<li><Link to={'/employer/add_job'}>Post a Job </Link></li>
+								<li><Link to={'/employer'}>Employer Dashboard </Link></li>
+								<li><Link to={'/employer'}>Application </Link></li>
 							</ul>
 						</div>
 					</div>

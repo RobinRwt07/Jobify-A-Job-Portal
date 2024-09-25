@@ -26,8 +26,7 @@ const OverView = () => {
 	if (!companyInfo) {
 		return navigate('/login/employer');
 	}
-	const recentJobs = allJobs.slice(-5);
-
+	const recentJobs = postedJobs.slice(0, 5);
 	return (
 		<div className={style.overview}>
 			<div>

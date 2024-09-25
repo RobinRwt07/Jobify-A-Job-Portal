@@ -17,7 +17,6 @@
     margin-block: var(--m-lg);
     table-layout: auto;
 
-
     & thead th {
       text-align: left;
       background-color: var(--bg-light);
@@ -29,16 +28,6 @@
       text-align: left;
       color: var(--text-light);
       padding: var(--p-lg);
-
-      &>button {
-        padding: var(--p-md) var(--p-lg);
-        border-radius: var(--br-sm);
-        color: var(--primary);
-        border: none;
-        font-weight: bold;
-        margin-right: var(--m-md);
-        cursor: pointer;
-      }
 
       & svg {
         margin-inline: var(--m-sm);
@@ -66,6 +55,36 @@
         }
       }
     }
-
   }
+}
+
+.jobButton {
+  width: 28px;
+  height: 28px;
+  aspect-ratio: 1;
+  border: none;
+  font-size: 1rem;
+  border-radius: var(--br-round);
+  color: var(--text-white);
+  margin-inline: var(--m-sm);
+  cursor: pointer;
+
+  &>svg {
+    margin: 0 !important;
+  }
+}
+
+.view {
+  composes: jobButton;
+  background-color: var(--primary);
+}
+
+.edit {
+  composes: jobButton;
+  background-color: var(--success);
+}
+
+.delete {
+  composes: jobButton;
+  background-color: var(--error);
 }

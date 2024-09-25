@@ -1,16 +1,45 @@
-import { faCircleCheck, faUserGroup, faEllipsisV, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faUserGroup, faCircleXmark, faEye, faTrash, faEdit, } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import style from '../style/recentActivity.module.css';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-const JobRow = ({ jobInfo: { jobTitle, jobType, expirationDate, postedOn } }) => {
-	const isActive = (new Date(expirationDate) > new Date()) ? true : false;
-	const posted = Math.floor((new Date() - new Date(postedOn)) / (60 * 60 * 24 * 1000));
+const JobRow = ({ jobInfo }) => {
+	const navigate = useNavigate();
+
+	const isActive = (new Date(jobInfo.expirationDate) > new Date()) ? true : false;
+	const posted = Math.floor((new Date() - new Date(jobInfo.postedOn)) / (60 * 60 * 24 * 1000));
+
+	function handleView() {
+		console.log("view");
+	}
+
+	function handleDelete(jobId, companyId) {
+		const allJobs = JSON.parse(localStorage.getItem("allJobs")) || [];
+		if (allJobs.length > 0) {
+			const deleteIndex = allJobs.findIndex(job => job.jobId === jobId && job.companyId === companyId);
+			if (deleteIndex !== -1) {
+				allJobs.splice(deleteIndex, 1);
+				localStorage.setItem('allJobs', JSON.stringify(allJobs));
+				toast.success("successfully deleted");
+			}
+		}
+		else {
+			toast.error("Failed to delete or Job not exist");
+			return
+		}
+	}
+
+	function handleEdit(jobId) {
+		navigate('/employer/update_job/' + jobId);
+	}
+
 	return (
 		<tr>
 			<td>
-				<h4>{jobTitle}</h4>
+				<h4>{jobInfo.jobTitle}</h4>
 				<div>
-					<span>{jobType}</span>
+					<span>{jobInfo.jobType}</span>
 					<span>{posted} days ago</span>
 				</div>
 			</td>
@@ -30,8 +59,11 @@ const JobRow = ({ jobInfo: { jobTitle, jobType, expirationDate, postedOn } }) =>
 				<FontAwesomeIcon icon={faUserGroup} />
 				130 Application</td>
 			<td>
-				<button>View Application</button>
-				<button><FontAwesomeIcon icon={faEllipsisV} /></button>
+				<button className={style.view} title='View Application' onClick={handleView}> <FontAwesomeIcon icon={faEye} /> </button>
+
+				<button className={style.edit} title="Edit Job" onClick={() => handleEdit(jobInfo.jobId)}><FontAwesomeIcon icon={faEdit} /></button>
+
+				<button className={style.delete} title="Delete Job" onClick={() => handleDelete(jobInfo.jobId, jobInfo.companyId)}><FontAwesomeIcon icon={faTrash} /></button>
 			</td>
 		</tr>
 	)

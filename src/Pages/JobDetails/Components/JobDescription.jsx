@@ -19,7 +19,7 @@ const JobDescription = ({ jobDescription: { jobDescription, education, workMode,
 				<>
 					<h3>Key Skills</h3>
 					<div className={`${style.box} ${style.keySkills}`}>
-						{skills.map(skill => <span>{skill}</span>)}
+						{skills.map((skill, index) => <span key={index}>{skill}</span>)}
 					</div>
 				</>
 			}

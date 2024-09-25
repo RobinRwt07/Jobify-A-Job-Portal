@@ -1,50 +1,61 @@
 import React, { useState } from 'react';
-import style from '../style/addjob.module.css';
-import { MyTextInput, MySelect } from './FormComponent';
+import style from '../../../Styles/form.module.css'
+import { MyTextInput, MySelect } from '../../../Component/FormComponent';
 import { Formik, Form } from 'formik';
 import addFormSchema from '../addJobFormSchema';
 import MyEditor from './MyEditor';
 import { useEmployerInfo } from '../useEmployerInfo';
 import { generateRandom } from '../../../../Public/utils';
 import { toast } from 'react-toastify';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const AddJob = () => {
-	const [jobDescription, setjobDescription] = useState('');
+const AddJob = ({ type = "add", jobInfo = {} }) => {
+	const navigate = useNavigate();
+
+	const [jobDescription, setjobDescription] = useState(jobInfo.jobDescription || '');
 	const [error, setError] = useState({});
 	const { companyInfo } = useEmployerInfo();
 
 	const initialValues = {
-		jobTitle: "",
-		jobType: "",
-		workMode: "",
-		minSalary: "",
-		maxSalary: "",
-		minExperience: 0,
-		maxExperience: 0,
-		vacancies: 1,
-		expirationDate: "",
-		education: "",
-		jobTags: "",
-		jobLocation: "",
-		skills: ""
+		jobTitle: jobInfo.jobTitle || "",
+		jobType: jobInfo.jobType || "",
+		workMode: jobInfo.workMode || "",
+		minSalary: jobInfo.minSalary || "",
+		maxSalary: jobInfo.maxSalary || "",
+		minExperience: jobInfo.minExperience || 0,
+		maxExperience: jobInfo.maxExperience || 0,
+		vacancies: jobInfo.vacancies || 1,
+		expirationDate: jobInfo.expirationDate || "",
+		education: jobInfo.education || "",
+		jobTags: jobInfo.jobTags || "",
+		jobLocation: jobInfo.jobLocation || "",
+		skills: jobInfo.skills || ""
 	}
 	function addNewJob(jobData) {
-		jobData.jobId = "JOB" + generateRandom(100000, 999999);
+		jobData.jobId = jobInfo.jobId || "JOB" + generateRandom(100000, 999999);
 		jobData.postedOn = new Date();
 		jobData.companyId = companyInfo.companyId;
 		jobData.companyName = companyInfo.companyName;
 		jobData.jobDescription = jobDescription;
 		const allJobs = JSON.parse(localStorage.getItem("allJobs")) || [];
+		if (type == 'update') {
+			const oldIndex = allJobs.findIndex(job => job.jobId == jobInfo.jobId);
+			if (oldIndex !== -1) {
+				allJobs.splice(oldIndex, 1);
+			}
+		}
+
 		allJobs.unshift(jobData);
 		localStorage.setItem("allJobs", JSON.stringify(allJobs));
-		toast.success("Successfully added.");
+		toast.success("Successfully " + type);
 	}
-	[].u
 
 	return (
-		<section className={style.addJobSection}>
-			<h2>Post A Job</h2>
+		<section className={style.formSection}>
+			{type == "add" ?
+				<h2>Post A Job</h2> :
+				<h2>Update Job</h2>
+			}
 			<Formik
 				initialValues={initialValues}
 				validationSchema={addFormSchema}
@@ -56,15 +67,17 @@ const AddJob = () => {
 					setTimeout(() => {
 						addNewJob(values);
 						setSubmitting(false);
-						location.reload();
+						navigate('/employer/my_jobs', { replace: true });
 					}, 1500);
 				}}>
 				{
 					({ isSubmitting }) => (
 						<Form>
-							<MyTextInput type="text" label="Job Title" name="jobTitle" placeholder="Add Job Title" />
 							<div className={style.inputBox}>
+								<MyTextInput type="text" label="Job Title" name="jobTitle" placeholder="Add Job Title" />
 								<MyTextInput type="text" label="Tags" name="jobTags" placeholder="Job Keyword" />
+							</div>
+							<div className={style.inputBox}>
 								<MySelect label="Job Type" name="jobType">
 									<option value="">Select</option>
 									<option value={"Full Time"}>Full Time</option>
@@ -106,7 +119,9 @@ const AddJob = () => {
 								<MyEditor jobDescription={jobDescription} setJobDescription={setjobDescription} />
 								{error.jobDescription ? <div className={style.error}>{error.jobDescription}</div> : null}
 							</div>
-							<button type='submit' className="btn btn-primary" disabled={isSubmitting}>Submit</button>
+							<button type='submit' className="btn btn-primary" disabled={isSubmitting}>
+								{type === "add" ? "Add Job" : "Update Job"}
+							</button>
 						</Form>
 					)
 				}
