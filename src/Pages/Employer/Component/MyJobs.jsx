@@ -18,8 +18,6 @@ const MyJobs = () => {
 
 	const { companyInfo, setCompanyInfo } = useEmployerInfo();
 
-	console.log(allPostedJobs);
-
 	useEffect(() => {
 		setAllPostedJobs(allJobs.filter(job => job.companyId === companyInfo.companyId));
 		setFilteredJobs(allJobs.filter(job => job.companyId === companyInfo.companyId))
@@ -59,24 +57,22 @@ const MyJobs = () => {
 
 	function handleJobTime(e) {
 		jobTime.current = e.target.value;
-		const jobs = allPostedJobs;
-		setFilteredJobs(jobs.sort((job1, job2) => {
-			const diff = new Date(job1.postedOn) - new Date(job2.postedOn);
-			if (jobTime.current === 'all') {
-				return 0;
-			}
-			else if (jobTime.current === 'latest') {
-				if (diff > 0) {
-					return -1;
-				}
-				if (diff < 0) {
-					return 1;
-				}
-			}
-			else if (jobTime === 'oldest') {
-				return diff;
-			}
-		}))
+		let result = [...allPostedJobs];
+		if (jobTime.current === 'all') {
+			result = [...allPostedJobs];
+		}
+		else if (jobTime.current === 'latest') {
+			result = result.sort((job1, job2) => {
+				return new Date(job2.postedOn) - new Date(job1.postedOn);
+			})
+		}
+		else if (jobTime.current === 'oldest') {
+			result = result.sort((job1, job2) => {
+				return new Date(job1.postedOn) - new Date(job2.postedOn);
+			})
+		}
+		setFilteredJobs(result);
+		console.log(filteredJobs);
 	}
 
 
