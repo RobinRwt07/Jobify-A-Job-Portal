@@ -5,7 +5,7 @@
   justify-content: space-between;
   padding: var(--p-lg);
   border-radius: var(--br-sm);
-  background-image: linear-gradient(to right, #FFF6E6, #FFFFFF);
+  background-image: linear-gradient(to right, #fff9ef, #FFFFFF);
   box-shadow: 0px 0px 3px 0px var(--bg-light-3);
 
   &:hover {
@@ -25,18 +25,28 @@
     align-items: center;
     margin-block: var(--m-md);
 
-    &>span {
+    & span {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: bold;
       color: var(--text-light)
     }
 
-    &>span:first-child {
-      padding: var(--p-sm);
-      border-radius: var(--br-sm);
-      font-weight: bold;
-      color: var(--success);
-      background-color: #d9f0de;
+    &>div {
+      display: flex;
+      gap: var(--gap-sm);
+
+      & span {
+        font-size: 12px;
+        padding: var(--p-sm);
+        border-radius: var(--br-sm);
+        color: var(--success);
+        background-color: #d9f0de;
+      }
+
+      span:nth-child(2) {
+        color: var(--primary);
+        background-color: #d4e4ff;
+      }
     }
   }
 }
@@ -54,7 +64,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: #d9d9d9;
+    background-color: #c2d9ff;
   }
 }
 

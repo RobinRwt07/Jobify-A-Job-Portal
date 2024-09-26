@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import style from '../Styles/JobCard.module.css';
 
-const JobCard = ({ jobData: { jobTitle, jobType, minSalary, maxSalary, companyName, jobLocation } }) => {
+const JobCard = ({ jobData: { jobTitle, workMode, jobType, minSalary, maxSalary, companyName, jobLocation } }) => {
 	function handleSaveClick() {
 		console.log("save");
 	}
@@ -11,7 +11,10 @@ const JobCard = ({ jobData: { jobTitle, jobType, minSalary, maxSalary, companyNa
 		<div className={style['job-card']}>
 			<h3>{jobTitle}</h3>
 			<div>
-				<span>{jobType}</span>
+				<div>
+					<span>{jobType}</span>
+					<span>{workMode}</span>
+				</div>
 				<span>Salary: {`${(minSalary / 100000).toFixed(1)}-${(maxSalary / 100000).toFixed(1)}`} LPA </span>
 			</div>
 

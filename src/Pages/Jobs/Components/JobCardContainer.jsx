@@ -53,19 +53,21 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	return (
 		<>
 			<div style={{ marginBlock: "1rem" }}>
-				<h3> Total Jobs : {filteredJobs.length}</h3>
-			</div>
-			<div className={style.jobCardContainer}>
-				<div className={style.jobCards}>
-					{currentPageItem.map(job => (
-						<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
-							<JobCard key={job.jobId} jobData={job} />
-						</Link>
-					))}
-				</div>
+				<h4> Total Jobs : {filteredJobs.length}</h4>
 			</div>
 
-			{/* paginations */}
+			{filteredJobs.length === 0 ?
+				<Message>No Jobs</Message> :
+				<div className={style.jobCardContainer}>
+					<div className={style.jobCards}>
+						{currentPageItem.map(job => (
+							<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
+								<JobCard key={job.jobId} jobData={job} />
+							</Link>
+						))}
+					</div>
+				</div>
+			}
 			{
 				totalPages.length > 1 &&
 				<div className={style.paginationBlock}>
