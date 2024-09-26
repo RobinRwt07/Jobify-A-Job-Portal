@@ -24,7 +24,7 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 		return matcheWorkMode && matchedJobType;
 	}))
 
-	const itemPerPage = 5;
+	const itemPerPage = 10;
 	const lastItem = currentPage * itemPerPage;
 	const firstItem = lastItem - itemPerPage;
 

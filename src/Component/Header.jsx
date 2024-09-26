@@ -36,6 +36,10 @@ const Header = () => {
 		navigate(path);
 	}
 
+	function closeNavBar() {
+		setNavActive(false);
+	}
+
 	useEffect(() => {
 		const mediaQuery = window.matchMedia("(max-width: 800px)");
 		if (mediaQuery.matches) {
@@ -59,19 +63,19 @@ const Header = () => {
 								<FontAwesomeIcon icon={faClose} size='xl' />
 							</Button>
 							<ul>
-								<li><NavLink to={'/'} end>Home</NavLink></li>
-								<li><NavLink to={'/jobs'} end>Jobs</NavLink></li>
+								<li><NavLink to={'/'} end onClick={closeNavBar}>Home</NavLink></li>
+								<li><NavLink to={'/jobs'} end onClick={closeNavBar}>Jobs</NavLink></li>
 								{
 									candidateAuthed ?
-										<li><NavLink to={''} end>Candidate</NavLink></li> :
+										<li><NavLink to={''} end onClick={closeNavBar}>Candidate</NavLink></li> :
 										(employerAuthed) ?
-											<li><NavLink to={'/employer'} >Employer</NavLink></li> :
+											<li><NavLink to={'/employer'} onClick={closeNavBar}>Employer</NavLink></li> :
 											<>
-												<li><NavLink to={'/employer'} >Employer</NavLink></li>
-												<li><NavLink to={'/candidate'} end>Candidate</NavLink></li>
+												<li><NavLink to={'/employer'} onClick={closeNavBar} >Employer</NavLink></li>
+												<li><NavLink to={'/candidate'} end onClick={closeNavBar}>Candidate</NavLink></li>
 											</>
 								}
-								<li><NavLink to={''} end>About Us</NavLink></li>
+								<li><NavLink to={''} end onClick={closeNavBar}>About Us</NavLink></li>
 							</ul>
 						</nav>
 						{
