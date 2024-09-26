@@ -17,19 +17,19 @@ const FilterBar = ({ handleFilterChange }) => {
 		remote: false,
 	})
 
-	const filterContext = useContext(FilterContext);
+	const { selectedTag, setSelectedTag } = useContext(FilterContext);
 
 	function handleJobChange(e) {
 		setJobTypes({
 			...jobType,
 			[e.target.name]: e.target.checked
 		})
-		filterContext.handler({
+		setSelectedTag({
 			workMode: {
-				...filterContext.tags.workMode
+				...selectedTag.workMode
 			},
 			jobType: {
-				...filterContext.tags.jobType,
+				...selectedTag.jobType,
 				[e.target.name]: e.target.checked,
 			}
 		})
@@ -40,12 +40,12 @@ const FilterBar = ({ handleFilterChange }) => {
 			[e.target.name]: e.target.checked
 		})
 
-		filterContext.handler({
+		setSelectedTag({
 			jobType: {
-				...filterContext.tags.jobType
+				...selectedTag.jobType
 			},
 			workMode: {
-				...filterContext.tags.workMode,
+				...selectedTag.workMode,
 				[e.target.name]: e.target.checked,
 			}
 		})
@@ -68,7 +68,7 @@ const FilterBar = ({ handleFilterChange }) => {
 						Part Time
 					</CheckBox>
 
-					<CheckBox name={"intership"} checked={jobType.internship} onChangeHandler={handleJobChange}>
+					<CheckBox name={"internship"} checked={jobType.internship} onChangeHandler={handleJobChange}>
 						Internship
 					</CheckBox>
 				</div>

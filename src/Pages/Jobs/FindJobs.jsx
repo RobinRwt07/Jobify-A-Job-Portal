@@ -36,7 +36,7 @@ const FindJobs = () => {
 	}, []);
 	return (
 		<>
-			<FilterContext.Provider value={{ tags: selectedTag, handler: setSelectedTag }}>
+			<FilterContext.Provider value={{ selectedTag, setSelectedTag }}>
 				<div className={`${style.jobContainer} container`}>
 					{isFilterOpen && <FilterBar handleFilterChange={setFilterOpen} />}
 					<div>

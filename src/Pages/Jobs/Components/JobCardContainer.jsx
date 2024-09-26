@@ -9,39 +9,23 @@ import Message from '../../../Component/Message';
 
 const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem("allJobs")) || []);
-	const [searchResult, setSearchResult] = useState([]);
 	const filterContext = useContext(FilterContext);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	useEffect(() => {
-		if (title.length !== 0 || location.length !== 0) {
-			setSearchResult(allJobs.filter(job => {
-				if (title && location.length == 0) {
-					return job.jobTitle.toLowerCase().includes(title.toLowerCase()) && job;
-				}
-				if (location && title.length == 0) {
-					return job.jobLocation.toLowerCase().includes(location.toLowerCase()) && job
-				}
-				if (title && location) {
-					return (job.jobLocation.toLowerCase().includes(location.toLowerCase()) && job.jobTitle.toLowerCase().includes(title.toLowerCase())) && job;
-				}
-			}));
-		}
-		else {
-			setSearchResult(allJobs);
-		}
-	}, [title, location]);
+	const searchResult = allJobs.filter(job => {
+		const matchedLocation = location.length === 0 || job.jobLocation.toLowerCase().includes(location.toLowerCase());
+		const matchedTitle = title.length === 0 || job.jobTitle.toLowerCase().includes(title.toLowerCase());
+		return matchedLocation && matchedTitle;
+	});
 
-	const itemPerPage = 10;
+	const itemPerPage = 5;
 	const lastItem = currentPage * itemPerPage;
 	const firstItem = lastItem - itemPerPage;
 
-	const allItems = searchResult;
-
-	const currentPageItem = allItems.slice(firstItem, lastItem);
+	const currentPageItem = searchResult.slice(firstItem, lastItem);
 	const totalPages = [];
 
-	for (let index = 1; index <= Math.ceil(allItems.length / itemPerPage); index++) {
+	for (let index = 1; index <= Math.ceil(searchResult.length / itemPerPage); index++) {
 		totalPages.push(index)
 	}
 
@@ -63,7 +47,7 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	return (
 		<>
 			<div style={{ marginBlock: "1rem" }}>
-				<h3> Total Jobs : {allItems.length}</h3>
+				<h3> Total Jobs : {searchResult.length}</h3>
 			</div>
 			<div className={style.jobCardContainer}>
 				<div className={style.jobCards}>
