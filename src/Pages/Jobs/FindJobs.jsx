@@ -14,16 +14,8 @@ const FindJobs = () => {
 	const queryParam = new URLSearchParams(location.search);
 
 	const [selectedTag, setSelectedTag] = useState({
-		jobType: {
-			fullTime: false,
-			partTime: false,
-			internship: false
-		},
-		workMode: {
-			onsite: false,
-			remote: false,
-			hybrid: false
-		}
+		jobType: [],
+		workMode: []
 	});
 
 	useEffect(() => {

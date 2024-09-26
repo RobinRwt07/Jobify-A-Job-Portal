@@ -9,7 +9,7 @@ import Message from '../../../Component/Message';
 
 const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem("allJobs")) || []);
-	const filterContext = useContext(FilterContext);
+	const { selectedTag, setSelectedTag } = useContext(FilterContext);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const searchResult = allJobs.filter(job => {
@@ -18,14 +18,20 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 		return matchedLocation && matchedTitle;
 	});
 
+	const filteredJobs = searchResult.filter((job => {
+		const matchedJobType = selectedTag.jobType.length === 0 || selectedTag.jobType.includes(job.jobType);
+		const matcheWorkMode = selectedTag.workMode.length === 0 || selectedTag.workMode.includes(job.workMode);
+		return matcheWorkMode && matchedJobType;
+	}))
+
 	const itemPerPage = 5;
 	const lastItem = currentPage * itemPerPage;
 	const firstItem = lastItem - itemPerPage;
 
-	const currentPageItem = searchResult.slice(firstItem, lastItem);
+	const currentPageItem = filteredJobs.slice(firstItem, lastItem);
 	const totalPages = [];
 
-	for (let index = 1; index <= Math.ceil(searchResult.length / itemPerPage); index++) {
+	for (let index = 1; index <= Math.ceil(filteredJobs.length / itemPerPage); index++) {
 		totalPages.push(index)
 	}
 
@@ -47,7 +53,7 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	return (
 		<>
 			<div style={{ marginBlock: "1rem" }}>
-				<h3> Total Jobs : {searchResult.length}</h3>
+				<h3> Total Jobs : {filteredJobs.length}</h3>
 			</div>
 			<div className={style.jobCardContainer}>
 				<div className={style.jobCards}>
