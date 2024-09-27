@@ -80,12 +80,14 @@
     height: 52px;
     aspect-ratio: 1;
     border-radius: var(--br-sm);
-    background-color: var(--bg-light-2);
+    background-color: var(--bg-white);
     padding: var(--p-sm);
 
     &>img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
+      mix-blend-mode: hard-light;
     }
   }
 

@@ -1,9 +1,9 @@
-import CompanyLogo from '../Assest/Images/landingImage.png';
+import logo from '../Assest/Images/landingImage.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import style from '../Styles/JobCard.module.css';
 
-const JobCard = ({ jobData: { jobTitle, workMode, jobType, minSalary, maxSalary, companyName, jobLocation } }) => {
+const JobCard = ({ jobData: { jobTitle, companyImage, workMode, jobType, minSalary, maxSalary, companyName, jobLocation } }) => {
 	function handleSaveClick() {
 		console.log("save");
 	}
@@ -20,7 +20,7 @@ const JobCard = ({ jobData: { jobTitle, workMode, jobType, minSalary, maxSalary,
 
 			<div className={style.companyInfo}>
 				<div>
-					<img src={CompanyLogo} alt="company logo" />
+					<img src={companyImage || logo} alt="company logo" />
 				</div>
 				<div>
 					<h4>{companyName}</h4>

@@ -37,6 +37,7 @@ const AddJob = ({ type = "add", jobInfo = {} }) => {
 		jobData.companyId = companyInfo.companyId;
 		jobData.companyName = companyInfo.companyName;
 		jobData.jobDescription = jobDescription;
+		jobData.companyImage = companyInfo.companyImage || '';
 		const allJobs = JSON.parse(localStorage.getItem("allJobs")) || [];
 		if (type == 'update') {
 			const oldIndex = allJobs.findIndex(job => job.jobId == jobInfo.jobId);

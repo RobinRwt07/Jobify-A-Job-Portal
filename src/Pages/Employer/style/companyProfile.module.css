@@ -163,7 +163,7 @@
     width: 100px;
     height: 100px;
     aspect-ratio: 1;
-    object-fit: center;
+    object-fit: contain;
   }
 
   & input[type="file"] {
