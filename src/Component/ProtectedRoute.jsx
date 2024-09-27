@@ -5,7 +5,7 @@ import { useEmployerAuth } from "../hooks/useEmployerAuth";
 
 const ProtectedRoute = ({ type, redirectTo }) => {
 
-	const { employerAuthed, setEmployerAuth } = useEmployerAuth();
+	const { employerAuthed } = useEmployerAuth();
 	const { candidateAuthed } = useCandidateAuth();
 
 	if (type == 'employer') {

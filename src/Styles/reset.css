@@ -262,5 +262,5 @@ h3 {
 }
 
 .activeEmployerTab {
-  background-color: #eff8ff;
+  background-color: var(--bg-light);
 }

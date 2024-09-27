@@ -22,6 +22,8 @@ import AddJob from './Pages/Employer/Component/AddJob';
 import MyJobs from "./Pages/Employer/Component/MyJobs";
 import UpdateJob from './Pages/Employer/Component/UpdateJob';
 import Error from "./Component/Error";
+import Candidate from "./Pages/Candidate/Candidate";
+import Profile from "./Pages/Candidate/Component/Profile";
 
 export const App = () => {
 	return (
@@ -47,7 +49,11 @@ export const App = () => {
 
 								<Route path={'/jobs'} element={<FindJobs />} />
 								<Route path={'/jobdetail/:jobid'} element={<JobDetails />} />
-								<Route element={<ProtectedRoute type={'candidate'} redirectTo={'/login/candidate'} />} />
+								<Route element={<ProtectedRoute type="candidate" redirectTo={'/login/candidate'} />} >
+									<Route path="/candidate" element={<Candidate />} >
+										<Route index element={<Profile />} />
+									</Route>
+								</Route>
 
 								<Route element={<ProtectedRoute type="employer" redirectTo={'/login/employer'} />}>
 									<Route path="/employer" element={<Employer />} >

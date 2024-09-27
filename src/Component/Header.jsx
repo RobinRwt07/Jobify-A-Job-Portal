@@ -6,17 +6,42 @@ import Logo from './Logo';
 import MenuLogo from '../Assest/Images/menu_icon.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import Avatar from './Avatar';
 import { useCandidateAuth } from '../hooks/useCandidateAuth';
 import { useEmployerAuth } from '../hooks/useEmployerAuth';
+import avatar from '../Assest/Images/profileAvatar.png';
 
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const Header = () => {
 	const [isNavActive, setNavActive] = useState(false);
 	const [isSmallScreen, setIsSmallScreen] = useState(false);
 	const navigate = useNavigate();
-	const { candidateAuthed, setCandidateAuth } = useCandidateAuth();
+	const { candidateAuthed, candidateLogout } = useCandidateAuth();
 	const { employerAuthed, setEmployerAuth } = useEmployerAuth();
+
+	const [anchorEl, setAnchorEl] = useState(null);
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(max-width: 800px)");
+		if (mediaQuery.matches) {
+			setIsSmallScreen(true);
+		}
+		mediaQuery.addEventListener('change', handleMediaQueryChange);
+		return () => {
+			mediaQuery.removeEventListener("change", handleMediaQueryChange);
+		};
+	}, []);
+
+	const open = Boolean(anchorEl);
+
+	const handleMenuOpen = (event) => {
+		console.log(Boolean(event.currentTarget));
+
+		setAnchorEl(event.currentTarget);
+	};
+	const handleMenuClose = () => {
+		setAnchorEl(null);
+	};
 
 	function handleMenuToggle() {
 		setNavActive(!isNavActive);
@@ -40,16 +65,16 @@ const Header = () => {
 		setNavActive(false);
 	}
 
-	useEffect(() => {
-		const mediaQuery = window.matchMedia("(max-width: 800px)");
-		if (mediaQuery.matches) {
-			setIsSmallScreen(true);
-		}
-		mediaQuery.addEventListener('change', handleMediaQueryChange);
-		return () => {
-			mediaQuery.removeEventListener("change", handleMediaQueryChange);
-		};
-	}, []);
+	function handleOnclick() {
+		console.log("click");
+
+	}
+
+	function handleLogout() {
+		handleMenuClose();
+		candidateLogout();
+	}
+
 
 	return (
 		<header className={style.header}>
@@ -62,34 +87,55 @@ const Header = () => {
 							<Button type='btn-tertiary' handler={handleMenuToggle}>
 								<FontAwesomeIcon icon={faClose} size='xl' />
 							</Button>
-							<ul>
-								<li><NavLink to={'/'} end onClick={closeNavBar}>Home</NavLink></li>
-								<li><NavLink to={'/jobs'} end onClick={closeNavBar}>Jobs</NavLink></li>
+							<div>
+								<NavLink to={'/'} end onClick={closeNavBar}>Home</NavLink>
+								<NavLink to={'/jobs'} end onClick={closeNavBar}>Jobs</NavLink>
 								{
 									candidateAuthed ?
-										<li><NavLink to={''} end onClick={closeNavBar}>Candidate</NavLink></li> :
+										<NavLink to={''} end onClick={closeNavBar}>Candidate</NavLink> :
 										(employerAuthed) ?
-											<li><NavLink to={'/employer'} onClick={closeNavBar}>Employer</NavLink></li> :
+											<NavLink to={'/employer'} onClick={closeNavBar}>Employer</NavLink> :
 											<>
-												<li><NavLink to={'/employer'} onClick={closeNavBar} >Employer</NavLink></li>
-												<li><NavLink to={'/candidate'} end onClick={closeNavBar}>Candidate</NavLink></li>
+												<NavLink to={'/employer'} onClick={closeNavBar} >Employer</NavLink>
+												<NavLink to={'/candidate'} end onClick={closeNavBar}>Candidate</NavLink>
 											</>
 								}
-								<li><NavLink to={''} end onClick={closeNavBar}>About Us</NavLink></li>
-							</ul>
+								<NavLink to={''} end onClick={closeNavBar}>About Us</NavLink>
+							</div>
 						</nav>
 						{
-							candidateAuthed || employerAuthed ?
-								<Avatar /> :
-								<div className={style.btnGroup}>
-									<Button type='btn-secondary' handler={() => handleNavigate('/login')} >Login</Button>
-									<Button type='btn-primary' handler={() => handleNavigate('/signup')}>Signup</Button>
-								</div>
+							!(candidateAuthed || employerAuthed) &&
+							<div className={style.btnGroup}>
+								<Button type='btn-secondary' handler={() => handleNavigate('/login')} >Login</Button>
+								<Button type='btn-primary' handler={() => handleNavigate('/signup')}>Signup</Button>
+							</div>
 						}
 					</div>
 				}
-				<div className={style.menuBtn} onClick={handleMenuToggle}>
-					<img src={MenuLogo} alt="menu-btn" />
+				<div className='flex-justify-center'>
+					<div className={style.menuBtn} onClick={handleMenuToggle}>
+						<img src={MenuLogo} alt="menu-btn" />
+					</div>
+					{candidateAuthed &&
+						<>
+							<div className={style.profileAvatar} onClick={handleMenuOpen}>
+								<img src={avatar} alt="profile picture" />
+							</div>
+							<Menu
+								id="basic-menu"
+								anchorEl={anchorEl}
+								open={open}
+								onClose={handleMenuClose}
+								MenuListProps={{
+									'aria-labelledby': 'basic-button',
+								}}
+							>
+								<MenuItem onClick={() => navigate('/candidate/profile')}>Profile</MenuItem>
+								<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+								<MenuItem onClick={handleLogout}>Logout</MenuItem>
+							</Menu>
+						</>
+					}
 				</div>
 			</div>
 		</header>
