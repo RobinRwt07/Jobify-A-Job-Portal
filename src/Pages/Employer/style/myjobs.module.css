@@ -4,25 +4,3 @@
   gap: var(--gap-lg);
   margin-block-end: var(--m-lg);
 }
-
-.paginationBlock {
-  margin-block: var(--m-2xl);
-  display: flex;
-  gap: var(--gap-md);
-  align-items: center;
-  justify-content: center;
-
-  &>div {
-    width: 32px;
-    aspect-ratio: 1;
-    text-align: center;
-    padding: var(--p-sm);
-    border-radius: var(--br-round);
-    background-color: var(--bg-light-2);
-  }
-
-  &>button {
-    aspect-ratio: 1;
-    border-radius: var(--br-round);
-  }
-}

@@ -1,0 +1,22 @@
+.pagination {
+  margin-block: var(--m-2xl);
+  display: flex;
+  gap: var(--gap-md);
+  align-items: center;
+  justify-content: center;
+
+  &>div {
+    width: 36px;
+    aspect-ratio: 1;
+    align-content: center;
+    text-align: center;
+    padding: var(--p-sm);
+    border-radius: var(--br-round);
+    background-color: var(--bg-light-2);
+  }
+
+  &>button {
+    aspect-ratio: 1;
+    border-radius: var(--br-round);
+  }
+}

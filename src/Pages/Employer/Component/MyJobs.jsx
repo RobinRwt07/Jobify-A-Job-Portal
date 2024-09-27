@@ -4,9 +4,7 @@ import style2 from '../style/myjobs.module.css';
 import Message from '../../../Component/Message';
 import { useEmployerInfo } from '../useEmployerInfo';
 import JobRow from './JobRow';
-import Button from '../../../Component/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Pagination from '../../../Component/Pagination';
 
 const MyJobs = () => {
 	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem("allJobs")) || []);
@@ -27,7 +25,7 @@ const MyJobs = () => {
 		return <Message>You have not posted any job yet</Message>
 	}
 
-	const jobsPerPage = 10;
+	const jobsPerPage = 5;
 	const lastJob = jobsPerPage * currentPage;
 	const firstJob = lastJob - jobsPerPage;
 
@@ -72,20 +70,8 @@ const MyJobs = () => {
 			})
 		}
 		setFilteredJobs(result);
-		console.log(filteredJobs);
 	}
 
-
-	function handleNextClick() {
-		if (currentPage < totalPages.length) {
-			setCurrentPage(currentPage + 1);
-		}
-	}
-	function handlePreviousClick() {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
-		}
-	}
 	return (
 		<section className={`${style.joblist} ${style2.myJobs}`}>
 			<h2>My Jobs</h2>
@@ -128,21 +114,7 @@ const MyJobs = () => {
 			</div>
 			{
 				(totalPages.length > 1) &&
-				<div className={style2.paginationBlock}>
-					<Button type="btn btn-primary" handler={handlePreviousClick} disabled={currentPage == 1}>
-						<FontAwesomeIcon icon={faArrowLeft} />
-					</Button>
-					{
-						totalPages.map((page, index) => (
-							<div key={index} onClick={(e) => setCurrentPage(Number(e.target.textContent))} className={page == currentPage ? "activePage" : ''}  >
-								{page}
-							</div>
-						))
-					}
-					<Button type="btn btn-primary" handler={handleNextClick} disabled={currentPage == totalPages.length}>
-						<FontAwesomeIcon icon={faArrowRight} />
-					</Button>
-				</div>
+				<Pagination totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 			}
 		</section >
 	)
