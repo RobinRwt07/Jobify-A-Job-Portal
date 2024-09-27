@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useEmployerInfo } from '../useEmployerInfo';
 import style from '../style/companyProfile.module.css';
 import logo from '../../../Assest/Images/profileAvatar.png';
@@ -9,10 +9,62 @@ import CompanyInfo from './CompanyInfo';
 import UpdateProfile from './UpdateProfile';
 import AccoutSetting from './AccoutSetting';
 
+// import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { toast } from 'react-toastify';
+
 const EmployerProfile = () => {
 	const { companyInfo, setCompanyInfo } = useEmployerInfo();
 	const [activeTab, setActiveTab] = useState("CompanyInfo");
+	const [open, setOpen] = useState(false);
+	const [error, setError] = useState('');
+	const [previewData, setPreviewData] = useState(null);
 
+	const fileInputRef = useRef(null);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setError('');
+		setPreviewData(null);
+		setOpen(false);
+	};
+
+	function handleChange() {
+		const seletedFile = fileInputRef.current.files[0];
+		const fileSize = Math.round(seletedFile.size / 1024);
+		if (fileSize > 50) {
+			setPreviewData(null);
+			setError('file size should be less then 50kb.');
+		}
+		else {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				setPreviewData(e.target.result);
+			}
+			reader.readAsDataURL(seletedFile);
+			setError('');
+		}
+	}
+
+	function handleProfileUpdate() {
+		const allOrg = JSON.parse(localStorage.getItem('registeredOrg'));
+		const index = allOrg.findIndex(org => org.companyId === companyInfo.companyId);
+		if (index !== -1) {
+			allOrg[index].companyImage = previewData;
+			localStorage.setItem("registeredOrg", JSON.stringify(allOrg));
+			toast.success("Image uploaded");
+			handleClose();
+			setTimeout(() => {
+				location.reload();
+			}, 1000)
+		}
+	}
 	return (
 		<section className={style.companyProfile}>
 			<div>
@@ -21,7 +73,29 @@ const EmployerProfile = () => {
 				</div>
 				<h2>{companyInfo.companyName}</h2>
 				<div className='flex-justify-center'>
-					<Button>Update Picture</Button>
+					<Button handler={handleClickOpen}>Update Picture</Button>
+					<Dialog
+						open={open}
+						onClose={handleClose}>
+						<DialogTitle>Update Profile</DialogTitle>
+						<DialogContent>
+							<div className={style.fileUploadForm}>
+								{
+									previewData &&
+									<img src={previewData} alt="profileImage" />
+								}
+								<label htmlFor='profilePicture'>
+									Select Image:
+									<input ref={fileInputRef} type="file" name="profilePicture" id="profilePicture" accept='image/*' onChange={handleChange} />
+								</label>
+								{error.length > 0 && <span >{error}</span>}
+							</div>
+						</DialogContent>
+						<DialogActions>
+							<Button type='tertairy' handler={handleClose}>Cancel</Button>
+							<Button disabled={previewData == null || error.length > 0} handler={handleProfileUpdate} >Update</Button>
+						</DialogActions>
+					</Dialog>
 				</div>
 			</div>
 			<div>

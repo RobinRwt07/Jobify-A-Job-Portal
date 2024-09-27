@@ -5,7 +5,6 @@ import style from './style/employer.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import { EmployerInfoProvider } from './useEmployerInfo';
-import Modal from '../../Component/Modal';
 
 const Employer = () => {
 	const [sideBarActive, setSideBarActive] = useState(false);
