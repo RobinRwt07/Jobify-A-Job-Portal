@@ -67,7 +67,6 @@ const Header = () => {
 
 	function handleOnclick() {
 		console.log("click");
-
 	}
 
 	function handleLogout() {
@@ -92,7 +91,7 @@ const Header = () => {
 								<NavLink to={'/jobs'} end onClick={closeNavBar}>Jobs</NavLink>
 								{
 									candidateAuthed ?
-										<NavLink to={''} end onClick={closeNavBar}>Candidate</NavLink> :
+										<NavLink to={'/candidate'} end onClick={closeNavBar}>Candidate</NavLink> :
 										(employerAuthed) ?
 											<NavLink to={'/employer'} onClick={closeNavBar}>Employer</NavLink> :
 											<>

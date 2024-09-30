@@ -5,22 +5,22 @@ import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import style from '../../../Styles/dashboard.module.css';
 
-const EmployerSideBar = () => {
+const CandidateSideBar = () => {
 	return (
 		<div className={style.navigationContainer}>
-			<NavLink to={'/employer'} end>
+			<NavLink to={'/candidate'} end>
 				<FontAwesomeIcon icon={faLayerGroup} />
-				<span>Overview</span>
+				<span>Profile</span>
 			</NavLink>
 
 			<NavLink to={'/employer/profile'} end>
 				<FontAwesomeIcon icon={faUserCircle} />
-				<span> Profile</span>
+				<span>Job History</span>
 			</NavLink>
 
 			<NavLink to={'/employer/add_job'} end>
 				<FontAwesomeIcon icon={faCirclePlus} />
-				<span>Add a post</span>
+				<span>Account</span>
 			</NavLink>
 
 			<NavLink to={'/employer/my_jobs'} end>
@@ -31,4 +31,4 @@ const EmployerSideBar = () => {
 	)
 }
 
-export default EmployerSideBar;
+export default CandidateSideBar;

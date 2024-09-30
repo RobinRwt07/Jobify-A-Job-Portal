@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../../Component/Button';
 import RecentActivity from './RecentActivity';
 import { useEmployerAuth } from '../../../hooks/useEmployerAuth';
-import style from '../style/employer.module.css';
+import style from '../../../Styles/dashboard.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useEmployerInfo } from '../useEmployerInfo';
 

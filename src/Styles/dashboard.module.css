@@ -1,4 +1,4 @@
-.employerContainer {
+.dashboard {
   display: flex;
   position: relative;
   gap: var(--gap-md);
@@ -11,7 +11,7 @@
   }
 }
 
-.employerSideBar {
+.sideBar {
   padding: var(--p-lg);
   display: flex;
   flex-direction: column;
@@ -30,32 +30,6 @@
     padding: 0;
   }
 
-  &>div:first-of-type {
-    margin-top: var(--m-lg);
-    flex: auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-md);
-
-    &>* {
-      padding: var(--p-md) var(--p-lg);
-      font-size: 15px;
-      color: var(--text-light);
-      font-weight: 500;
-      display: flex;
-      gap: var(--gap-md);
-      align-items: center;
-
-      &>svg {
-        font-size: 20px;
-      }
-
-      &:hover {
-        background-color: #ddefff;
-      }
-    }
-  }
-
   &>button {
     display: flex;
     gap: var(--gap-sm);
@@ -64,6 +38,32 @@
     margin-block: var(--m-lg);
     padding-left: var(--p-lg);
     align-self: flex-start;
+  }
+}
+
+.navigationContainer {
+  margin-top: var(--m-lg);
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+
+  &>* {
+    padding: var(--p-md) var(--p-lg);
+    font-size: 15px;
+    color: var(--text-light);
+    font-weight: 500;
+    display: flex;
+    gap: var(--gap-md);
+    align-items: center;
+
+    &>svg {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: #ddefff;
+    }
   }
 }
 

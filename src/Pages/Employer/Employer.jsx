@@ -1,10 +1,11 @@
 import React, { createContext, useState } from 'react';
 import EmployerSideBar from './Component/EmployerSideBar';
 import { Outlet } from 'react-router-dom';
-import style from './style/employer.module.css'
+import style from '../../Styles/dashboard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import { EmployerInfoProvider } from './useEmployerInfo';
+import DashboardSideBar from '../../Component/DashboardSideBar';
 
 const Employer = () => {
 	const [sideBarActive, setSideBarActive] = useState(false);
@@ -14,7 +15,7 @@ const Employer = () => {
 
 	return (
 		<EmployerInfoProvider>
-			<section className={`${style.employerContainer} container`}>
+			<section className={`${style.dashboard} container`}>
 				{
 					(!sideBarActive) &&
 					<span className={` ${style.sidebarBtn} ${style.openBtn}`} onClick={handleOpen}>
@@ -23,7 +24,10 @@ const Employer = () => {
 				}
 
 				{
-					sideBarActive && <EmployerSideBar sideBarActive={sideBarActive} setSideBarActive={setSideBarActive} />
+					sideBarActive &&
+					<DashboardSideBar sideBarActive={sideBarActive} setSideBarActive={setSideBarActive} type={'employer'} >
+						<EmployerSideBar />
+					</DashboardSideBar>
 				}
 				<div className={style.contentContainer}>
 					<Outlet />
