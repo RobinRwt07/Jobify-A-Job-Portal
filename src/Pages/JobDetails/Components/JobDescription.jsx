@@ -24,7 +24,6 @@ const JobDescription = ({ jobDescription: { jobDescription, education, workMode,
 				</>
 			}
 			<div>
-				<h3>Employement Type : <span>{jobType}</span></h3>
 				<h3>Work Mode : <span>{workMode}</span></h3>
 			</div>
 		</section>

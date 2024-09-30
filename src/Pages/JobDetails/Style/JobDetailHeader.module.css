@@ -1,0 +1,81 @@
+.JobDetailsHeader {
+  padding: var(--p-lg);
+  border-radius: var(--br-md);
+  box-shadow: 0px 0px 3px 1px var(--bg-light-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+
+  &>div:first-child {
+    display: flex;
+    gap: var(--gap-md);
+
+    & h3 {
+      font-size: 20px;
+    }
+
+    &>div:has(>img) {
+      padding: var(--p-sm);
+      flex: none;
+      width: 56px;
+      height: 56px;
+      aspect-ratio: 1;
+      border-radius: var(--br-round);
+      background-color: var(--bg-light-3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &>img {
+        width: 85%;
+        height: 85%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &>div:nth-of-type(2) {
+    margin-block: var(--m-md);
+    display: grid;
+    justify-content: center;
+    row-gap: var(--gap-lg);
+    column-gap: var(--gap-md);
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (min-width:400px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width:500px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width:680px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    &>div {
+      display: flex;
+      flex-direction: column;
+
+      & svg {
+        color: var(--primary);
+        font-size: 24px;
+      }
+
+      span {
+        font-size: 13px;
+        font-weight: bold;
+        margin-block-start: var(--m-sm);
+        color: var(--text-x-light);
+      }
+
+      p {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+    }
+  }
+
+}

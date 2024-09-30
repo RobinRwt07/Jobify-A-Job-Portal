@@ -34,9 +34,11 @@ const JobDetails = () => {
 
 	const jobInfo = {
 		jobTitle: matchedJob.jobTitle,
+		companyImage: matchedJob.companyImage,
 		companyName: matchedJob.companyName,
 		jobLocation: matchedJob.jobLocation,
 		vacancies: matchedJob.vacancies,
+		workMode: matchedJob.workMode,
 		salary: `${(matchedJob.minSalary / 100000).toFixed(1)} - ${(matchedJob.maxSalary / 100000).toFixed(1)} LPA`,
 		experience: `${matchedJob.minExperience} - ${matchedJob.maxExperience}`,
 		postedOn: dayjs(matchedJob.postedOn).format('DD MMM YYYY')
