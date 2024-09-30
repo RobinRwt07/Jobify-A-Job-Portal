@@ -10,7 +10,6 @@ import { useEmployerInfo } from '../useEmployerInfo';
 const OverView = () => {
 	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem('allJobs')) || []);
 	const [postedJobs, setPostedJobs] = useState([]);
-	const { employerAuthed } = useEmployerAuth();
 	const { companyInfo, setCompanyInfo } = useEmployerInfo();
 	const navigate = useNavigate();
 

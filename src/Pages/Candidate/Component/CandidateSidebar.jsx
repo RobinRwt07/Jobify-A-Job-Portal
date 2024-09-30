@@ -10,22 +10,22 @@ const CandidateSideBar = () => {
 		<div className={style.navigationContainer}>
 			<NavLink to={'/candidate'} end>
 				<FontAwesomeIcon icon={faLayerGroup} />
-				<span>Profile</span>
+				<span>Overview</span>
 			</NavLink>
 
 			<NavLink to={'/employer/profile'} end>
 				<FontAwesomeIcon icon={faUserCircle} />
-				<span>Job History</span>
+				<span>Profile</span>
 			</NavLink>
 
 			<NavLink to={'/employer/add_job'} end>
 				<FontAwesomeIcon icon={faCirclePlus} />
-				<span>Account</span>
+				<span>My Jobs</span>
 			</NavLink>
 
 			<NavLink to={'/employer/my_jobs'} end>
 				<FontAwesomeIcon icon={faBriefcase} />
-				<span>My Jobs</span>
+				<span>Saved Jobs</span>
 			</NavLink>
 		</div>
 	)

@@ -1,0 +1,64 @@
+.joblist {
+  &>div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.jobsTable {
+  overflow-x: scroll;
+  scrollbar-width: none;
+
+  & table {
+    min-width: 100%;
+    width: 800px;
+    border-collapse: collapse;
+    margin-block: var(--m-lg);
+    table-layout: auto;
+
+    & thead th {
+      text-align: left;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      padding: var(--p-lg);
+    }
+
+    & tbody td {
+      text-align: left;
+      color: var(--text-light);
+      padding: var(--p-lg);
+
+      & svg {
+        margin-inline: var(--m-sm);
+      }
+    }
+
+    & tbody>tr {
+      border-bottom: 2px solid var(--bg-light-2);
+    }
+
+    & tbody>tr>td:first-child {
+      &>div {
+        margin-block-start: var(--m-sm);
+        flex-shrink: 0;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: var(--gap-md);
+
+        &>span:first-child {
+          background-color: rgba(215, 235, 255, 0.81);
+          padding: var(--p-sm);
+          border-radius: var(--br-sm);
+        }
+      }
+    }
+  }
+}
+
+.view {
+  background-color: var(--bg-ligth-2);
+  color: var(--primary);
+}

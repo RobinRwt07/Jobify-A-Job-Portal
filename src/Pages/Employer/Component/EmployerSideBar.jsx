@@ -20,7 +20,7 @@ const EmployerSideBar = () => {
 
 			<NavLink to={'/employer/add_job'} end>
 				<FontAwesomeIcon icon={faCirclePlus} />
-				<span>Add a post</span>
+				<span>Add a job</span>
 			</NavLink>
 
 			<NavLink to={'/employer/my_jobs'} end>

@@ -35,8 +35,6 @@ const Header = () => {
 	const open = Boolean(anchorEl);
 
 	const handleMenuOpen = (event) => {
-		console.log(Boolean(event.currentTarget));
-
 		setAnchorEl(event.currentTarget);
 	};
 	const handleMenuClose = () => {
@@ -64,11 +62,6 @@ const Header = () => {
 	function closeNavBar() {
 		setNavActive(false);
 	}
-
-	function handleOnclick() {
-		console.log("click");
-	}
-
 	function handleLogout() {
 		handleMenuClose();
 		candidateLogout();
@@ -91,9 +84,9 @@ const Header = () => {
 								<NavLink to={'/jobs'} end onClick={closeNavBar}>Jobs</NavLink>
 								{
 									candidateAuthed ?
-										<NavLink to={'/candidate'} end onClick={closeNavBar}>Candidate</NavLink> :
+										<NavLink to={'/candidate'} end onClick={closeNavBar}>Dashboard</NavLink> :
 										(employerAuthed) ?
-											<NavLink to={'/employer'} onClick={closeNavBar}>Employer</NavLink> :
+											<NavLink to={'/employer'} onClick={closeNavBar}>Dashboard</NavLink> :
 											<>
 												<NavLink to={'/employer'} onClick={closeNavBar} >Employer</NavLink>
 												<NavLink to={'/candidate'} end onClick={closeNavBar}>Candidate</NavLink>

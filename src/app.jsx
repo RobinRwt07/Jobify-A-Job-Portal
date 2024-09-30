@@ -23,7 +23,7 @@ import MyJobs from "./Pages/Employer/Component/MyJobs";
 import UpdateJob from './Pages/Employer/Component/UpdateJob';
 import Error from "./Component/Error";
 import Candidate from "./Pages/Candidate/Candidate";
-import Profile from "./Pages/Candidate/Component/Profile";
+import CandidateOverview from "./Pages/Candidate/Component/CandidateOverview";
 
 export const App = () => {
 	return (
@@ -51,7 +51,7 @@ export const App = () => {
 								<Route path={'/jobdetail/:jobid'} element={<JobDetails />} />
 								<Route element={<ProtectedRoute type="candidate" redirectTo={'/login/candidate'} />} >
 									<Route path="/candidate" element={<Candidate />} >
-										<Route index element={<Profile />} />
+										<Route index element={<CandidateOverview />} />
 									</Route>
 								</Route>
 

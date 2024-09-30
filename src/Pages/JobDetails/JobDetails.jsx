@@ -33,6 +33,8 @@ const JobDetails = () => {
 	}
 
 	const jobInfo = {
+		jobId: matchedJob.jobId,
+		companyId: matchedJob.companyId,
 		jobTitle: matchedJob.jobTitle,
 		companyImage: matchedJob.companyImage,
 		companyName: matchedJob.companyName,
@@ -46,7 +48,6 @@ const JobDetails = () => {
 	const jobDescription = {
 		jobDescription: matchedJob.jobDescription,
 		education: matchedJob.education,
-		jobType: matchedJob.jobType,
 		workMode: matchedJob.workMode,
 		skills: matchedJob.skills.split(',')
 	}
