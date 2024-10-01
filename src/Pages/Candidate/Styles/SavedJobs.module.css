@@ -1,0 +1,96 @@
+.savedJobsTable {
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+.savedJobContainer {
+  min-width: 100%;
+  width: 800px;
+  margin-block: var(--m-lg);
+}
+
+.savedJobRow {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  padding: var(--p-lg);
+  box-shadow: inset 0px 0px 0px 2px var(--bg-light-2);
+  border-radius: var(--br-md);
+
+  &:hover {
+    box-shadow: inset 0px 0px 0px 2px var(--primary);
+  }
+
+  & span {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-light);
+  }
+
+  &>div:first-child {
+    flex: auto;
+    display: flex;
+    gap: var(--gap-md);
+
+    &>div:has(img) {
+      flex: none;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--br-sm);
+      background-color: var(--bg-light-3);
+      aspect-ratio: 1;
+      align-content: center;
+
+      &>img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        margin: auto;
+      }
+    }
+  }
+}
+
+.iconBox {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-lg);
+
+  & svg {
+    font-size: 16px;
+    color: var(--text-light);
+  }
+
+  &>div {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+}
+
+.jobDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+
+  &>div:first-child {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+
+    span {
+      font-size: 13px;
+      font-weight: bold;
+      background-color: rgba(0, 72, 255, 0.191);
+      color: var(--primary);
+      border-radius: var(--br-sm);
+      padding: var(--p-sm) var(--p-md);
+    }
+  }
+}
+
+.expire {
+  &>* {
+    color: red !important;
+  }
+}

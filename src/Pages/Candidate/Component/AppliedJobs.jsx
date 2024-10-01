@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import style2 from '../Styles/RecentAppliedJobs.module.css';
+import style from '../Styles/RecentAppliedJobs.module.css';
 import { useCandidateAuth } from '../../../hooks/useCandidateAuth';
 import Message from '../../../Component/Message';
 import JobRow from './JobRow';
@@ -55,7 +55,7 @@ const AppliedJobs = () => {
 	return (
 		<section>
 			<h3>Applied Jobs ({appliedJobs.length})</h3>
-			<div className={style2.jobsTable}>
+			<div className={style.jobsTable}>
 				<table>
 					<thead>
 						<tr>
