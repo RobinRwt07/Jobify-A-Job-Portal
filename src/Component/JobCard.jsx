@@ -1,12 +1,11 @@
 import logo from '../Assest/Images/landingImage.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import style from '../Styles/JobCard.module.css';
 
+
 const JobCard = ({ jobData: { jobTitle, companyImage, workMode, jobType, minSalary, maxSalary, companyName, jobLocation } }) => {
-	function handleSaveClick() {
-		console.log("save");
-	}
+
 	return (
 		<div className={style['job-card']}>
 			<h3>{jobTitle}</h3>
@@ -28,9 +27,6 @@ const JobCard = ({ jobData: { jobTitle, companyImage, workMode, jobType, minSala
 						<FontAwesomeIcon icon={faLocationDot} />
 						<span>{jobLocation}</span>
 					</div>
-				</div>
-				<div onClick={handleSaveClick} className={style.saveBtn}>
-					<FontAwesomeIcon icon={faBookmark} />
 				</div>
 			</div>
 		</div>

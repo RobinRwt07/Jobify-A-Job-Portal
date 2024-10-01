@@ -24,6 +24,9 @@ import UpdateJob from './Pages/Employer/Component/UpdateJob';
 import Error from "./Component/Error";
 import Candidate from "./Pages/Candidate/Candidate";
 import CandidateOverview from "./Pages/Candidate/Component/CandidateOverview";
+import AppliedJobs from "./Pages/Candidate/Component/AppliedJobs";
+import SavedJobs from "./Pages/Candidate/Component/SavedJobs";
+import CandidateProfile from "./Pages/Candidate/Component/CandidateProfile";
 
 export const App = () => {
 	return (
@@ -52,6 +55,9 @@ export const App = () => {
 								<Route element={<ProtectedRoute type="candidate" redirectTo={'/login/candidate'} />} >
 									<Route path="/candidate" element={<Candidate />} >
 										<Route index element={<CandidateOverview />} />
+										<Route path="/candidate/applied_jobs" element={<AppliedJobs />} />
+										<Route path="/candidate/saved_jobs" element={<SavedJobs />} />
+										<Route path='/candidate/profile' element={<CandidateProfile />} />
 									</Route>
 								</Route>
 

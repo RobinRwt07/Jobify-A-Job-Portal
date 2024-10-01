@@ -35,7 +35,11 @@
     }
 
     & tbody>tr {
-      border-bottom: 2px solid var(--bg-light-2);
+      box-shadow: inset 0px 2px 0px 2px var(--bg-light-2);
+
+      &:hover {
+        box-shadow: inset 0px 0px 0px 2px var(--primary);
+      }
     }
 
     & tbody>tr>td:first-child {
@@ -49,16 +53,12 @@
         gap: var(--gap-md);
 
         &>span:first-child {
-          background-color: rgba(215, 235, 255, 0.81);
+          background-color: rgba(8, 140, 255, 0.163);
+          color: var(--primary);
           padding: var(--p-sm);
           border-radius: var(--br-sm);
         }
       }
     }
   }
-}
-
-.view {
-  background-color: var(--bg-ligth-2);
-  color: var(--primary);
 }

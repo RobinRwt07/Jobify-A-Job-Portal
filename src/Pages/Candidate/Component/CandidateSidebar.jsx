@@ -13,17 +13,17 @@ const CandidateSideBar = () => {
 				<span>Overview</span>
 			</NavLink>
 
-			<NavLink to={'/employer/profile'} end>
+			<NavLink to={'/candidate/profile'} end>
 				<FontAwesomeIcon icon={faUserCircle} />
 				<span>Profile</span>
 			</NavLink>
 
-			<NavLink to={'/employer/add_job'} end>
+			<NavLink to={'/candidate/applied_jobs'} end>
 				<FontAwesomeIcon icon={faCirclePlus} />
-				<span>My Jobs</span>
+				<span>Applied Job</span>
 			</NavLink>
 
-			<NavLink to={'/employer/my_jobs'} end>
+			<NavLink to={'/candidate/saved_jobs'} end>
 				<FontAwesomeIcon icon={faBriefcase} />
 				<span>Saved Jobs</span>
 			</NavLink>

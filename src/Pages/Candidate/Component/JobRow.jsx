@@ -1,28 +1,61 @@
+import { faCircleCheck, faCirclePause, faCircleXmark, faLocation, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const JobRow = ({ jobInfo = {} }) => {
+	const navigate = useNavigate();
+	const style = {
+		backgroundColor: "#1452ff33",
+		color: "var(--primary)"
+	}
+	const allJobs = JSON.parse(localStorage.getItem("allJobs"));
+	const jobDetails = allJobs.find(job => job.jobId === jobInfo.jobId);
+
+	function handleView() {
+		navigate('/jobdetail/' + jobInfo.jobId);
+	}
+
 	return (
 		<tr>
 			<td>
-				<h4>{jobInfo?.jobTitle}</h4>
+				<h4>{jobDetails?.jobTitle}</h4>
 				<div>
-					<span>{jobInfo?.jobType}</span>
-					<span>{jobInfo?.jobLocation} days ago</span>
+					<span>{jobDetails?.jobType}</span>
+					<div>
+						<FontAwesomeIcon icon={faLocationDot} />
+						<span>{jobDetails?.jobLocation}</span>
+					</div>
 				</div>
 			</td>
 			<td>
-				<FontAwesomeIcon icon={faCircleCheck} color='green' />
-				<span>active</span>
+				{
+					jobInfo.status === 'pending' ?
+						<>
+							<FontAwesomeIcon icon={faCirclePause} color='blue' />
+							<span>Pending</span>
+						</>
+						: jobInfo.status === 'accepted' ?
+							<>
+								<FontAwesomeIcon icon={faCircleCheck} color='green' />
+								<span>Accepted</span>
+							</>
+							: jobInfo.status === 'rejected' ?
+								<>
+									<FontAwesomeIcon icon={faCircleXmark} color='red' />
+									<span>Rejected</span>
+								</> : <></>
+				}
 				{/* <>
 						<FontAwesomeIcon icon={faCircleXmark} color='red' />
-						<span>expire</span>
+						<span>Rejected</span>
 					</>  */}
 			</td>
 			<td>
-				23 sep 2024
+				{new Date(jobInfo.dateApplied).toDateString() || "NA"}
 			</td>
 			<td>
-				<button className={` ${style.view} "btn" `} title='View Details' onClick={handleView}>View Details</button>
+				<button style={style} className={'btn'} title='View Details' onClick={handleView}>View Details</button>
 			</td>
 		</tr >
 	)

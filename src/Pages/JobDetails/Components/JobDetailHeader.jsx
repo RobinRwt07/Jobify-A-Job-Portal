@@ -2,7 +2,7 @@ import style from '../Style/JobDetailHeader.module.css';
 import style2 from '../../../Styles/form.module.css';
 import { toast } from "react-toastify";
 import { useCandidateAuth } from "../../../hooks/useCandidateAuth";
-import { FaCalendarAlt, FaMoneyBillWave, FaWallet } from 'react-icons/fa';
+import { FaBookmark, FaCalendarAlt, FaMoneyBillWave, FaWallet } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdWork } from "react-icons/md";
 import Dialog from '@mui/material/Dialog';
@@ -63,9 +63,10 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 		const newJobApplications = {
 			...values,
 			jobId: jobId,
+			dateApplied: new Date(),
 			candidateId: candidateInfo.candidateId,
 			companyId: companyId,
-			status: 'pending'
+			status: 'pending',
 		}
 		jobApplications.push(newJobApplications);
 		localStorage.setItem('jobApplications', JSON.stringify(jobApplications));
@@ -73,15 +74,50 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 		toast.success("SuccessfullApplied");
 	}
 
+	function handleSaveClick(jobId) {
+		if (candidateAuthed) {
+			const allCandidatesDetails = JSON.parse(localStorage.getItem('candidatesDetails')) || [];
+			const index = allCandidatesDetails.findIndex(candidate => candidate.candidateId === candidateAuthed);
+			if (index !== -1) {
+				if (allCandidatesDetails[index].hasOwnProperty("savedJobs")) {
+					allCandidatesDetails[index].savedJobs.push(jobId);
+				}
+				else {
+					allCandidatesDetails[index].savedJobs = [jobId];
+				}
+			}
+			else {
+				const newCandidate = {
+					candidateId: candidateAuthed,
+					savedJobs: [jobId]
+				}
+				allCandidatesDetails.push(newCandidate);
+			}
+			localStorage.setItem('candidatesDetails', JSON.stringify(allCandidatesDetails));
+			toast.success("Job Saved")
+		}
+		else {
+			const savedJobs = JSON.parse(sessionStorage.getItem('savedJobs')) || [];
+			savedJobs.push(jobId);
+			sessionStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+			toast.success("Job Saved")
+		}
+	}
+
 	return (
 		<div className={style.JobDetailsHeader}>
 			<div>
 				<div>
-					<img src={companyImage || companyLogo} alt="Company Logo" />
+					<div>
+						<img src={companyImage || companyLogo} alt="Company Logo" />
+					</div>
+					<div>
+						<h3>{jobTitle}</h3>
+						<p>At {companyName}</p>
+					</div>
 				</div>
-				<div>
-					<h3>{jobTitle}</h3>
-					<p>At {companyName}</p>
+				<div className={style.bookMarkBtn} onClick={() => handleSaveClick(jobId)}>
+					<FaBookmark />
 				</div>
 			</div>
 			<div>
@@ -146,7 +182,7 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 												<option value="">Select State</option>
 												{
 													statesOfIndia.map((state, index) => (
-														<option value={state} key="index">{state}</option>
+														<option value={state} key={index}>{state}</option>
 													))
 												}
 											</MySelect>

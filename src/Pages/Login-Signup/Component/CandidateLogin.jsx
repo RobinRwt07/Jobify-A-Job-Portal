@@ -41,6 +41,29 @@ const CandidateLogin = () => {
 				const matchedCandidate = registeredCandidate.find(candidate => candidate.candidateEmail === loginData.email);
 				if (matchedCandidate) {
 					if (matchedCandidate.candidatePassword === loginData.password) {
+						// check if user has saved jobs or not
+						const savedJobs = JSON.parse(sessionStorage.getItem('savedJobs')) || [];
+						if (savedJobs.length > 0) {
+							const allCandidates = JSON.parse(localStorage.getItem('candidatesDetails')) || [];
+							const index = allCandidates.findIndex(candidate => candidate.candidateId === matchedCandidate.candidateId);
+							if (index !== -1) {
+								if (allCandidates[index].hasOwnProperty("savedJobs")) {
+									allCandidates[index].savedJobs.push(...savedJobs);
+								}
+								else {
+									allCandidates[index].savedJobs = [...savedJobs];
+								}
+							}
+							else {
+								const newCandidate = {
+									candidateId: matchedCandidate.candidateId,
+									savedJobs: [...savedJobs]
+								}
+								allCandidates.push(newCandidate);
+							}
+							localStorage.setItem('candidatesDetails', JSON.stringify(allCandidates));
+							sessionStorage.clear();
+						}
 						toast.success("success");
 						localStorage.setItem("loggedInCandidate", matchedCandidate.candidateId);
 						setCandidateAuth(true);
@@ -65,7 +88,6 @@ const CandidateLogin = () => {
 	}
 	return (
 		<form className={style.form} onSubmit={handleFormSubmit}>
-
 			<label>
 				<input type="email" name="email" placeholder="Email Address" value={candidateLoginData.email} onChange={handleFormChange} />
 				{errors.email && <span> {errors.email}</span>}

@@ -29,7 +29,7 @@ const FeaturedJob = () => {
 			<div className={`${style['featured-job-box']} inner-container `}>
 				{jobs.map(job => (
 					<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
-						<JobCard key={job.jobId} jobData={job} />
+						<JobCard jobData={job} />
 					</Link>
 				))}
 			</div>

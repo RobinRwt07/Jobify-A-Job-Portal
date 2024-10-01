@@ -2,7 +2,7 @@ import React from 'react';
 import style from '../Style/jobdetail.module.css';
 import DOMPurify from 'dompurify';
 
-const JobDescription = ({ jobDescription: { jobDescription, education, workMode, jobType, skills } }) => {
+const JobDescription = ({ jobDescription: { jobDescription, education, workMode, skills } }) => {
 	const jd = DOMPurify.sanitize(jobDescription);
 	return (
 		<section className={style.JobDescription}>

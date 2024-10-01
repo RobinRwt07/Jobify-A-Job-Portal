@@ -2,10 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../../../Component/Button';
 import style from '../Styles/RecentAppliedJobs.module.css';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-// import JobRow from './JobRow';
+import JobRow from './JobRow';
 import { useNavigate } from 'react-router-dom';
 
-const RecentAppliedJobs = ({ recentJobs = [] }) => {
+const RecentAppliedJobs = ({ recentAppliedJobs = [] }) => {
 
 	const navigate = useNavigate();
 	return (
@@ -28,13 +28,13 @@ const RecentAppliedJobs = ({ recentJobs = [] }) => {
 					</thead>
 					<tbody>
 						{
-							recentJobs.length == 0 ?
+							recentAppliedJobs.length == 0 ?
 								<tr>
 									<td style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center" }} colSpan={4}>
 										You have not Applied for any job
 									</td>
 								</tr> :
-								recentJobs.map(job => (
+								recentAppliedJobs.map(job => (
 									<JobRow jobInfo={job} key={job.jobId} />
 								))
 						}

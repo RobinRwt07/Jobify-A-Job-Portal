@@ -35,7 +35,11 @@
     }
 
     & tbody>tr {
-      border-bottom: 2px solid var(--bg-light-2);
+      box-shadow: 0px 0px 0px 2px var(--bg-light-2);
+
+      &:hover {
+        box-shadow: inset 0px 0px 0px 2px var(--primary);
+      }
     }
 
     & tbody>tr>td:first-child {
