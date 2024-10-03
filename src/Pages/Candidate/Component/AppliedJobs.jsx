@@ -38,7 +38,6 @@ const AppliedJobs = () => {
 				return job.status === 'accepted' && job;
 			}
 		}))
-		console.log(status.current);
 	}
 
 	const jobsPerPage = 2;

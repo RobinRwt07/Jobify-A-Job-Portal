@@ -15,14 +15,16 @@ const SavedJobs = () => {
 	useEffect(() => {
 		const allCandidateDetails = JSON.parse(localStorage.getItem("candidatesDetails")) || [];
 		const candidateDetails = allCandidateDetails.find(candidate => candidate.candidateId === candidateInfo.candidateId);
-		const savedJobs = new Set(candidateDetails.savedJobs);
-		const allSavedJobsArray = Array.from(savedJobs.values());
-		const allJobs = JSON.parse(localStorage.getItem('allJobs')) || [];
-		setSavedJobs(allJobs.filter(job => {
-			if (allSavedJobsArray.includes(job.jobId)) {
-				return job;
-			}
-		}));
+		if (candidateDetails && candidateDetails.savedJobs.length > 0) {
+			const savedJobs = new Set(candidateDetails.savedJobs);
+			const allSavedJobsArray = Array.from(savedJobs.values());
+			const allJobs = JSON.parse(localStorage.getItem('allJobs')) || [];
+			setSavedJobs(allJobs.filter(job => {
+				if (allSavedJobsArray.includes(job.jobId)) {
+					return job;
+				}
+			}));
+		}
 	}, []);
 
 
@@ -30,7 +32,7 @@ const SavedJobs = () => {
 		return <Message>No Saved Jobs</Message>
 	}
 
-	const jobsPerPage = 2;
+	const jobsPerPage = 10;
 	const lastJob = jobsPerPage * currentPage;
 	const firstJob = lastJob - jobsPerPage;
 	const currentPageJobs = allSavedJobs.slice(firstJob, lastJob);
@@ -40,6 +42,7 @@ const SavedJobs = () => {
 		totalPages.push(i);
 	}
 
+	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
 	return (
 		<section>
 			<h3>Saved Jobs (12)</h3>
@@ -49,9 +52,10 @@ const SavedJobs = () => {
 					{
 						allSavedJobs.length === 0 ?
 							<Message>No Saved Jobs</Message> :
-							currentPageJobs.map(job =>
-								<SavedJobRow jobInfo={job} key={job.jobId} />
-							)
+							currentPageJobs.map(job => {
+								const matchedOrg = allOrgs.find(company => company.companyId === job.companyId);
+								return <SavedJobRow jobInfo={job} key={job.jobId} companyImage={matchedOrg.companyImage} />
+							})
 					}
 				</div>
 			</div>

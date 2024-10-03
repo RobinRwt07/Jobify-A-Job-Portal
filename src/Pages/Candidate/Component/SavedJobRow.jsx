@@ -4,9 +4,11 @@ import companyLogo from '../../../Assest/Images/profileAvatar.png';
 import Button from '../../../Component/Button';
 import { FaCircleXmark, FaIndianRupeeSign, FaLocationDot } from "react-icons/fa6";
 import { FaCalendar } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 
 
-const SavedJobRow = ({ jobInfo }) => {
+const SavedJobRow = ({ jobInfo, companyImage }) => {
+	const navigate = useNavigate();
 	const salary = `${(jobInfo.minSalary / 100000).toFixed(1)} - ${(jobInfo.maxSalary / 100000).toFixed(1)}`;
 
 	const isExpire = new Date(jobInfo.expirationDate) < new Date();
@@ -16,12 +18,15 @@ const SavedJobRow = ({ jobInfo }) => {
 			return Math.ceil((new Date(jobInfo.expirationDate) - new Date()) / (1000 * 24 * 60 * 60));
 		}
 	}
+	function handleJobApply() {
+		navigate('/jobdetail/' + jobInfo.jobId);
+	}
 
 	return (
 		<div className={style.savedJobRow}>
 			<div>
 				<div>
-					<img src={jobInfo.companyImage || companyLogo} alt={"Company Name"} />
+					<img src={companyImage || companyLogo} alt={"Company Name"} />
 				</div>
 				<div className={style.jobDetails}>
 					<div>
@@ -51,7 +56,7 @@ const SavedJobRow = ({ jobInfo }) => {
 					</div>
 				</div>
 			</div>
-			<Button disabled={isExpire}>{isExpire ? "Deadline Expire" : "Apply Now"}</Button>
+			<Button disabled={isExpire} handler={handleJobApply}>{isExpire ? "Deadline Expire" : "Apply Now"}</Button>
 		</div>
 	)
 }

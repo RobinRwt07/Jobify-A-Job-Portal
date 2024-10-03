@@ -35,9 +35,7 @@ const AddJob = ({ type = "add", jobInfo = {} }) => {
 		jobData.jobId = jobInfo.jobId || "JOB" + generateRandom(100000, 999999);
 		jobData.postedOn = new Date();
 		jobData.companyId = companyInfo.companyId;
-		jobData.companyName = companyInfo.companyName;
 		jobData.jobDescription = jobDescription;
-		jobData.companyImage = companyInfo.companyImage || '';
 		const allJobs = JSON.parse(localStorage.getItem("allJobs")) || [];
 		if (type == 'update') {
 			const oldIndex = allJobs.findIndex(job => job.jobId == jobInfo.jobId);
@@ -45,7 +43,6 @@ const AddJob = ({ type = "add", jobInfo = {} }) => {
 				allJobs.splice(oldIndex, 1);
 			}
 		}
-
 		allJobs.unshift(jobData);
 		localStorage.setItem("allJobs", JSON.stringify(allJobs));
 		toast.success("Successfully " + type);

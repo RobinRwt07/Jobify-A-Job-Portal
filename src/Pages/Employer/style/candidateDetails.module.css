@@ -1,0 +1,150 @@
+.candidateDetailsContainer {
+  container-name: details;
+  container-type: inline-size;
+
+  @media (min-width:1024px) {
+    padding: var(--p-xl);
+  }
+
+}
+
+.candidateDetailsHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-xl);
+  justify-content: space-between;
+  margin-block-end: var(--m-2xl);
+
+  &>div {
+    display: flex;
+    gap: var(--gap-md);
+    align-items: center;
+  }
+
+  & div:has(>img) {
+    width: 60px;
+    height: 60px;
+    aspect-ratio: 1;
+    border-radius: var(--br-round);
+    background-color: var(--bg-light-2);
+    align-content: center;
+
+    &>img {
+      width: 90%;
+      height: 90%;
+      border-radius: inherit;
+      object-fit: contain;
+      margin: auto;
+    }
+  }
+
+  & div:has(>svg) {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+}
+
+.candidateDetailsBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
+
+  @container details (min-width:700px) {
+    flex-direction: row;
+  }
+
+  &>div:first-child {
+    flex-basis: 60%;
+
+    &>p {
+      line-height: 1.5;
+      margin-block: var(--m-md);
+    }
+  }
+
+  &>div:last-child {
+    flex: auto;
+  }
+}
+
+.dialogConainer {
+  scrollbar-width: none;
+}
+
+.contactInformation {
+  padding: var(--p-lg);
+  border: 2px solid var(--bg-light-3);
+  border-radius: var(--br-md);
+  margin-block: var(--m-lg);
+
+  &>div {
+    display: flex;
+    gap: var(--gap-md);
+    align-items: center;
+    padding-block: var(--p-lg);
+    border-bottom: 2px solid var(--bg-light-3);
+
+    &>svg {
+      color: var(--primary);
+      font-size: 32px;
+    }
+
+    span {
+      font-weight: bold;
+      font-size: 14px;
+      color: var(--text-x-light);
+    }
+  }
+}
+
+.candidateInformation {
+  padding: var(--p-lg);
+  border: 2px solid var(--bg-light-3);
+  border-radius: var(--br-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--gap-lg);
+  flex-wrap: wrap;
+
+
+  &>div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &>svg {
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    span {
+      margin-block-start: var(--m-sm);
+      font-weight: bold;
+      font-size: 14px;
+      color: var(--text-x-light);
+    }
+  }
+}
+
+.educationDetails {
+  margin-bottom: var(--m-lg);
+
+  h3 {
+    margin-block-end: var(--m-md);
+  }
+
+  &>div {
+    &>* {
+      flex: 1 1;
+    }
+
+    display: flex;
+    gap: var(--gap-md);
+    align-items: center;
+
+    &>span:first-child {
+      font-weight: bold;
+    }
+  }
+}

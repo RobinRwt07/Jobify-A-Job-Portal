@@ -5,7 +5,6 @@ const CandidateAuthContext = createContext(null);
 
 export const CandidateAuthProvider = ({ children }) => {
 	const [candidateAuthed, setCandidateAuth] = useState(localStorage.getItem('loggedInCandidate') || false);
-
 	const candidateLogout = () => {
 		if (candidateAuthed) {
 			if (localStorage.getItem('loggedInCandidate')) {

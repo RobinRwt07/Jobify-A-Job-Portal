@@ -12,7 +12,7 @@ const RecentAppliedJobs = ({ recentAppliedJobs = [] }) => {
 		<div className={style.joblist}>
 			<div>
 				<h3>Recently Applied Jobs</h3>
-				<Button type='btn btn-tertiary' handler={() => navigate('/candidate/my_jobs')}>View all
+				<Button type='btn btn-tertiary' handler={() => navigate('/candidate/applied_jobs')}>View all
 					<FontAwesomeIcon icon={faArrowRight} />
 				</Button>
 			</div>

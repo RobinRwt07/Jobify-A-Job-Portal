@@ -18,6 +18,7 @@ const FeaturedJob = () => {
 		)
 	}
 	const jobs = allJobs.slice(0, 9);
+	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
 	return (
 		<div className="container">
 			<div className={style["featured-header"]}>
@@ -27,11 +28,14 @@ const FeaturedJob = () => {
 				</Button>
 			</div>
 			<div className={`${style['featured-job-box']} inner-container `}>
-				{jobs.map(job => (
-					<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
-						<JobCard jobData={job} />
-					</Link>
-				))}
+				{jobs.map(job => {
+					const matchedOrg = allOrgs.find(company => company.companyId === job.companyId);
+					return (
+						<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
+							<JobCard jobData={job} companyName={matchedOrg.companyName} companyImage={matchedOrg.companyImage} />
+						</Link>
+					)
+				})}
 			</div>
 		</div>
 	)

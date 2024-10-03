@@ -27,6 +27,7 @@ import CandidateOverview from "./Pages/Candidate/Component/CandidateOverview";
 import AppliedJobs from "./Pages/Candidate/Component/AppliedJobs";
 import SavedJobs from "./Pages/Candidate/Component/SavedJobs";
 import CandidateProfile from "./Pages/Candidate/Component/CandidateProfile";
+import JobApplications from "./Pages/Employer/Component/JobApplications";
 
 export const App = () => {
 	return (
@@ -68,6 +69,7 @@ export const App = () => {
 										<Route path="/employer/add_job" element={<AddJob />} />
 										<Route path="/employer/my_jobs" element={<MyJobs />} />
 										<Route path="/employer/update_job/:jobId" element={<UpdateJob />} />
+										<Route path="/employer/job_applications/:jobId" element={<JobApplications />} />
 									</Route>
 								</Route>
 								<Route path="*" element={<Error />} />

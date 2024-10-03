@@ -12,6 +12,14 @@ const CandidateOverview = () => {
 		setAppliedJobs(totalApplications.filter(job => job.candidateId === candidateInfo.candidateId));
 	}, []);
 	const recentAppliedJobs = allAppliedJobs.slice(0, 5);
+
+	let totalSavedJobs = 0;
+
+	const allCandidateDetails = JSON.parse(localStorage.getItem("candidatesDetails")) || [];
+	const candidateDetails = allCandidateDetails.find(candidate => candidate.candidateId === candidateInfo.candidateId);
+	if (candidateDetails && candidateDetails.savedJobs) {
+		totalSavedJobs = candidateDetails.savedJobs.length;
+	}
 	return (
 		<div className={style.overview}>
 			<div>
@@ -23,7 +31,7 @@ const CandidateOverview = () => {
 					Applied Jobs
 				</div>
 				<div style={{ backgroundColor: '#fafad2' }}>
-					<span>{23}</span><br />
+					<span>{totalSavedJobs}</span><br />
 					Saved Jobs
 				</div>
 			</div>
@@ -31,5 +39,6 @@ const CandidateOverview = () => {
 		</div>
 	)
 }
+
 
 export default CandidateOverview

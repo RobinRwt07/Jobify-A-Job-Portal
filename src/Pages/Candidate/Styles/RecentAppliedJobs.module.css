@@ -35,10 +35,11 @@
     }
 
     & tbody>tr {
-      box-shadow: inset 0px 2px 0px 2px var(--bg-light-2);
+      box-shadow: inset 0px 0px 0px 1.5px var(--bg-light-2);
 
       &:hover {
-        box-shadow: inset 0px 0px 0px 2px var(--primary);
+        box-shadow: inset 0px 0px 5px 3px var(--bg-light-3);
+        border-radius: var(--br-md);
       }
     }
 

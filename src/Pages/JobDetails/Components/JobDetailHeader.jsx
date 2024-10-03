@@ -12,9 +12,9 @@ import { Form, Formik } from 'formik';
 import { MySelect, MyTextArea, MyTextInput } from '../../../Component/FormComponent';
 import companyLogo from '../../../Assest/Images/alpha.jpg';
 import schema from '../jobFormSchema';
-import { statesOfIndia } from '../../../../Public/utils';
+import { generateRandom, statesOfIndia } from '../../../../Public/utils';
 
-const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage, companyName, experience, salary = "Not Disclosed", jobLocation, postedOn = "NA", workMode } }) => {
+const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, experience, salary = "Not Disclosed", jobLocation, postedOn = "NA", workMode } }) => {
 	const { candidateAuthed, setCandidateAuth } = useCandidateAuth();
 	const [candidateInfo, setCandidateInfo] = useState({});
 	const [open, setOpen] = useState(false);
@@ -62,6 +62,7 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 		const jobApplications = JSON.parse(localStorage.getItem('jobApplications')) || [];
 		const newJobApplications = {
 			...values,
+			applicationId: "JOBAP" + generateRandom(100000, 999999),
 			jobId: jobId,
 			dateApplied: new Date(),
 			candidateId: candidateInfo.candidateId,
@@ -71,7 +72,7 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 		jobApplications.push(newJobApplications);
 		localStorage.setItem('jobApplications', JSON.stringify(jobApplications));
 		handleClose();
-		toast.success("SuccessfullApplied");
+		toast.success("Successfully Applied");
 	}
 
 	function handleSaveClick(jobId) {
@@ -103,17 +104,19 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 			toast.success("Job Saved")
 		}
 	}
+	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
+	const company = allOrgs.find(org => org.companyId === companyId);
 
 	return (
 		<div className={style.JobDetailsHeader}>
 			<div>
 				<div>
 					<div>
-						<img src={companyImage || companyLogo} alt="Company Logo" />
+						<img src={company.companyImage || companyLogo} alt="Company Logo" />
 					</div>
 					<div>
 						<h3>{jobTitle}</h3>
-						<p>At {companyName}</p>
+						<p>At {company.companyName}</p>
 					</div>
 				</div>
 				<div className={style.bookMarkBtn} onClick={() => handleSaveClick(jobId)}>
@@ -160,11 +163,11 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 							({ isSubmitting }) => (
 								<Form>
 									<div className={style2.inputBox}>
-										<MyTextInput type="text" name='candidateFirstName' label='First Name' placeholder="First Name" readOnly="true" />
-										<MyTextInput type="text" name='candidateLastName' label='Last Name' placeholder="Last Name" readOnly="true" />
+										<MyTextInput type="text" name='candidateFirstName' label='First Name' placeholder="First Name" readOnly={true} />
+										<MyTextInput type="text" name='candidateLastName' label='Last Name' placeholder="Last Name" readOnly={true} />
 									</div>
 									<div className={style2.inputBox}>
-										<MyTextInput type="email" name='candidateEmail' label='Email' placeholder="Email" readOnly="true" />
+										<MyTextInput type="email" name='candidateEmail' label='Email' placeholder="Email" readOnly={true} />
 										<MyTextInput type="number" name='candidatePhone' label='Phone Number' placeholder="Phone Number" />
 									</div>
 									<div className={style2.inputBox}>
@@ -190,9 +193,10 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, companyImage,
 									</div>
 									<div>
 										<h4 style={{ marginBlockStart: '1rem' }}>Education Details</h4>
-										<MyTextInput type="text" name="course" label={'Course'} placeholder={'Course'} />
+										<MyTextInput type="text" name="course" label={'Education'} placeholder={'Course'} />
 										<div className={style2.inputBox}>
 											<MyTextInput type="text" name="collegeName" label="College/ University" placeholder="College/University" />
+
 											<MyTextInput type="number" name="graduationYear" label={"Graducation Year"} placeholder="Graduation Year" />
 										</div>
 									</div>

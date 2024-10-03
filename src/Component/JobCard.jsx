@@ -4,7 +4,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import style from '../Styles/JobCard.module.css';
 
 
-const JobCard = ({ jobData: { jobTitle, companyImage, workMode, jobType, minSalary, maxSalary, companyName, jobLocation } }) => {
+const JobCard = ({ jobData: { jobTitle, workMode, jobType, minSalary, maxSalary, jobLocation }, companyImage, companyName }) => {
 
 	return (
 		<div className={style['job-card']}>
@@ -22,7 +22,7 @@ const JobCard = ({ jobData: { jobTitle, companyImage, workMode, jobType, minSala
 					<img src={companyImage || logo} alt="company logo" />
 				</div>
 				<div>
-					<h4>{companyName}</h4>
+					<h4>{companyName || ''}</h4>
 					<div>
 						<FontAwesomeIcon icon={faLocationDot} />
 						<span>{jobLocation}</span>

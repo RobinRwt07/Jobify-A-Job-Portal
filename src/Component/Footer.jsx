@@ -32,16 +32,16 @@ const Footer = () => {
 							<h3>Candidate</h3>
 							<ul>
 								<li><Link to={'/jobs'}>Browse Jobs </Link></li>
-								<li><Link to={'/'}>Candidate Dashboard </Link></li>
-								<li><Link to={'/'}>Saved Jobs </Link></li>
+								<li><Link to={'/candidate'}>Candidate Dashboard </Link></li>
+								<li><Link to={'/candidate/saved_jobs'}>Saved Jobs </Link></li>
 							</ul>
 						</div>
 						<div>
 							<h3>Employer</h3>
 							<ul>
-								<li><Link to={'/employer/add_job'}>Post a Job </Link></li>
 								<li><Link to={'/employer'}>Employer Dashboard </Link></li>
-								<li><Link to={'/employer'}>Application </Link></li>
+								<li><Link to={'/employer/add_job'}>Post a Job </Link></li>
+								<li><Link to={'/employer/applications'}>Application </Link></li>
 							</ul>
 						</div>
 					</div>

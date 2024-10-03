@@ -26,11 +26,11 @@ const CandidateSignup = () => {
 	function handleFormSubmit(e) {
 		e.preventDefault();
 		const validationError = {};
-		const firstNameError = validateName(candidateData.candidateFirstName);
+		const firstNameError = validateName(candidateData.candidateFirstName.trim());
 		if (firstNameError) {
 			validationError.firstName = firstNameError;
 		}
-		const lastNameError = validateName(candidateData.candidateLastName);
+		const lastNameError = validateName(candidateData.candidateLastName.trim());
 		if (lastNameError) {
 			validationError.lastName = lastNameError;
 		}
@@ -58,11 +58,10 @@ const CandidateSignup = () => {
 
 	function signupCandidate(newCandidate) {
 		const registeredCandidate = JSON.parse(localStorage.getItem('registeredCandidate')) || [];
-		if (registeredCandidate.length > 0) {
-			if (registeredCandidate.find((candidate) => candidate.candidateEmail === newCandidate.candidateEmail)) {
-				toast.error("Email already registered");
-				return false;
-			}
+
+		if (registeredCandidate.find((candidate) => candidate.candidateEmail === newCandidate.candidateEmail)) {
+			toast.error("Email already registered");
+			return false;
 		}
 		else {
 			newCandidate.candidateId = "CND" + generateRandom(10000, 99999);

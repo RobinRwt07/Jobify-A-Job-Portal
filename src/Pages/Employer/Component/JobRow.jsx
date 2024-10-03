@@ -6,18 +6,19 @@ import { useNavigate } from 'react-router-dom';
 
 const JobRow = ({ jobInfo }) => {
 	const navigate = useNavigate();
-
+	const allJobApplications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+	const totalApplications = allJobApplications.filter(application => application.jobId === jobInfo.jobId).length;
 	const isActive = (new Date(jobInfo.expirationDate) > new Date()) ? true : false;
 	const posted = Math.floor((new Date() - new Date(jobInfo.postedOn)) / (60 * 60 * 24 * 1000));
 
 	function handleView() {
-		console.log("view");
+		navigate('/employer/job_applications/' + jobInfo.jobId);
 	}
 
-	function handleDelete(jobId, companyId) {
+	function handleDelete() {
 		const allJobs = JSON.parse(localStorage.getItem("allJobs")) || [];
 		if (allJobs.length > 0) {
-			const deleteIndex = allJobs.findIndex(job => job.jobId === jobId && job.companyId === companyId);
+			const deleteIndex = allJobs.findIndex(job => job.jobId === jobInfo.jobId && job.companyId === jobInfo.companyId);
 			if (deleteIndex !== -1) {
 				allJobs.splice(deleteIndex, 1);
 				localStorage.setItem('allJobs', JSON.stringify(allJobs));
@@ -30,8 +31,8 @@ const JobRow = ({ jobInfo }) => {
 		}
 	}
 
-	function handleEdit(jobId) {
-		navigate('/employer/update_job/' + jobId);
+	function handleEdit() {
+		navigate('/employer/update_job/' + jobInfo.jobId);
 	}
 
 	return (
@@ -57,13 +58,11 @@ const JobRow = ({ jobInfo }) => {
 			</td>
 			<td>
 				<FontAwesomeIcon icon={faUserGroup} />
-				130 Application</td>
+				{totalApplications} Application</td>
 			<td>
 				<button className={style.view} title='View Application' onClick={handleView}> <FontAwesomeIcon icon={faEye} /> </button>
-
-				<button className={style.edit} title="Edit Job" onClick={() => handleEdit(jobInfo.jobId)}><FontAwesomeIcon icon={faEdit} /></button>
-
-				<button className={style.delete} title="Delete Job" onClick={() => handleDelete(jobInfo.jobId, jobInfo.companyId)}><FontAwesomeIcon icon={faTrash} /></button>
+				<button className={style.edit} title="Edit Job" onClick={handleEdit}><FontAwesomeIcon icon={faEdit} /></button>
+				<button className={style.delete} title="Delete Job" onClick={handleDelete}><FontAwesomeIcon icon={faTrash} /></button>
 			</td>
 		</tr>
 	)

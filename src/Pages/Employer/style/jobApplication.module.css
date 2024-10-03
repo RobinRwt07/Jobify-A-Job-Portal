@@ -1,15 +1,15 @@
-.savedJobsTable {
+.jobApplicationTable {
   overflow-x: scroll;
   scrollbar-width: none;
 }
 
-.savedJobContainer {
+.jobApplicationContainer {
   min-width: 100%;
   width: 800px;
   margin-block: var(--m-lg);
 }
 
-.savedJobRow {
+.jobApplicationRow {
   display: flex;
   align-items: center;
   gap: var(--gap-md);
@@ -17,12 +17,12 @@
   box-shadow: inset 0px 0px 0px 2px var(--bg-light-2);
 
   &:hover {
-    box-shadow: inset 0px 0px 0px 2px var(--primary);
+    box-shadow: inset 0px 0px 3px 2px var(--bg-light-3);
     border-radius: var(--br-md);
   }
 
   & span {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--text-light);
   }
@@ -57,7 +57,7 @@
   gap: var(--gap-lg);
 
   & svg {
-    font-size: 16px;
+    font-size: 20px;
     color: var(--text-light);
   }
 
@@ -68,18 +68,25 @@
   }
 }
 
-.jobDetails {
+.candidateDetail {
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);
+
+  &>h3 {
+    font-size: 20px;
+  }
 
   &>div:first-child {
     display: flex;
     align-items: center;
     gap: var(--gap-md);
 
-    span {
-      font-size: 13px;
+    &>div {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      font-size: 14px;
       font-weight: bold;
       background-color: rgba(0, 72, 255, 0.191);
       color: var(--primary);

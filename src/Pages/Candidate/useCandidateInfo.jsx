@@ -6,7 +6,7 @@ const CandidateInfoContext = createContext(null);
 
 export const CandidateInfoProvider = ({ children }) => {
 	const [candidateInfo, setCandidateInfo] = useState(null);
-	const { candidateAuthed, candidateLogout } = useCandidateAuth();
+	const { candidateAuthed } = useCandidateAuth();
 	const navigate = useNavigate();
 
 	useEffect(() => {

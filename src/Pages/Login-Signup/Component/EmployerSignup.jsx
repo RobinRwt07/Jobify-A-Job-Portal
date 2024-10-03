@@ -35,7 +35,7 @@ const EmployerSignup = () => {
 		e.preventDefault();
 		const validationError = {};
 
-		if (companyData.companyName.length === 0) {
+		if (companyData.companyName.trim().length === 0) {
 			validationError.name = "Please provide company name";
 		}
 		if (companyData.companyLocation.length === 0) {

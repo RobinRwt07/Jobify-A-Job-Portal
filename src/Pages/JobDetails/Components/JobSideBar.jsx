@@ -4,6 +4,7 @@ import JobCard from '../../../Component/JobCard';
 import { Link } from 'react-router-dom';
 
 const JobSideBar = ({ similerJobs, jobTitle }) => {
+	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
 	return (
 		<div className={style.jobSideBar}>
 			<h3>Similar Role </h3>
@@ -11,11 +12,14 @@ const JobSideBar = ({ similerJobs, jobTitle }) => {
 				{
 					similerJobs.length == 0 ?
 						<h3>No Similar Job Found</h3> :
-						similerJobs.map((job) => (
-							<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
-								<JobCard jobData={job} />
-							</Link>
-						))
+						similerJobs.map((job) => {
+							const matchedOrg = allOrgs.find(company => company.companyId === job.companyId);
+							return (
+								<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
+									<JobCard jobData={job} companyName={matchedOrg.companyName} companyImage={matchedOrg.companyImage} />
+								</Link>
+							)
+						})
 				}
 			</div>
 		</div>

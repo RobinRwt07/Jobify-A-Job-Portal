@@ -26,6 +26,12 @@ const Login = () => {
 		}
 	}, [])
 
+	useEffect(() => {
+		if (candidateAuthed || employerAuthed) {
+			navigate('/', { replace: true });
+		}
+	}, [])
+
 	function handleEmployerClick() {
 		navigate('/login/employer');
 		setActiveFrom("employer");
@@ -34,9 +40,6 @@ const Login = () => {
 	function handleCandidateClick() {
 		navigate('/login/candidate')
 		setActiveFrom("candidate");
-	}
-	if (candidateAuthed || employerAuthed) {
-		navigate('/', { replace: true });
 	}
 	return (
 		<section className={`${style.loginBox} container`}>

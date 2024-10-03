@@ -49,7 +49,7 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	if (searchResult.length === 0) {
 		return <Message>Can't Find Any Job</Message>
 	}
-
+	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
 	return (
 		<>
 			<div style={{ marginBlock: "1rem" }}>
@@ -60,11 +60,14 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 				<Message>No Jobs</Message> :
 				<div className={style.jobCardContainer}>
 					<div className={style.jobCards}>
-						{currentPageItem.map(job => (
-							<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
-								<JobCard key={job.jobId} jobData={job} />
-							</Link>
-						))}
+						{currentPageItem.map(job => {
+							const matchedOrg = allOrgs.find(company => company.companyId === job.companyId);
+							return (
+								<Link to={`/jobdetail/${job.jobId}`} key={job.jobId}>
+									<JobCard jobData={job} companyName={matchedOrg.companyName} companyImage={matchedOrg.companyImage} />
+								</Link>
+							)
+						})}
 					</div>
 				</div>
 			}

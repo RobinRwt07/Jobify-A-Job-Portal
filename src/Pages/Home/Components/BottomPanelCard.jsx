@@ -3,9 +3,9 @@ import style from '../Styles/bottomPanel.module.css';
 import { useNavigate } from "react-router-dom";
 import { useCandidateAuth } from "../../../hooks/useCandidateAuth";
 
-const BottomPanelCard = ({ heading, image, children, type }) => {
+const BottomPanelCard = ({ image, children, type }) => {
+	const { candidateAuthed } = useCandidateAuth();
 	const navigate = useNavigate();
-	const { candidateAuthed, setCandidateAuth } = useCandidateAuth();
 	function handleClick() {
 		if (type == 'candidate') {
 			if (candidateAuthed) {
