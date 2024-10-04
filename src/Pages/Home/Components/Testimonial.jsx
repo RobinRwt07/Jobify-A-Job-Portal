@@ -1,14 +1,13 @@
 import { useRef } from "react";
 import TestimonialCard from "./TestimonialCard";
-import testimonials from '../../../../Public/DummyData/testimonial';
 import style from '../Styles/testimonial.module.css';
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../../Component/Button";
+import testimonials from "../../../../Public/DummyData/testimonial";
 
 const Testmonial = () => {
 	const scrollBox = useRef(null);
-
 	function handleNextClick() {
 		scrollBox.current.scrollBy({
 			left: 300,
@@ -43,6 +42,4 @@ const Testmonial = () => {
 		</div >
 	)
 }
-
-
 export default Testmonial;

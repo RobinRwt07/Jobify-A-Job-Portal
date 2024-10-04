@@ -1,4 +1,4 @@
-export default testimonial = [
+const testimonials = [
   {
     id: 1,
     rating: 4.5,
@@ -55,4 +55,6 @@ export default testimonial = [
     userDesignation: "FrontEnd Dev",
     image: "https://statinfer.com/wp-content/uploads/dummy-user.png"
   }
-]
+];
+
+export default testimonials;
