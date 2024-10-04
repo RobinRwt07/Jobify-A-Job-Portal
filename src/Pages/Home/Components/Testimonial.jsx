@@ -4,7 +4,8 @@ import testimonials from '../../../../Public/DummyData/testimonial';
 import style from '../Styles/testimonial.module.css';
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from '../../../Component/Button';
+import Button from "../../../Component/Button";
+
 const Testmonial = () => {
 	const scrollBox = useRef(null);
 

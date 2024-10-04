@@ -4,6 +4,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 import { FilterContext } from '../context';
 import CheckBox from '../../../Component/Checkbox';
+import Button from '../../../Component/Button';
 
 const FilterBar = ({ handleFilterChange }) => {
 	const jobTypes = ['Full Time', 'Part Time', 'Internship'];

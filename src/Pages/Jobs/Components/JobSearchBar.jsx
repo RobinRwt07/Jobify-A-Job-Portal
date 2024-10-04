@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import style from '../Style/jobs.module.css';
+import Button from '../../../Component/Button';
 
 const JobSearchBar = ({ handleSearchData, handleFilterChange }) => {
 	const [jobTitle, setJobTitle] = useState("");

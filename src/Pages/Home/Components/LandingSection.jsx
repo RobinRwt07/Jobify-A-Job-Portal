@@ -9,7 +9,6 @@ import {
 import style from "../Styles/landingSection.module.css";
 import landingImage from "../../../Assest/Images/landingImage.png";
 import Button from '../../../Component/Button';
-
 export default LandingSection = () => {
 	const [jobTitle, setJobTitle] = useState("");
 	const [jobLocation, setJobLocation] = useState("");
