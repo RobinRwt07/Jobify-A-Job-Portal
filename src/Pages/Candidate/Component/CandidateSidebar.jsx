@@ -20,7 +20,7 @@ const CandidateSideBar = () => {
 
 			<NavLink to={'/candidate/applied_jobs'} end>
 				<FontAwesomeIcon icon={faCirclePlus} />
-				<span>Applied Job</span>
+				<span>Applied Jobs</span>
 			</NavLink>
 
 			<NavLink to={'/candidate/saved_jobs'} end>

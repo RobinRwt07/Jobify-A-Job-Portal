@@ -9,7 +9,7 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-md);
-    background-color: var(--bg-light);
+    border: 1px solid var(--bg-light-3);
     border-radius: var(--br-sm);
     padding: var(--p-lg);
 
@@ -37,18 +37,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-lg);
-  background-color: var(--bg-light);
+  border: 1px solid var(--bg-light-3);
   border-radius: var(--br-sm);
   padding: var(--p-lg);
 
   & h3 {
     margin-block: var(--m-lg) var(--m-md);
     font-size: 18px;
-  }
-
-  & input,
-  textarea {
-    background-color: var(--bg-white);
   }
 }
 
@@ -116,9 +111,11 @@
 
 .employerTabs {
   display: flex;
+  gap: var(--gap-md);
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+  margin-block-end: var(--m-lg);
 
   &>div {
     color: var(--text-dark);
@@ -129,11 +126,13 @@
     gap: var(--gap-sm);
     cursor: pointer;
     padding: var(--p-md) var(--p-lg);
-    border-top-left-radius: var(--br-sm);
-    border-top-right-radius: var(--br-sm);
+    box-shadow: inset 0px 0px 0px 1px var(--bg-light-3);
+    border-radius: var(--br-sm);
+    transition: transform .2s linear;
 
     &:hover {
-      background-color: var(--bg-light-3);
+      transform: translateY(-3px);
+      box-shadow: inset 0px 0px 0px 1px var(--bg-dark);
     }
   }
 }

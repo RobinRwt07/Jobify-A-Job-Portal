@@ -45,7 +45,7 @@ const SavedJobs = () => {
 	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
 	return (
 		<section>
-			<h3>Saved Jobs (12)</h3>
+			<h3>Saved Jobs ({allSavedJobs.length})</h3>
 			<div className={style.savedJobsTable}>
 
 				<div className={style.savedJobContainer}>

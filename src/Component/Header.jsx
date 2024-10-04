@@ -101,15 +101,15 @@ const Header = () => {
 								<NavLink to={'/jobs'} end onClick={closeNavBar}>Jobs</NavLink>
 								{
 									candidateAuthed ?
-										<NavLink to={'/candidate'} end onClick={closeNavBar}>Dashboard</NavLink> :
+										<NavLink to={'/candidate'} onClick={closeNavBar}>Dashboard</NavLink> :
 										(employerAuthed) ?
 											<NavLink to={'/employer'} onClick={closeNavBar}>Dashboard</NavLink> :
 											<>
 												<NavLink to={'/employer'} onClick={closeNavBar} >Employer</NavLink>
-												<NavLink to={'/candidate'} end onClick={closeNavBar}>Candidate</NavLink>
+												<NavLink to={'/candidate'} onClick={closeNavBar}>Candidate</NavLink>
 											</>
 								}
-								<NavLink to={''} end onClick={closeNavBar}>About Us</NavLink>
+								<NavLink to={'/about'} end onClick={closeNavBar}>About Us</NavLink>
 							</div>
 						</nav>
 						{
@@ -125,7 +125,7 @@ const Header = () => {
 					<div className={style.menuBtn} onClick={handleMenuToggle}>
 						<img src={MenuLogo} alt="menu-btn" />
 					</div>
-					{candidateAuthed || employerAuthed &&
+					{(candidateAuthed || employerAuthed) &&
 						<>
 							<div className={style.profileAvatar} onClick={handleMenuOpen}>
 								<img src={avatar} alt="profile picture" />

@@ -6,9 +6,8 @@
   width: 280px;
   height: 100vh;
   padding: var(--p-lg);
-  background-color: var(--bg-white);
+  border: 1px solid var(--bg-light-3);
   border-radius: var(--br-sm);
-  background-color: var(--bg-light-2);
 
   @media (min-width:1024px) {
     height: auto;

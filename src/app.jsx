@@ -27,7 +27,7 @@ import AppliedJobs from "./Pages/Candidate/Component/AppliedJobs";
 import SavedJobs from "./Pages/Candidate/Component/SavedJobs";
 import CandidateProfile from "./Pages/Candidate/Component/CandidateProfile";
 import JobApplications from "./Pages/Employer/Component/JobApplications";
-
+import About from "./Pages/About/About";
 export const App = () => {
 	return (
 		<>
@@ -71,6 +71,7 @@ export const App = () => {
 										<Route path="/employer/job_applications/:jobId" element={<JobApplications />} />
 									</Route>
 								</Route>
+								<Route path={'/about'} element={<About />} />
 								<Route path="*" element={<GlobalError />} />
 							</Routes>
 						</main >

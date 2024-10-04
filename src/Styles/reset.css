@@ -262,5 +262,5 @@ h3 {
 }
 
 .activeEmployerTab {
-  background-color: var(--bg-light);
+  box-shadow: inset 0px 0px 0px 1px var(--bg-dark) !important;
 }
