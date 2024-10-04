@@ -9,7 +9,7 @@ import {
 import style from "../Styles/landingSection.module.css";
 import landingImage from "../../../Assest/Images/landingImage.png";
 import Button from '../../../Component/Button';
-export default LandingSection = () => {
+const LandingSection = () => {
 	const [jobTitle, setJobTitle] = useState("");
 	const [jobLocation, setJobLocation] = useState("");
 	const navigate = useNavigate();
@@ -57,3 +57,5 @@ export default LandingSection = () => {
 		</div >
 	);
 };
+
+export default LandingSection;
