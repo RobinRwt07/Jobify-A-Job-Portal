@@ -5,17 +5,19 @@ import Pagination from "../../../Component/Pagination";
 import Message from "../../../Component/Message";
 import style from '../style/jobApplication.module.css';
 import CandidateDetails from "./CandidateDetails";
+import { useEmployerInfo } from "../useEmployerInfo";
 
 const JobApplications = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [open, setOpen] = useState(false);
 	const [applicationId, setApplicationsId] = useState(null);
 	const [applications, setApplications] = useState([]);
+	const { companyInfo } = useEmployerInfo();
 	const { jobId } = useParams();
 
 	useEffect(() => {
 		const allApplications = JSON.parse(localStorage.getItem("jobApplications")) || [];
-		setApplications(allApplications.filter(application => application.jobId === jobId));
+		setApplications(allApplications.filter(application => application.jobId === jobId && application.companyId === companyInfo.companyId));
 	}, []);
 
 	if (jobId.length === 0 || (!jobId.startsWith("JOB"))) {

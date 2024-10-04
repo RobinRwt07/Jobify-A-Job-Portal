@@ -18,7 +18,7 @@ const Header = () => {
 	const [isSmallScreen, setIsSmallScreen] = useState(false);
 	const navigate = useNavigate();
 	const { candidateAuthed, candidateLogout } = useCandidateAuth();
-	const { employerAuthed, setEmployerAuth } = useEmployerAuth();
+	const { employerAuthed, employerLogout } = useEmployerAuth();
 
 	const [anchorEl, setAnchorEl] = useState(null);
 	useEffect(() => {
@@ -62,9 +62,26 @@ const Header = () => {
 	function closeNavBar() {
 		setNavActive(false);
 	}
+
 	function handleLogout() {
 		handleMenuClose();
-		candidateLogout();
+		if (candidateAuthed) {
+			candidateLogout();
+		}
+		if (employerAuthed) {
+			employerLogout();
+		}
+	}
+
+
+	function handleProfileClick() {
+		handleMenuClose();
+		if (candidateAuthed) {
+			navigate('/candidate/profile');
+		}
+		if (employerAuthed) {
+			navigate('/employer/profile');
+		}
 	}
 
 
@@ -108,7 +125,7 @@ const Header = () => {
 					<div className={style.menuBtn} onClick={handleMenuToggle}>
 						<img src={MenuLogo} alt="menu-btn" />
 					</div>
-					{candidateAuthed &&
+					{candidateAuthed || employerAuthed &&
 						<>
 							<div className={style.profileAvatar} onClick={handleMenuOpen}>
 								<img src={avatar} alt="profile picture" />
@@ -122,7 +139,7 @@ const Header = () => {
 									'aria-labelledby': 'basic-button',
 								}}
 							>
-								<MenuItem onClick={() => navigate('/candidate/profile')}>Profile</MenuItem>
+								<MenuItem onClick={handleProfileClick}>Profile</MenuItem>
 								<MenuItem onClick={handleMenuClose}>My account</MenuItem>
 								<MenuItem onClick={handleLogout}>Logout</MenuItem>
 							</Menu>
@@ -130,7 +147,7 @@ const Header = () => {
 					}
 				</div>
 			</div>
-		</header>
+		</header >
 	)
 }
 

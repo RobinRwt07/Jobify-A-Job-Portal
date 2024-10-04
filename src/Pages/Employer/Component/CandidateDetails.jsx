@@ -6,12 +6,26 @@ import avatar from '../../../Assest/Images/profileAvatar.png';
 import { FaCakeCandles, FaLocationDot } from 'react-icons/fa6';
 import { MdEmail } from "react-icons/md";
 import { FaLayerGroup, FaPhone, FaSchool } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const CandidateDetails = ({ open, handleClose, applicationId }) => {
 	const allApplication = JSON.parse(localStorage.getItem('jobApplications')) || [];
 	const applicationDetails = allApplication.find(application => application.applicationId === applicationId);
 	if (!applicationDetails) {
 		return;
+	}
+	function handleRejectClick() {
+		applicationDetails.status = 'rejected';
+		const index = allApplication.findIndex(application => application.applicationId === applicationId);
+		if (index !== -1) {
+			allApplication.splice(index, 1, applicationDetails);
+			localStorage.setItem('jobApplications', JSON.stringify(allApplication));
+			toast.success("Application Rejected");
+		}
+		else {
+			toast.error("can't find application");
+		}
+		handleClose();
 	}
 
 	return (
@@ -35,7 +49,7 @@ const CandidateDetails = ({ open, handleClose, applicationId }) => {
 							</div>
 						</div>
 						<div>
-							<Button type='btn-danger'>Reject</Button>
+							<Button type='btn-danger' handler={handleRejectClick}>Reject</Button>
 							<Button type='btn btn-primary'>Accept Application</Button>
 						</div>
 					</div>

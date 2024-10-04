@@ -2,12 +2,13 @@ import Button from "../../../Component/Button";
 import style from '../Styles/SavedJobs.module.css';
 import companyLogo from '../../../Assest/Images/profileAvatar.png';
 import Button from '../../../Component/Button';
-import { FaCircleXmark, FaIndianRupeeSign, FaLocationDot } from "react-icons/fa6";
+import { FaCircleXmark, FaIndianRupeeSign, FaLocationDot, FaTrash } from "react-icons/fa6";
 import { FaCalendar } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
-const SavedJobRow = ({ jobInfo, companyImage }) => {
+const SavedJobRow = ({ jobInfo, companyImage, candidateId }) => {
 	const navigate = useNavigate();
 	const salary = `${(jobInfo.minSalary / 100000).toFixed(1)} - ${(jobInfo.maxSalary / 100000).toFixed(1)}`;
 
@@ -20,6 +21,18 @@ const SavedJobRow = ({ jobInfo, companyImage }) => {
 	}
 	function handleJobApply() {
 		navigate('/jobdetail/' + jobInfo.jobId);
+	}
+
+	function handleUnsaveClick() {
+		const allCandidatesDetails = JSON.parse(localStorage.getItem('candidatesDetails')) || [];
+		const index = allCandidatesDetails.findIndex(candidate => candidate.candidateId === candidateId);
+		if (index !== -1) {
+			const filterSavedJobs = allCandidatesDetails[index].savedJobs.filter(job => job !== jobInfo.jobId);
+			allCandidatesDetails[index].savedJobs = [...filterSavedJobs];
+			localStorage.setItem('candidatesDetails', JSON.stringify(allCandidatesDetails));
+			toast.success("job removed");
+			location.reload();
+		}
 	}
 
 	return (
@@ -56,6 +69,10 @@ const SavedJobRow = ({ jobInfo, companyImage }) => {
 					</div>
 				</div>
 			</div>
+
+			<Button type="btn-danger" handler={handleUnsaveClick}>
+				<FaTrash />
+			</Button>
 			<Button disabled={isExpire} handler={handleJobApply}>{isExpire ? "Deadline Expire" : "Apply Now"}</Button>
 		</div>
 	)

@@ -1,5 +1,5 @@
 import { FaSchool, FaSuitcase } from "react-icons/fa"
-import { FaLocationDot } from "react-icons/fa6"
+import { FaCircleCheck, FaCirclePause, FaCircleXmark, FaLocationDot } from "react-icons/fa6"
 import style from '../style/jobApplication.module.css';
 import avatar from '../../../Assest/Images/profileAvatar.png';
 const JobApplicationRow = ({ applicationInfo, setOpen, setApplicationsId }) => {
@@ -29,12 +29,28 @@ const JobApplicationRow = ({ applicationInfo, setOpen, setApplicationsId }) => {
 						</div>
 						<div>
 							<FaLocationDot />
-							<span>{applicationInfo.city}, {applicationInfo.state}</span>
+							<span>{applicationInfo.city}</span>
 						</div>
 					</div>
 				</div>
 			</div>
-			<Button handler={viewApplicantDetails}>View Details</Button>
+			{
+				applicationInfo.status === "rejected" ?
+					<div style={{ color: "red" }}>
+						<FaCircleXmark />
+						<span>{"Rejected"}</span>
+					</div> :
+					applicationInfo.status === 'pending' ?
+						<div style={{ color: "blue" }}>
+							<FaCirclePause />
+							<span>{"Pending"}</span>
+						</div> :
+						<div style={{ color: "green" }}>
+							<FaCircleCheck />
+							<span>{"Accepted"}</span>
+						</div>
+			}
+			<Button handler={viewApplicantDetails} disabled={applicationInfo.status === 'rejected'}>View Details</Button>
 		</div>
 	)
 }

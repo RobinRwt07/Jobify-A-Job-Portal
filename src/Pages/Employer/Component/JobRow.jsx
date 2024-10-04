@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from '../style/recentActivity.module.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useEmployerInfo } from '../useEmployerInfo';
 
 const JobRow = ({ jobInfo }) => {
 	const navigate = useNavigate();
+	const { companyInfo } = useEmployerInfo();
 	const allJobApplications = JSON.parse(localStorage.getItem('jobApplications')) || [];
-	const totalApplications = allJobApplications.filter(application => application.jobId === jobInfo.jobId).length;
+	const totalApplications = allJobApplications.filter(application => application.jobId === jobInfo.jobId && application.companyId === companyInfo.companyId).length;
 	const isActive = (new Date(jobInfo.expirationDate) > new Date()) ? true : false;
 	const posted = Math.floor((new Date() - new Date(jobInfo.postedOn)) / (60 * 60 * 24 * 1000));
 

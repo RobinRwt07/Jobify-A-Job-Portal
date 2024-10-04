@@ -54,7 +54,7 @@ const SavedJobs = () => {
 							<Message>No Saved Jobs</Message> :
 							currentPageJobs.map(job => {
 								const matchedOrg = allOrgs.find(company => company.companyId === job.companyId);
-								return <SavedJobRow jobInfo={job} key={job.jobId} companyImage={matchedOrg.companyImage} />
+								return <SavedJobRow candidateId={candidateInfo.candidateId} jobInfo={job} key={job.jobId} companyImage={matchedOrg.companyImage} />
 							})
 					}
 				</div>

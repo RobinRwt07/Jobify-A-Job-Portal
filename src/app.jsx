@@ -21,7 +21,6 @@ import Overview from './Pages/Employer/Component/OverView';
 import AddJob from './Pages/Employer/Component/AddJob';
 import MyJobs from "./Pages/Employer/Component/MyJobs";
 import UpdateJob from './Pages/Employer/Component/UpdateJob';
-import Error from "./Component/Error";
 import Candidate from "./Pages/Candidate/Candidate";
 import CandidateOverview from "./Pages/Candidate/Component/CandidateOverview";
 import AppliedJobs from "./Pages/Candidate/Component/AppliedJobs";
@@ -72,7 +71,7 @@ export const App = () => {
 										<Route path="/employer/job_applications/:jobId" element={<JobApplications />} />
 									</Route>
 								</Route>
-								<Route path="*" element={<Error />} />
+								<Route path="*" element={<GlobalError />} />
 							</Routes>
 						</main >
 						<ToastContainer autoClose={3000} />
