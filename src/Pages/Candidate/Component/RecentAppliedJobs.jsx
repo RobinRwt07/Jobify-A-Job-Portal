@@ -35,7 +35,7 @@ const RecentAppliedJobs = ({ recentAppliedJobs = [] }) => {
 									</td>
 								</tr> :
 								recentAppliedJobs.map(job => (
-									<JobRow jobInfo={job} key={job.jobId} />
+									<JobRow jobInfo={job} key={job.applicationId} />
 								))
 						}
 					</tbody>

@@ -137,17 +137,118 @@
 .profile {
   composes: container;
   display: flex;
+  gap: var(--gap-lg);
   flex-direction: column;
 
   @container candidate (min-width:700px) {
     flex-direction: row;
 
     &>div:first-child {
-      flex-basis: 60%;
+      flex-basis: 65%;
     }
 
     &>div:last-child {
-      flex-basis: 40%;
+      border-left: 2px solid var(--bg-light-2);
+      padding-left: var(--p-lg);
+      flex-basis: 35%;
     }
+  }
+}
+
+
+.candidateInfo {
+  display: grid;
+  column-gap: var(--gap-lg);
+  row-gap: var(--gap-xl);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+
+  &>div {
+    display: flex;
+    flex-direction: column;
+
+    &>svg {
+      font-size: 24px;
+      color: var(--primary);
+      margin-block-end: var(--m-sm);
+    }
+
+    &>span {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--text-x-light);
+    }
+
+    &>p {
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+}
+
+.contentbox {
+  margin-bottom: var(--m-xl);
+
+  &>h3 {
+    margin-block-end: var(--m-md);
+  }
+
+  &>div {
+    margin-block: var(--m-lg);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-md);
+
+    &>div:has(>svg) {
+      align-content: center;
+      border-radius: var(--br-sm);
+      background-color: var(--bg-light-2);
+      padding: var(--p-lg);
+      font-size: 28px;
+      color: var(--primary);
+    }
+  }
+}
+
+/* account page style */
+
+.deleteAccount {
+  margin-block: var(--m-2xl) var(--m-lg);
+}
+
+.dialogContent {
+  padding: var(--p-lg);
+
+  @media (min-width:768px) {
+    padding: var(--p-2xl);
+  }
+
+  &>h2 {
+    font-size: 20px;
+    margin-block-end: var(--m-lg);
+  }
+
+  &>div:has(>button) {
+    margin-block-start: var(--p-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+    justify-content: flex-end;
+  }
+}
+
+
+/* update profile page style  */
+.updateCandidateProfile {
+  composes: container;
+}
+
+.inputFieldContainer {
+  padding: var(--p-md);
+  border-radius: var(--br-md);
+  background-color: #f1f1f2;
+  margin-block-end: var(--m-lg);
+
+  @container candidate (min-width:700px) {
+    padding: var(--p-lg);
   }
 }

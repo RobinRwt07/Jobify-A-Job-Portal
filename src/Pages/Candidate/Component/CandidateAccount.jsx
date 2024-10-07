@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from '../Styles/CandidateProfile.module.css';
 import { Form, Formik } from 'formik';
 import { validatePassword } from '../../../../Public/utils';
 import { MyTextInput } from '../../../Component/FormComponent';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Buttton from '../../../Component/Button';
+import { Dialog } from '@mui/material';
+import { useCandidateAuth } from '../../../hooks/useCandidateAuth';
 
 const CandidateAccount = ({ candidateInfo }) => {
 	const navigate = useNavigate();
+	const [open, setOpen] = useState(false);
+	const { candidateAuthed } = useCandidateAuth();
 
 	const validate = (values) => {
 		const errors = {};
@@ -49,9 +54,45 @@ const CandidateAccount = ({ candidateInfo }) => {
 		}
 	}
 
+	function handleDeleteAccount() {
+		if (candidateAuthed) {
+			const allApplications = JSON.parse(localStorage.getItem("jobApplications")) || [];
+			const filteredApplication = allApplications.filter(application => application.candidateId !== candidateAuthed);
+			console.log(filteredApplication);
+
+			localStorage.setItem('jobApplications', JSON.stringify(filteredApplication));
+
+			const allCandidatesDetails = JSON.parse(localStorage.getItem("candidatesDetails")) || [];
+			const index = allCandidatesDetails.findIndex(candidate => candidate.candidateId === candidateAuthed);
+			if (index !== -1) {
+				allCandidatesDetails.splice(index, 1);
+				localStorage.setItem('candidatesDetails', JSON.stringify(allCandidatesDetails));
+			}
+			const allRegisteredCandidate = JSON.parse(localStorage.getItem("registeredCandidate")) || [];
+			const candidateIndex = allRegisteredCandidate.findIndex(candidate => candidate.candidateId === candidateAuthed);
+			if (candidateIndex !== -1) {
+				allRegisteredCandidate.splice(candidateIndex, 1);
+				localStorage.setItem('registeredCandidate', JSON.stringify(allRegisteredCandidate));
+			}
+			localStorage.removeItem('loggedInCandidate');
+			handleDialogClose();
+			toast.success('Your account has been successfully deleted.');
+			setTimeout(() => {
+				location.reload();
+			}, 1000);
+		}
+		else {
+			toast.error('Account Deletion canceled.')
+		}
+	}
+
+	function handleDialogClose() {
+		setOpen(false);
+	}
+
 	return (
 		<div className={style.candidateAccount}>
-			<div>
+			<div className={style.inputFieldContainer}>
 				<h3>Change Password</h3>
 				<Formik initialValues={{
 					currentPassword: "",
@@ -72,6 +113,22 @@ const CandidateAccount = ({ candidateInfo }) => {
 						</Form>
 					)}
 				</Formik>
+			</div>
+			<div className={`${style.deleteAccount} ${style.inputFieldContainer}`}>
+				<h3>Delete Your Account</h3>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet vitae accusamus iure asperiores tempora rem dicta quidem animi enim numquam itaque excepturi mollitia eius tenetur, quia soluta veniam corporis quo.</p>
+				<Buttton type='btn btn-danger' handler={() => setOpen(true)}>Delete Account </Buttton>
+
+				<Dialog onClose={handleDialogClose} open={open}>
+					<div className={style.dialogContent} >
+						<h2>Are you sure you want to delete your account?</h2>
+						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur quas, voluptas repellat illo deleniti labore cum adipisci sequi vitae nihil!</p>
+						<div>
+							<Buttton type="btn-primary" handler={handleDialogClose}>Cancel</Buttton>
+							<Buttton type="btn btn-danger" handler={handleDeleteAccount}>Delete</Buttton>
+						</div>
+					</div>
+				</Dialog>
 			</div>
 		</div>
 	)

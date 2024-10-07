@@ -9,10 +9,12 @@
   margin: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   @media (min-width:800px) {
     flex-direction: row;
-    gap: var(--gap-xl);
+
+    gap: var(--gap-md);
 
     &>* {
       flex: 1 1;
@@ -67,6 +69,12 @@
 
   @media (min-width:800px) {
     display: block;
+  }
+
+  @media (min-width:1400px) {
+    display: block;
+    height: 700px;
+    margin: auto;
   }
 
   &>img {

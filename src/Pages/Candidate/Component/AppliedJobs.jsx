@@ -17,9 +17,8 @@ const AppliedJobs = () => {
 		setAppliedJobs(allApplication.filter(job => job.candidateId === candidateAuthed));
 		setFilteredJobs(allApplication.filter(job => job.candidateId === candidateAuthed));
 	}, []);
-
 	if (appliedJobs.length === 0) {
-		return <Message>You have not posted any job</Message>
+		return <Message>You have not Applied for any jobs</Message>
 	}
 
 	function handleStatusChange(e) {
@@ -80,7 +79,7 @@ const AppliedJobs = () => {
 									</td>
 								</tr> :
 								currentPageJobs.map(job => (
-									<JobRow jobInfo={job} key={job.jobId} />
+									<JobRow jobInfo={job} key={job.applicationId} />
 								))
 						}
 					</tbody>

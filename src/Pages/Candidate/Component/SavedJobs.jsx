@@ -67,4 +67,5 @@ const SavedJobs = () => {
 	)
 }
 
-export default SavedJobs
+export default SavedJobs;
+

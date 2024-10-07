@@ -68,6 +68,7 @@ const CandidateLogin = () => {
 						localStorage.setItem("loggedInCandidate", matchedCandidate.candidateId);
 						setCandidateAuth(true);
 						navigate('/');
+						location.reload();
 					}
 					else {
 						toast.error("Invalid Password");

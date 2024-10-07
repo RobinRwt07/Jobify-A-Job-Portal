@@ -142,6 +142,7 @@ textarea {
   border: 1.5px solid rgb(188, 188, 188);
   border-radius: var(--br-sm);
   padding: var(--p-md) var(--p-lg);
+  background-color: var(--bg-white);
 
   &::placeholder {
     font-size: 16px;

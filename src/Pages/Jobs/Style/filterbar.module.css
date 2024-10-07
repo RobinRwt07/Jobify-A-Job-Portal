@@ -7,7 +7,8 @@
   height: 100vh;
   padding: var(--p-lg);
   border: 1px solid var(--bg-light-3);
-  border-radius: var(--br-sm);
+  border-radius: var(--br-md);
+  background-color: var(--bg-white);
 
   @media (min-width:1024px) {
     height: auto;

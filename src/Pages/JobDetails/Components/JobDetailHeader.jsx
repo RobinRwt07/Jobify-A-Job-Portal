@@ -15,34 +15,39 @@ import schema from '../jobFormSchema';
 import { generateRandom, statesOfIndia } from '../../../../Public/utils';
 
 const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, experience, salary = "Not Disclosed", jobLocation, postedOn = "NA", workMode } }) => {
-	const { candidateAuthed, setCandidateAuth } = useCandidateAuth();
-	const [candidateInfo, setCandidateInfo] = useState({});
+	const { candidateAuthed } = useCandidateAuth();
 	const [open, setOpen] = useState(false);
-
-	useState(() => {
-		if (candidateAuthed) {
-			const allCandidates = JSON.parse(localStorage.getItem('registeredCandidate')) || [];
-			const candidate = allCandidates.find(candidate => candidate.candidateId === candidateAuthed);
-			if (candidate) {
-				setCandidateInfo(candidate);
+	let candidateDetails = {};
+	if (candidateAuthed) {
+		const allCandidates = JSON.parse(localStorage.getItem('registeredCandidate')) || [];
+		const candidate = allCandidates.find(candidate => candidate.candidateId === candidateAuthed);
+		if (candidate) {
+			candidateDetails = { ...candidate };
+			const allCandidatesDetails = JSON.parse(localStorage.getItem('candidatesDetails')) || [];
+			const details = allCandidatesDetails.find(candidate => candidate.candidateId === candidateAuthed);
+			if (details) {
+				candidateDetails = {
+					...candidateDetails,
+					...details?.candidateData || {}
+				}
 			}
 		}
-	}, [])
+	}
 
 	const initialValues = {
-		candidateFirstName: candidateInfo?.candidateFirstName || '',
-		candidateLastName: candidateInfo?.candidateLastName || '',
-		candidatePhone: candidateInfo?.candidatePhone || '',
-		candidateEmail: candidateInfo?.candidateEmail || '',
-		dateOfBirth: candidateInfo?.dateOfBirth || '',
-		experience: candidateInfo?.experience || '',
-		streetAddress: candidateInfo?.streetAddress || '',
-		city: candidateInfo?.city || '',
-		postalCode: candidateInfo?.postalCode || '',
-		state: candidateInfo?.state || '',
-		course: candidateInfo?.course || '',
-		collegeName: candidateInfo?.collegeName || '',
-		graduationYear: candidateInfo?.graduationYear || '',
+		candidateFirstName: candidateDetails?.candidateFirstName || '',
+		candidateLastName: candidateDetails?.candidateLastName || '',
+		candidatePhone: candidateDetails?.candidatePhone || '',
+		candidateEmail: candidateDetails?.candidateEmail || '',
+		dateOfBirth: candidateDetails?.dateOfBirth || '',
+		experience: candidateDetails?.experience || '',
+		streetAddress: candidateDetails?.streetAddress || '',
+		city: candidateDetails?.city || '',
+		postalCode: candidateDetails?.postalCode || '',
+		state: candidateDetails?.state || '',
+		course: candidateDetails?.course || '',
+		collegeName: candidateDetails?.collegeName || '',
+		graduationYear: candidateDetails?.graduationYear || '',
 		coverLetter: ''
 	}
 	function handleClick() {
