@@ -86,7 +86,7 @@ main {
 }
 
 .heading {
-  font-size: 2rem;
+  font-size: 30px;
   font-weight: bold;
 
   &>span {

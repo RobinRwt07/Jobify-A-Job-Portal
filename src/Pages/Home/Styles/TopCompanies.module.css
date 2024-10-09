@@ -1,0 +1,25 @@
+.topCompanies {
+  margin-block-start: var(--m-xl);
+
+  &>h2 {
+    text-align: center;
+  }
+
+  &>div {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-block: var(--m-2xl);
+    gap: var(--gap-xl);
+
+    &>div:has(>img) {
+      &>img {
+        width: 140px;
+        height: 40px;
+        object-fit: contain;
+      }
+    }
+  }
+
+
+}

@@ -1,0 +1,92 @@
+.howItWorks {
+  &>p {
+    font-size: 15px;
+    color: var(--text-x-light);
+    font-weight: 500;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  &>div:last-child {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 240px));
+    grid-template-rows: repeat(4, auto);
+    justify-content: center;
+    gap: var(--gap-xl);
+    margin-block: var(--m-2xl) var(--m-xl);
+
+    &>* {
+      width: 250px;
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-template-columns: subgrid;
+      grid-row: span 4;
+      background-color: var(--bg-light-2);
+      padding: var(--p-lg);
+      border-radius: var(--br-md);
+      gap: var(--gap-sm);
+
+      @media (min-width:1024px) {
+        padding: var(--p-xl);
+      }
+
+      &>p:first-child {
+        color: var(--primary);
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1;
+        margin-block-end: var(--m-lg);
+
+        &>span {
+          font-size: 48px;
+          font-weight: bold;
+        }
+      }
+
+      &>h3 {
+        font-size: 20px;
+      }
+
+      &>p:last-of-type {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-x-light);
+      }
+
+      &>a {
+        display: flex;
+        align-items: center;
+        margin-block-start: var(--m-lg);
+        font-size: 15px;
+        font-weight: bold;
+        color: var(--primary);
+        color: var(--primary);
+
+        &>svg {
+          margin-inline-start: 2px;
+          transition: all .3s linear;
+        }
+
+        &:hover {
+          color: color-mix(in lab, var(--primary) 60%, var(--bg-dark) 40%);
+
+          &>svg {
+            transform: translateX(50%);
+          }
+        }
+      }
+    }
+
+    &>div:first-child {
+      background-color: rgb(255, 251, 231);
+    }
+
+    &>div:nth-child(2) {
+      background-color: rgb(224, 243, 255)
+    }
+
+    &>div:last-child {
+      background-color: #f7f7f7;
+    }
+  }
+}
