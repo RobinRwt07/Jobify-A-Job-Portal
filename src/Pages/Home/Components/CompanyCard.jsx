@@ -1,25 +1,24 @@
 import Button from "../../../Component/Button";
-import CompanyLogo from '../../../Assest/Images/landingImage.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import style from '../Styles/CompanyCard.module.css';
 
-const CompanyCard = ({ companyData: { companyName, location, totalOpening } }) => {
+const CompanyCard = ({ companyData: { companyName, companyLocation }, companyImage }) => {
 	return (
 		<div className={style.companyCard}>
 			<div>
 				<div>
-					<img src={CompanyLogo} alt="company logo" />
+					<img src={companyImage} alt="company logo" />
 				</div>
 				<div>
 					<h4>{companyName}</h4>
 					<div>
 						<FontAwesomeIcon icon={faLocationDot} />
-						<span>{location}</span>
+						<span>{companyLocation}</span>
 					</div>
 				</div>
 			</div>
-			<Button type='btn-primary'>	Open Position ({totalOpening})</Button>
+			<Button type='btn-primary'>	Open Position </Button>
 		</ div >
 	)
 }
