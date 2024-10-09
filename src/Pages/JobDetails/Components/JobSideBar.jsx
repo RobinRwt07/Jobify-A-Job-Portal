@@ -4,7 +4,7 @@ import JobCard from '../../../Component/JobCard';
 import { Link } from 'react-router-dom';
 
 const JobSideBar = ({ similerJobs, jobTitle }) => {
-	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
+	const allOrgs = JSON.parse(localStorage.getItem("employersDetails")) || [];
 	return (
 		<div className={style.jobSideBar}>
 			<h3>Similar Role </h3>

@@ -49,7 +49,7 @@ const AddJob = ({ type = "add", jobInfo = {} }) => {
 	}
 
 	return (
-		<section className={style.formSection}>
+		<section className={style.formSection} style={{ backgroundColor: "var(--bg-light-2)", borderRadius: "var(--br-md)" }}>
 			{type == "add" ?
 				<h2>Post A Job</h2> :
 				<h2>Update Job</h2>

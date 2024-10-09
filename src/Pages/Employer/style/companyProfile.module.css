@@ -1,4 +1,6 @@
 .companyProfile {
+  container-name: employer;
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   gap: var(--gap-lg);
@@ -33,59 +35,69 @@
   }
 }
 
-.profileTabs {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-lg);
-  border: 1px solid var(--bg-light-3);
-  border-radius: var(--br-sm);
-  padding: var(--p-lg);
 
-  & h3 {
-    margin-block: var(--m-lg) var(--m-md);
-    font-size: 18px;
-  }
-}
 
 .companyInfo {
-  composes: profileTabs;
-  container-name: information;
-  container-type: inline-size;
+  composes: box;
+  background-color: var(--bg-light-2);
 
-  &>div:first-child>h4 {
-    margin-block: var(--m-lg) var(--m-md);
-  }
+  &>div:last-child {
+    margin-block-start: var(--m-xl);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
 
-  &>div:not(div:first-child) {
-    display: flex;
-    flex-direction: column;
+    @media (min-width:600px) {
+      column-gap: var(--gap-lg);
+      grid-template-columns: 1fr 1fr;
+      margin-inline: var(--m-md);
 
-    & span {
-      font-weight: 500;
+      &>div:nth-child(3) {
+        border: none !important;
+      }
     }
 
-    &>* {
+    &>div:not(:last-child) {
+      border-bottom: 1px solid var(--bg-light-3);
+    }
+
+    &>div {
       flex: 1 1;
-      margin-block: var(--m-sm);
-    }
+      padding-block: var(--p-md) var(--p-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
 
-    @container information (width>700) {
-      flex-direction: row;
+
+      &>svg {
+        flex-grow: 0;
+        font-size: 28px;
+        color: var(--primary);
+      }
+
+      & span {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-light);
+      }
+
+      & p {
+        font-size: 15px;
+        margin-block: var(--m-sm);
+        font-weight: bold;
+        color: var(--text-dark);
+      }
     }
   }
 }
 
 .accountSetting {
-  composes: profileTabs;
-  container-name: account;
-  container-type: inline-size;
-
   &>form>div {
     display: flex;
     flex-direction: column;
     gap: var(--gap-lg);
 
-    @container account (width>720px) {
+    @container employer (width>700px) {
       flex-direction: row;
 
       &>* {
@@ -104,8 +116,12 @@
 }
 
 .updateProfile {
-  composes: profileTabs;
+  padding: 0%;
   composes: formSection from '../../../Styles/form.module.css';
+
+  & h3 {
+    margin: 0;
+  }
 }
 
 
@@ -138,6 +154,9 @@
 }
 
 .deleteAccount {
+  margin-block-start: var(--m-xl);
+  composes: box;
+
   svg {
     font-size: 20px;
   }
@@ -178,5 +197,15 @@
   & span {
     font-size: 14px;
     color: var(--error);
+  }
+}
+
+.box {
+  padding: var(--p-lg);
+  border-radius: var(--br-md);
+  background-color: var(--bg-light-2);
+
+  @container (min-width:700px) {
+    padding-inline: var(--p-xl);
   }
 }

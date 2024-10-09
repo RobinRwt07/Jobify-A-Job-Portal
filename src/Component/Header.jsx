@@ -140,7 +140,6 @@ const Header = () => {
 								}}
 							>
 								<MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-								<MenuItem onClick={handleMenuClose}>My account</MenuItem>
 								<MenuItem onClick={handleLogout}>Logout</MenuItem>
 							</Menu>
 						</>

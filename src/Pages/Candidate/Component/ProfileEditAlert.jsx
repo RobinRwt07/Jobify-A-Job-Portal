@@ -20,7 +20,7 @@ const ProfileEditAlert = ({ setActiveTab }) => {
 				<h4>Your Profile is not completed. Please complete Your Profile</h4>
 				<p style={{ fontSize: '14px' }}>Complete your profile to easily apply for jobs.</p>
 			</div>
-			<button style={{ color: "red", backgroundColor: 'white' }} className='btn' onClick={() => setActiveTab("updateprofile")}>Edit Profile</button>
+			<button style={{ color: "red", backgroundColor: 'white' }} className='btn' onClick={() => setActiveTab("UpdateProfile")}>Edit Profile</button>
 		</div>
 	)
 }

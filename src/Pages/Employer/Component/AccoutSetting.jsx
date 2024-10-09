@@ -7,8 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useState } from 'react';
+import { useEmployerInfo } from '../useEmployerInfo';
 
-const AccoutSetting = ({ companyInfo }) => {
+const AccoutSetting = () => {
+	const { companyInfo } = useEmployerInfo();
 	const [isPasswordFieldActive, setPasswordFieldActive] = useState(false);
 	const navigate = useNavigate();
 	const passwordRef = useRef(null);
@@ -44,6 +46,8 @@ const AccoutSetting = ({ companyInfo }) => {
 			let allOrg = JSON.parse(localStorage.getItem('registeredOrg')) || [];
 			allOrg = allOrg.filter(org => org.companyId !== companyInfo.companyId);
 			localStorage.setItem('registeredOrg', JSON.stringify(allOrg));
+			let allEmployerDetails = JSON.parse(localStorage.getItem("employersDetails")) || [];
+			localStorage.setItem('employersDetails', JSON.stringify(allEmployerDetails.filter(employer => employer.companyId !== companyInfo.companyId)))
 			if (localStorage.getItem('loggedInOrg') === companyInfo.companyId) {
 				localStorage.removeItem("loggedInOrg");
 				toast.success("Account Deleted");
@@ -75,26 +79,28 @@ const AccoutSetting = ({ companyInfo }) => {
 	}
 	return (
 		<div className={style.accountSetting}>
-			<h3>Change Password</h3>
-			<Formik initialValues={{
-				currentPassword: "",
-				newPassword: "",
-				confirmPassword: "",
-			}}
-				onSubmit={(values) => handlePasswordChange(values)}
-				validate={validate}
-			>
-				{() => (
-					<Form>
-						<div>
-							<MyTextInput label={"Current Password"} type="password" name="currentPassword" placeholder="Password" />
-							<MyTextInput label={"New Password"} type="password" name="newPassword" placeholder="Password" />
-							<MyTextInput label={"Confirm Password"} type="password" name="confirmPassword" placeholder="Password" />
-						</div>
-						<button type='submit' className='btn btn-primary'>Change Password</button>
-					</Form>
-				)}
-			</Formik>
+			<div className={style.box}>
+				<h3>Change Password</h3>
+				<Formik initialValues={{
+					currentPassword: "",
+					newPassword: "",
+					confirmPassword: "",
+				}}
+					onSubmit={(values) => handlePasswordChange(values)}
+					validate={validate}
+				>
+					{() => (
+						<Form>
+							<div>
+								<MyTextInput label={"Current Password"} type="password" name="currentPassword" placeholder="Password" />
+								<MyTextInput label={"New Password"} type="password" name="newPassword" placeholder="Password" />
+								<MyTextInput label={"Confirm Password"} type="password" name="confirmPassword" placeholder="Password" />
+							</div>
+							<button type='submit' className='btn btn-primary'>Change Password</button>
+						</Form>
+					)}
+				</Formik>
+			</div>
 
 			<div className={style.deleteAccount}>
 				<h3>Delete Your Company</h3>

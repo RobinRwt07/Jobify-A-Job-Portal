@@ -5,9 +5,10 @@ import { MyTextArea, MyTextInput } from '../../../Component/FormComponent';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useEmployerInfo } from '../useEmployerInfo';
 
-const UpdateProfile = ({ companyInfo }) => {
-	const navigate = useNavigate();
+const UpdateProfile = ({ employerDetails = {} }) => {
+	const { companyInfo } = useEmployerInfo();
 
 	const schema = Yup.object({
 		companyPhone: Yup.string().matches(/((\+*)((0[ -]*)*|((91 )*))((\d{12})+|(\d{10})+))|\d{5}([- ]*)\d{6}/, 'Invalid phone number').required('Phone number is required'),
@@ -17,55 +18,59 @@ const UpdateProfile = ({ companyInfo }) => {
 	})
 
 	function handleProfileUpdate(values) {
-		const allOrgs = JSON.parse(localStorage.getItem('registeredOrg')) || [];
-		const index = allOrgs.findIndex(org => org.companyId === companyInfo.companyId);
+		const allEmployerDetails = JSON.parse(localStorage.getItem('employersDetails')) || [];
+		const index = allEmployerDetails.findIndex(org => org.companyId === companyInfo.companyId);
 		if (index !== -1) {
-			allOrgs.splice(index, 1);
-			allOrgs.push({
-				...companyInfo,
-				...values
-			});
-			localStorage.setItem("registeredOrg", JSON.stringify(allOrgs));
-			toast.success("Successfully Updated");
-			setTimeout(() => {
-				location.reload();
-			}, 1000)
+			allEmployerDetails[index].employerInfo = values;
 		}
 		else {
-			navigate('*');
+			const newEmployer = {
+				companyId: companyInfo.companyId,
+				employerInfo: {
+					...values
+				}
+			}
+			allEmployerDetails.push(newEmployer);
 		}
+		localStorage.setItem("employersDetails", JSON.stringify(allEmployerDetails));
+		toast.success("Successfully Updated");
+		setTimeout(() => {
+			location.reload();
+		}, 1000)
 	}
 
 	return (
 		<div className={style.updateProfile} >
-			<h3>Update Profile</h3>
-			<Formik initialValues={{
-				companyEmail: companyInfo.companyEmail || "",
-				companyPhone: companyInfo.companyPhone || "",
-				companyLocation: companyInfo.companyLocation || "",
-				companyWebsite: companyInfo.companyWebsite || "",
-				aboutCompany: companyInfo.aboutCompany || "",
-			}}
-				onSubmit={(values) => handleProfileUpdate(values)}
-				validationSchema={schema}
-			>
-				{() => (
-					<Form>
-						<div className={style2.inputBox}>
-							<MyTextInput label={'Company Email'} type="text" name="companyEmail" placeholder={'Company Email'} readOnly={true} />
-							<MyTextInput label={'Company Phone'} type="text" name="companyPhone" placeholder={'Company Phone'} />
-						</div>
+			<div className={style.box}>
+				<h3>Update Profile</h3>
+				<Formik initialValues={{
+					companyEmail: companyInfo.companyEmail || "",
+					companyPhone: employerDetails.companyPhone || "",
+					companyLocation: employerDetails.companyLocation || "",
+					companyWebsite: employerDetails.companyWebsite || "",
+					aboutCompany: employerDetails.aboutCompany || "",
+				}}
+					onSubmit={(values) => handleProfileUpdate(values)}
+					validationSchema={schema}
+				>
+					{() => (
+						<Form>
+							<div className={style2.inputBox}>
+								<MyTextInput label={'Company Email'} type="text" name="companyEmail" placeholder={'Company Email'} readOnly={true} />
+								<MyTextInput label={'Company Phone'} type="text" name="companyPhone" placeholder={'Company Phone'} />
+							</div>
 
-						<div className={style2.inputBox}>
-							<MyTextInput label={'Company Website'} type="url" name="companyWebsite" placeholder={'Company Website'} />
-							<MyTextInput label={'Company Location'} type="text" name="companyLocation" placeholder={'Company Location'} />
-						</div>
-						<MyTextArea name='aboutCompany' label="About Company" rows={8} placeholder={'About Company'} />
-						<button type='sumbit' className='btn btn-primary'>Update Profile</button>
-					</Form>
+							<div className={style2.inputBox}>
+								<MyTextInput label={'Company Website'} type="url" name="companyWebsite" placeholder={'Company Website'} />
+								<MyTextInput label={'Company Location'} type="text" name="companyLocation" placeholder={'Company Location'} />
+							</div>
+							<MyTextArea name='aboutCompany' label="About Company" rows={8} placeholder={'About Company'} />
+							<button type='sumbit' className='btn btn-primary'>Update Profile</button>
+						</Form>
 
-				)}
-			</Formik>
+					)}
+				</Formik>
+			</div>
 		</div >
 	)
 }

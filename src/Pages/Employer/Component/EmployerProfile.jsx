@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useEmployerInfo } from '../useEmployerInfo';
 import style from '../style/companyProfile.module.css';
 import logo from '../../../Assest/Images/profileAvatar.png';
@@ -15,15 +15,25 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { toast } from 'react-toastify';
+import ProfileEditAlert from '../../Candidate/Component/ProfileEditAlert';
 
 const EmployerProfile = () => {
-	const { companyInfo, setCompanyInfo } = useEmployerInfo();
+	const { companyInfo } = useEmployerInfo();
+	const [employerDetails, setEmployerDetails] = useState({});
 	const [activeTab, setActiveTab] = useState("CompanyInfo");
 	const [open, setOpen] = useState(false);
 	const [error, setError] = useState('');
 	const [previewData, setPreviewData] = useState(null);
-
 	const fileInputRef = useRef(null);
+
+
+	useEffect(() => {
+		const allEmployerDetails = JSON.parse(localStorage.getItem('employersDetails')) || [];
+		const employerInfo = allEmployerDetails.find(employer => employer.companyId === companyInfo.companyId);
+		if (employerInfo) {
+			setEmployerDetails(employerInfo);
+		}
+	}, [])
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -53,23 +63,31 @@ const EmployerProfile = () => {
 	}
 
 	function handleProfileUpdate() {
-		const allOrg = JSON.parse(localStorage.getItem('registeredOrg'));
+		const allOrg = JSON.parse(localStorage.getItem('employersDetails')) || [];
 		const index = allOrg.findIndex(org => org.companyId === companyInfo.companyId);
 		if (index !== -1) {
 			allOrg[index].companyImage = previewData;
-			localStorage.setItem("registeredOrg", JSON.stringify(allOrg));
-			toast.success("Image uploaded");
-			handleClose();
-			setTimeout(() => {
-				location.reload();
-			}, 1000)
 		}
+		else {
+			const newEmployer = {
+				companyId: companyInfo.companyId,
+				companyName: companyInfo.companyName,
+				companyImage: previewData
+			}
+			allOrg.push(newEmployer);
+		}
+		localStorage.setItem("employersDetails", JSON.stringify(allOrg));
+		toast.success("Image uploaded");
+		handleClose();
+		setTimeout(() => {
+			location.reload();
+		}, 1000)
 	}
 	return (
 		<section className={style.companyProfile}>
 			<div>
 				<div>
-					<img src={companyInfo.companyImage || logo} alt="CompanyLogo" />
+					<img src={employerDetails.companyImage || logo} alt="CompanyLogo" />
 				</div>
 				<h2>{companyInfo.companyName}</h2>
 				<div className='flex-justify-center'>
@@ -98,6 +116,7 @@ const EmployerProfile = () => {
 					</Dialog>
 				</div>
 			</div>
+			{!(employerDetails.hasOwnProperty("employerInfo")) && <ProfileEditAlert setActiveTab={setActiveTab} />}
 			<div>
 				<div className={style.employerTabs}>
 					<div className={activeTab === "CompanyInfo" && 'activeEmployerTab'} onClick={() => setActiveTab('CompanyInfo')} >
@@ -113,9 +132,9 @@ const EmployerProfile = () => {
 						<span>Account Setting</span>
 					</div>
 				</div>
-				{activeTab === 'CompanyInfo' && <CompanyInfo companyInfo={companyInfo} />}
-				{activeTab === 'UpdateProfile' && <UpdateProfile companyInfo={companyInfo} />}
-				{activeTab === 'AccountSetting' && <AccoutSetting companyInfo={companyInfo} />}
+				{activeTab === 'CompanyInfo' && <CompanyInfo employerDetails={employerDetails.employerInfo} />}
+				{activeTab === 'UpdateProfile' && <UpdateProfile employerDetails={employerDetails.employerInfo} />}
+				{activeTab === 'AccountSetting' && <AccoutSetting />}
 			</div>
 		</section >
 	)

@@ -23,9 +23,6 @@ const EmployerSignup = () => {
 			[e.target.name]: e.target.value
 		})
 	}
-	function handleFormSubmit() {
-		console.log("submit");
-	}
 
 	function handleCheckBoxClick(e) {
 		setChecked(e.target.checked);
@@ -67,6 +64,7 @@ const EmployerSignup = () => {
 
 	function employerSignup(newOrgDetails) {
 		const registeredOrg = JSON.parse(localStorage.getItem('registeredOrg')) || [];
+		const employersDetails = JSON.parse(localStorage.getItem('employersDetails')) || [];
 		if (registeredOrg.find(org => org.companyName == newOrgDetails.companyName || org.companyEmail === newOrgDetails.companyEmail)) {
 			toast.error("Company already registered with this name.");
 		}
@@ -75,6 +73,11 @@ const EmployerSignup = () => {
 			delete newOrgDetails.confirmPassword;
 			registeredOrg.push(newOrgDetails);
 			localStorage.setItem('registeredOrg', JSON.stringify(registeredOrg));
+			employersDetails.push({
+				companyId: newOrgDetails.companyId,
+				companyName: newOrgDetails.companyName
+			})
+			localStorage.setItem("employersDetails", JSON.stringify(employersDetails))
 			toast.success("Successfully registered");
 			navigate('/login/employer');
 		}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import image from '../../../Assest/Images/bgImageLogin.jpg';
 import { useCandidateInfo } from '../useCandidateInfo';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -9,7 +9,7 @@ import CandidateAccount from './CandidateAccount';
 import UpdateCandidateProfile from './UpdateCandidateProfile';
 import ProfileEditAlert from './ProfileEditAlert';
 const CandidateProfile = () => {
-	const [activeTab, setActiveTab] = useState('aboutCandidate');
+	const [activeTab, setActiveTab] = useState('AboutCandidate');
 	const candidateInfo = useCandidateInfo();
 
 	let candidateDetails = {};
@@ -36,19 +36,18 @@ const CandidateProfile = () => {
 					</div>
 				</div>
 			</div>
-
 			{
 				Object.keys(candidateDetails).length === 0 && <ProfileEditAlert setActiveTab={setActiveTab} />
 			}
 			<div className={style.pageTabs}>
-				<div onClick={() => setActiveTab('aboutCandidate')} className={activeTab === 'aboutCandidate' && 'activeEmployerTab'}>About</div>
-				<div onClick={() => setActiveTab('updateprofile')} className={activeTab === 'updateprofile' && 'activeEmployerTab'}>Update Profile</div>
-				<div onClick={() => setActiveTab('candidateAccount')} className={activeTab === 'candidateAccount' && 'activeEmployerTab'}>Account Setting</div>
+				<div onClick={() => setActiveTab('AboutCandidate')} className={activeTab === 'AboutCandidate' && 'activeEmployerTab'}>About</div>
+				<div onClick={() => setActiveTab('UpdateProfile')} className={activeTab === 'UpdateProfile' && 'activeEmployerTab'}>Update Profile</div>
+				<div onClick={() => setActiveTab('CandidateAccount')} className={activeTab === 'CandidateAccount' && 'activeEmployerTab'}>Account Setting</div>
 			</div>
 			{
-				(activeTab === 'aboutCandidate') ? <Profile candidateInfo={candidateInfo} /> :
-					(activeTab === 'candidateAccount') ? <CandidateAccount candidateInfo={candidateInfo} /> :
-						(activeTab === 'updateprofile') ? <UpdateCandidateProfile candidateInfo={candidateInfo} /> : <></>
+				(activeTab === 'AboutCandidate') ? <Profile candidateInfo={candidateInfo} /> :
+					(activeTab === 'CandidateAccount') ? <CandidateAccount candidateInfo={candidateInfo} /> :
+						(activeTab === 'UpdateProfile') ? <UpdateCandidateProfile candidateInfo={candidateInfo} /> : <></>
 			}
 		</section>
 	)

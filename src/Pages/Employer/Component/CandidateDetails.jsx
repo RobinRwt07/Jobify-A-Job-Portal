@@ -28,6 +28,19 @@ const CandidateDetails = ({ open, handleClose, applicationId }) => {
 		handleClose();
 	}
 
+	function handleAcceptClick() {
+		applicationDetails.status = 'accepted';
+		const index = allApplication.findIndex(application => application.applicationId === applicationId);
+		if (index !== -1) {
+			allApplication.splice(index, 1, applicationDetails);
+			localStorage.setItem('jobApplications', JSON.stringify(allApplication));
+			toast.success("Application Accepted");
+		}
+		else {
+			toast.error("can't find application");
+		}
+		handleClose();
+	}
 	return (
 		<Dialog onClose={handleClose} open={open} fullWidth={true}
 			maxWidth={'md'}>
@@ -50,7 +63,7 @@ const CandidateDetails = ({ open, handleClose, applicationId }) => {
 						</div>
 						<div>
 							<Button type='btn-danger' handler={handleRejectClick}>Reject</Button>
-							<Button type='btn btn-primary'>Accept Application</Button>
+							<Button type='btn btn-primary' handler={handleAcceptClick}>Accept Application</Button>
 						</div>
 					</div>
 					<div className={style.candidateDetailsBody}>

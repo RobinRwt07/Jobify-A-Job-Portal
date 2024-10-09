@@ -1,24 +1,45 @@
 import style from '../style/companyProfile.module.css';
+import { IoMailOutline } from 'react-icons/io5';
+import { FaPhone } from 'react-icons/fa';
+import { FaEarthAsia, FaLocationDot } from 'react-icons/fa6';
 
-const CompanyInfo = ({ companyInfo }) => {
+const CompanyInfo = ({ employerDetails = {} }) => {
 	return (
 		<div className={style.companyInfo}>
 			<div>
 				<h3>About Company</h3>
-				<p>{companyInfo.aboutCompany || "NA"}</p>
+				<p>{employerDetails.aboutCompany || "NA"}</p>
 			</div>
 			<div>
-				<h4>Email : <span> {companyInfo.companyEmail || "NA"} </span></h4>
-				<h4>Phone : <span>{companyInfo.companyPhone || "NA"}</span></h4>
+				<div>
+					<IoMailOutline />
+					<div>
+						<span>Email Address</span>
+						<p>{employerDetails.companyEmail || "NA"}</p>
+					</div>
+				</div>
+				<div>
+					<FaPhone />
+					<div>
+						<span>Phone</span>
+						<p>{employerDetails.companyPhone || "NA"}</p>
+					</div>
+				</div>
+				<div>
+					<FaEarthAsia />
+					<div>
+						<span>Website</span>
+						<p>{employerDetails.companyWebsite || "NA"}</p>
+					</div>
+				</div>
+				<div>
+					<FaLocationDot />
+					<div>
+						<span>Location</span>
+						<p>{employerDetails.companyLocation || "NA"}</p>
+					</div>
+				</div>
 			</div>
-			<div>
-				<h4>Website : <span>{companyInfo.companyWebsite || "NA"}</span></h4>
-				<h4>Organization Type : <span>{companyInfo.companyType || "NA"}</span></h4>
-			</div>
-			<div>
-				<h4>Location: <span> {companyInfo.companyLocation} </span></h4>
-			</div>
-
 		</div>
 	)
 }

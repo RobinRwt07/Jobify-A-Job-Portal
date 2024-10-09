@@ -19,7 +19,7 @@ const FeaturedJob = () => {
 		)
 	}
 	const jobs = allJobs.slice(0, 9);
-	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
+	const allOrgs = JSON.parse(localStorage.getItem("employersDetails")) || [];
 	return (
 		<div className="container">
 			<div className={style["featured-header"]}>

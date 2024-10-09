@@ -2,6 +2,7 @@ import { FaSchool, FaSuitcase } from "react-icons/fa"
 import { FaCircleCheck, FaCirclePause, FaCircleXmark, FaLocationDot } from "react-icons/fa6"
 import style from '../style/jobApplication.module.css';
 import avatar from '../../../Assest/Images/profileAvatar.png';
+import Button from "../../../Component/Button";
 const JobApplicationRow = ({ applicationInfo, setOpen, setApplicationsId }) => {
 
 	function viewApplicantDetails() {

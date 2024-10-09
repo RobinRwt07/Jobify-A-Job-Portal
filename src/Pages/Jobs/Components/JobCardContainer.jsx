@@ -50,7 +50,7 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	if (searchResult.length === 0) {
 		return <Message>Can't Find Any Job</Message>
 	}
-	const allOrgs = JSON.parse(localStorage.getItem("registeredOrg")) || [];
+	const allOrgs = JSON.parse(localStorage.getItem("employersDetails")) || [];
 	return (
 		<>
 			<div style={{ marginBlock: "1rem" }}>
