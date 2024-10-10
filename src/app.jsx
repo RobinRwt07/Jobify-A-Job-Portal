@@ -8,7 +8,6 @@ import EmployerSignup from "./Pages/Login-Signup/Component/EmployerSignup";
 import Login from "./Pages/Login-Signup/Login";
 import CandidateLogin from "./Pages/Login-Signup/Component/CandidateLogin";
 import EmployerLogin from "./Pages/Login-Signup/Component/EmployerLogin";
-import GlobalError from "./Component/GlobalError";
 import FindJobs from "./Pages/Jobs/FindJobs";
 import JobDetails from "./Pages/JobDetails/JobDetails";
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,6 +28,7 @@ import CandidateProfile from "./Pages/Candidate/Component/CandidateProfile";
 import JobApplications from "./Pages/Employer/Component/JobApplications";
 import About from "./Pages/About/About";
 import UpdateCandidateProfile from "./Pages/Candidate/Component/UpdateCandidateProfile";
+import Error from "./Component/Error";
 
 export const App = () => {
 	return (
@@ -39,7 +39,7 @@ export const App = () => {
 						<Header />
 						<main>
 							<Routes>
-								<Route path="/" element={<Home />} errorElement={<GlobalError />} />
+								<Route path="/" element={<Home />} errorElement={<Error />} />
 								<Route path="/signup" element={<SignUp />}  >
 									<Route index element={<CandidateSignup />} />
 									<Route path='/signup/candidate' element={<CandidateSignup />} />
@@ -75,7 +75,7 @@ export const App = () => {
 									</Route>
 								</Route>
 								<Route path={'/about'} element={<About />} />
-								<Route path="*" element={<GlobalError />} />
+								<Route path="*" element={<Error />} />
 							</Routes>
 						</main >
 						<ToastContainer autoClose={3000} />

@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import JobCard from '../../../Component/JobCard';
 import style from '../Style/jobs.module.css';
 import { FilterContext } from '../context';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Message from '../../../Component/Message';
 import Button from '../../../Component/Button';
 
-const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
+const JobCardContainer = ({ searchParam: { title = "", location = "", companyId = "" } }) => {
+	const navigate = useNavigate();
 	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem("allJobs")) || []);
 	const { selectedTag, setSelectedTag } = useContext(FilterContext);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +17,8 @@ const JobCardContainer = ({ searchParam: { title = "", location = "" } }) => {
 	const searchResult = allJobs.filter(job => {
 		const matchedLocation = location.length === 0 || job.jobLocation.toLowerCase().includes(location.toLowerCase());
 		const matchedTitle = title.length === 0 || job.jobTitle.toLowerCase().includes(title.toLowerCase());
-		return matchedLocation && matchedTitle;
+		const matchedCompany = companyId.length === 0 || job.companyId === companyId;
+		return matchedLocation && matchedTitle && matchedCompany;
 	});
 
 	const filteredJobs = searchResult.filter((job => {

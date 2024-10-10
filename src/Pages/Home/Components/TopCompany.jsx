@@ -9,14 +9,15 @@ const TopCompany = () => {
 		return <Message>No Companies </Message>;
 	}
 	const allCompaniesDetails = JSON.parse(localStorage.getItem('employersDetails')) || [];
+	const allJobs = JSON.parse(localStorage.getItem('allJobs')) || [];
 	return (
 		<div className="container">
 			<h2 className='heading'>Top <span>Companies</span> </h2>
 			<div className={`${style['featured-job-box']} inner-container`}>
 				{allCompanies.map(company => {
-					const matchedCompany = allCompaniesDetails.find(org => org.companyId === company.companyId)
-					console.log(matchedCompany)
-					return <CompanyCard key={company.companyId} companyData={company} companyImage={matchedCompany?.companyImage || companyLogo} />
+					const matchedCompany = allCompaniesDetails.find(org => org.companyId === company.companyId);
+					const totalOpening = allJobs.filter(job => job.companyId === company.companyId).length;
+					return <CompanyCard key={company.companyId} companyData={company} companyImage={matchedCompany?.companyImage || companyLogo} totalOpening={totalOpening} />
 				})}
 			</div>
 		</div >

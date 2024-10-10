@@ -1,7 +1,6 @@
 import React from 'react';
 import AddJob from './AddJob';
 import { useNavigate, useParams } from 'react-router-dom';
-import Error from '../../../Component/Error';
 
 const UpdateJob = () => {
 	const navigate = useNavigate();

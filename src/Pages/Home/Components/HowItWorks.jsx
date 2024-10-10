@@ -6,7 +6,7 @@ const HowItWorks = () => {
 		<div className="container">
 			<div className={style.howItWorks}>
 				<h2 className='heading tx-center'>How it <span>Work</span></h2>
-				<p>Explore the following steps will help you to find job easil3</p>
+				<p>Explore the following steps will help you to find job easily</p>
 				<div>
 					<div>
 						<p>Step <span>1</span></p>
@@ -22,7 +22,7 @@ const HowItWorks = () => {
 					</div>
 					<div>
 						<p>Step <span>3</span></p>
-						<h3>Apply Job</h3>
+						<h3>Apply</h3>
 						<p>Apply for the jobs</p>
 						<Link to={'/jobs'}>Apply
 							<FaArrowRight />

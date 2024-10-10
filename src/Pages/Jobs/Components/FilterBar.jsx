@@ -23,7 +23,6 @@ const FilterBar = ({ handleFilterChange }) => {
 
 	function handleJobTypeChange(e) {
 		const { name, value, checked } = e.target;
-		console.log(name);
 		if (checked) {
 			setSelectedTag({
 				...selectedTag,

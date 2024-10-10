@@ -8,7 +8,7 @@ import style from './Style/jobs.module.css';
 import { FilterContext } from "./context";
 
 const FindJobs = () => {
-	const [searchData, setSearchData] = useState({ title: "", location: "" });
+	const [searchData, setSearchData] = useState({ title: "", location: "", companyId: "" });
 	const [isFilterOpen, setFilterOpen] = useState(false);
 	const location = useLocation();
 	const queryParam = new URLSearchParams(location.search);
@@ -19,10 +19,11 @@ const FindJobs = () => {
 	});
 
 	useEffect(() => {
-		if (queryParam.has("location") || queryParam.has('title')) {
+		if (queryParam.has("location") || queryParam.has('title') || queryParam.has('companyId')) {
 			setSearchData({
-				title: queryParam.get('title'),
-				location: queryParam.get('location')
+				title: queryParam.get('title') || '',
+				location: queryParam.get('location') || '',
+				companyId: queryParam.get('companyId') || '',
 			})
 		}
 	}, []);
