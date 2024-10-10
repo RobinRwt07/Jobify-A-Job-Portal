@@ -4,15 +4,13 @@ const Home = () => {
 
 	return (
 		<>
-			<main>
-				<LandingSection />
-				<FeaturedCompanies />
-				<FeaturedJob />
-				<TopCompany />
-				<HowItWorks />
-				<Testmonial />
-				<BottomPanel />
-			</main>
+			<LandingSection />
+			<FeaturedCompanies />
+			<FeaturedJob />
+			<TopCompany />
+			<HowItWorks />
+			<Testmonial />
+			<BottomPanel />
 			<Footer />
 		</>
 
