@@ -1,5 +1,6 @@
 import style from '../Styles/pagination.module.css';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Button from './Button';
 
 
 const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {

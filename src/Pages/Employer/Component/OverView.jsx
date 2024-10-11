@@ -16,6 +16,9 @@ const OverView = () => {
 		const allPostedJobs = allJobs.filter(job => job.companyId === companyId);
 		setPostedJobs(allPostedJobs);
 	}
+	let totalApplications = 0;
+	const allApplications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+	totalApplications = allApplications.filter(application => application.companyId === companyInfo.companyId).length;
 	useEffect(() => {
 		// fetch all job with the same company id
 		fetchAllPostedJobs(companyInfo.companyId);
@@ -37,8 +40,8 @@ const OverView = () => {
 					Jobs Posted
 				</div>
 				<div style={{ backgroundColor: '#fafad2' }}>
-					<span>{postedJobs.length}</span><br />
-					Job
+					<span>{totalApplications}</span><br />
+					Applications
 				</div>
 			</div>
 			<RecentActivity recentJobs={recentJobs} />

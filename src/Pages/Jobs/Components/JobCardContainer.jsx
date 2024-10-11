@@ -14,7 +14,9 @@ const JobCardContainer = ({ searchParam: { title = "", location = "", companyId 
 	const { selectedTag, setSelectedTag } = useContext(FilterContext);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const searchResult = allJobs.filter(job => {
+	let jobs = allJobs.filter(job => new Date(job.expirationDate) > new Date());
+
+	const searchResult = jobs.filter(job => {
 		const matchedLocation = location.length === 0 || job.jobLocation.toLowerCase().includes(location.toLowerCase());
 		const matchedTitle = title.length === 0 || job.jobTitle.toLowerCase().includes(title.toLowerCase());
 		const matchedCompany = companyId.length === 0 || job.companyId === companyId;

@@ -47,7 +47,7 @@ main {
   /* colors */
   --success: #0BA02C;
   --error: #ff2600;
-  --primary: #4640DE;
+  --primary: #003cff;
   --bg-light: #F9F9F9;
   --bg-light-2: #F8F8Fa;
   --bg-light-3: #E0E0E0;
@@ -264,4 +264,12 @@ h3 {
 
 .activeEmployerTab {
   box-shadow: inset 0px 0px 0px 1px var(--bg-dark) !important;
+}
+
+.block-sub-heading {
+  font-size: 15px;
+  color: var(--text-light);
+  text-wrap: balance;
+  font-weight: 500;
+  text-align: center;
 }

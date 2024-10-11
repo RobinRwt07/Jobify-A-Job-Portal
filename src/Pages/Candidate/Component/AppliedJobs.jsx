@@ -39,7 +39,7 @@ const AppliedJobs = () => {
 		}))
 	}
 
-	const jobsPerPage = 2;
+	const jobsPerPage = 10;
 	const lastJob = jobsPerPage * currentPage;
 	const firstJob = lastJob - jobsPerPage;
 	const currentPageJobs = filteredJobs.slice(firstJob, lastJob);

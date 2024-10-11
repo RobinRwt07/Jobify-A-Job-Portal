@@ -4,15 +4,16 @@ import Message from '../../../Component/Message';
 import companyLogo from '../../../Assest/Images/landingImage.png';
 
 const TopCompany = () => {
-	const allCompanies = JSON.parse(localStorage.getItem('registeredOrg')) || [];
+	let allCompanies = JSON.parse(localStorage.getItem('registeredOrg')) || [];
 	if (allCompanies.length === 0) {
 		return <Message>No Companies </Message>;
 	}
 	const allCompaniesDetails = JSON.parse(localStorage.getItem('employersDetails')) || [];
 	const allJobs = JSON.parse(localStorage.getItem('allJobs')) || [];
+	allCompanies = allCompanies.slice(0, 9);
 	return (
 		<div className="container">
-			<h2 className='heading'>Top <span>Companies</span> </h2>
+			<h2 className='heading tx-center'>Top <span>Companies</span> </h2>
 			<div className={`${style['featured-job-box']} inner-container`}>
 				{allCompanies.map(company => {
 					const matchedCompany = allCompaniesDetails.find(org => org.companyId === company.companyId);

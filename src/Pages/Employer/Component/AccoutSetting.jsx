@@ -104,7 +104,8 @@ const AccoutSetting = () => {
 
 			<div className={style.deleteAccount}>
 				<h3>Delete Your Company</h3>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis ipsa iure recusandae culpa dicta architecto rem et. Rerum repellendus est natus dolorem voluptates laudantium nemo quo ex suscipit, aliquid temporibus.</p>
+				<p>Once your account is deleted. All your company profile information, job listings, and candidate applications will be permanently removed.
+					Any active job postings will be immediately taken down, and candidates will no longer be able to view or apply to your positions. This action is irreversible, and you will not be able to recover your account or its data after deletion.</p>
 				{
 					(!isPasswordFieldActive) && <button className={"btn btn-danger"} onClick={() => setPasswordFieldActive(true)}>
 						<FontAwesomeIcon icon={faCircleXmark} />

@@ -24,6 +24,7 @@ const JobDetails = () => {
 		// fetch job details with specified jobid
 		fetchJobData(routeParam.jobid);
 	}, [routeParam])
+
 	if (allJobs.length === 0) {
 		return <Message>Jobs Not Found</Message>
 	}
@@ -36,8 +37,6 @@ const JobDetails = () => {
 		jobId: matchedJob.jobId,
 		companyId: matchedJob.companyId,
 		jobTitle: matchedJob.jobTitle,
-		companyImage: matchedJob.companyImage,
-		companyName: matchedJob.companyName,
 		jobLocation: matchedJob.jobLocation,
 		vacancies: matchedJob.vacancies,
 		workMode: matchedJob.workMode,
@@ -58,13 +57,13 @@ const JobDetails = () => {
 		}
 	})
 
-	const allOrg = JSON.parse(localStorage.getItem("registeredOrg")) || [];
-	const companyInfo = allOrg.find(org => org.companyId === matchedJob.companyId) || {};
+	const allEmployers = JSON.parse(localStorage.getItem("employersDetails")) || [];
+	const companyInfo = allEmployers.find(employer => employer.companyId === matchedJob.companyId) || {};
 	return (
 		<>
 			<section className={`${style.jobDetails} container`}>
 				<div>
-					<JobDetailsHeader jobInfo={jobInfo} />
+					<JobDetailsHeader jobInfo={jobInfo} companyInfo={companyInfo} />
 					<JobDescription jobDescription={jobDescription} />
 					<CompanyDetail companyInfo={companyInfo} />
 				</div>

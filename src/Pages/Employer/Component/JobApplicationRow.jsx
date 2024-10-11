@@ -9,6 +9,7 @@ const JobApplicationRow = ({ applicationInfo, setOpen, setApplicationsId }) => {
 		setOpen(true);
 		setApplicationsId(applicationInfo.applicationId)
 	}
+
 	return (
 		<div className={style.jobApplicationRow}>
 			<div>
@@ -51,7 +52,11 @@ const JobApplicationRow = ({ applicationInfo, setOpen, setApplicationsId }) => {
 							<span>{"Accepted"}</span>
 						</div>
 			}
-			<Button handler={viewApplicantDetails} disabled={applicationInfo.status === 'rejected'}>View Details</Button>
+			{
+				applicationInfo.status === 'accepted' ?
+					<a className="btn btn-primary" href={`mailto:${applicationInfo.candidateEmail}`}>Send Mail</a> :
+					<Button handler={viewApplicantDetails} disabled={applicationInfo.status === 'rejected'}>View Details</Button>
+			}
 		</div>
 	)
 }

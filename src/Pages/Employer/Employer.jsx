@@ -26,7 +26,7 @@ const Employer = () => {
 				{
 					sideBarActive &&
 					<DashboardSideBar sideBarActive={sideBarActive} setSideBarActive={setSideBarActive} type={'employer'} >
-						<EmployerSideBar />
+						<EmployerSideBar setSideBarActive={setSideBarActive} />
 					</DashboardSideBar>
 				}
 				<div className={style.contentContainer}>

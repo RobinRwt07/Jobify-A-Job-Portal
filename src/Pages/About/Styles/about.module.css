@@ -1,0 +1,52 @@
+.aboutContainer {
+  &>h2 {
+    margin-block: var(--m-lg);
+  }
+}
+
+.aboutWhoWeAre,
+.ourMission {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+
+  @media (min-width:768px) {
+    flex-direction: row;
+    align-items: center;
+
+    &>div:first-child {
+      padding: var(--p-lg);
+    }
+
+    &>* {
+      flex: 1 1;
+    }
+  }
+
+  h3 {
+    margin-block-end: var(--m-md);
+  }
+
+  &>div:has(img) {
+    max-height: 300px;
+    aspect-ratio: 5/2;
+    border-radius: var(--br-lg);
+
+    @media (min-width:768px) {
+      aspect-ratio: 4/2;
+    }
+
+    &>img {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      object-fit: cover;
+    }
+  }
+}
+
+.ourMission {
+  @media (min-width:768px) {
+    flex-direction: row-reverse;
+  }
+}

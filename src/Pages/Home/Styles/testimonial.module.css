@@ -5,29 +5,32 @@
     overflow: hidden;
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, auto);
     gap: var(--gap-md);
 
     @media (min-width:768px) {
       gap: var(--gap-xl);
     }
-
-    &>* {
-      flex: none
-    }
   }
 }
 
 .testimonialCard {
-  max-width: 280px;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  width: 280px;
   padding: var(--p-lg);
   border-radius: var(--br-sm);
   background-color: var(--bg-light-2);
   scroll-snap-align: start;
+  gap: 0;
 
   & p {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-light);
+    margin-block-start: var(--m-sm);
   }
 
   &>div:first-child {

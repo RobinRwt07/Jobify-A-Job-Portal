@@ -1,0 +1,55 @@
+.whyJobfifyContainer {
+  &>div:last-child {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: repeat(3, auto);
+    gap: var(--gap-lg);
+    margin-block: var(--m-xl);
+
+    &>* {
+      padding: var(--p-lg);
+      border-radius: var(--br-md);
+      box-shadow: inset 0px 0px 0px 1px var(--bg-light-3);
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 3;
+      gap: var(--gap-sm);
+
+      @media (min-width:1024px) {
+        padding: var(--p-xl);
+      }
+
+      &>p {
+        font-size: 15px;
+      }
+
+      &>div:has(>svg) {
+        width: 42px;
+        height: 42px;
+        aspect-ratio: 1;
+        border-radius: var(--br-round);
+        background-color: var(--primary);
+        color: var(--text-white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-block-end: var(--m-md);
+
+        & svg {
+          font-size: 24px;
+        }
+      }
+    }
+
+    &>div:last-child {
+      background-image: linear-gradient(160deg, #93c0ff, #3d8eff, #305aff, #1644ff, #0030f1, #002de2);
+      color: var(--text-white) !important;
+
+      &>div:has(>svg) {
+        background-color: var(--bg-white);
+        color: #0278ff;
+      }
+    }
+  }
+}

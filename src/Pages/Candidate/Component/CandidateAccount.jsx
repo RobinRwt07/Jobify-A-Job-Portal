@@ -116,13 +116,13 @@ const CandidateAccount = ({ candidateInfo }) => {
 			</div>
 			<div className={`${style.deleteAccount} ${style.inputFieldContainer}`}>
 				<h3>Delete Your Account</h3>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet vitae accusamus iure asperiores tempora rem dicta quidem animi enim numquam itaque excepturi mollitia eius tenetur, quia soluta veniam corporis quo.</p>
+				<p> Once your account is deleted. All your profile information will be permanently removed.	You will lose access to all saved jobs, job applications, and job alerts.Any ongoing job applications will be canceled, and employers will no longer be able to view your profile.This action is irreversible, and you will not be able to recover your account or its data after deletion.</p>
 				<Buttton type='btn btn-danger' handler={() => setOpen(true)}>Delete Account </Buttton>
 
 				<Dialog onClose={handleDialogClose} open={open}>
 					<div className={style.dialogContent} >
 						<h2>Are you sure you want to delete your account?</h2>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur quas, voluptas repellat illo deleniti labore cum adipisci sequi vitae nihil!</p>
+						<p>This action is permanent and cannot be undone. You will lose access to all your saved jobs, applications, and profile information. Please confirm if you wish to proceed.</p>
 						<div>
 							<Buttton type="btn-primary" handler={handleDialogClose}>Cancel</Buttton>
 							<Buttton type="btn btn-danger" handler={handleDeleteAccount}>Delete</Buttton>

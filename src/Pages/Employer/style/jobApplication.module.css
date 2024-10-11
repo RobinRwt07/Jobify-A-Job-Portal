@@ -22,7 +22,7 @@
   }
 
   & span {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--text-light);
   }
@@ -66,10 +66,11 @@
 .iconBox {
   display: flex;
   flex-direction: row;
-  gap: var(--gap-lg);
+  gap: var(--gap-sm);
+  flex-wrap: wrap;
 
   & svg {
-    font-size: 20px;
+    font-size: 18px;
     color: var(--text-light);
   }
 

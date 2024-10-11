@@ -23,20 +23,19 @@ const Testmonial = () => {
 
 	return (
 		<div className="container">
-			<div>
-				<h2 className='heading'>Client <span>Testimonials</span></h2>
-				<div className={style.testimonialBox}>
-					<div ref={scrollBox} >
-						{testimonials.map(testimonial => <TestimonialCard data={testimonial} key={testimonial.id} />)}
-					</div>
-					<div className={style.sliderBtn}>
-						<Button type="btn-tertiary" handler={handlePreviousClick}>
-							<FontAwesomeIcon icon={faArrowLeft} />
-						</Button>
-						<Button type="btn-tertiary" handler={handleNextClick}>
-							<FontAwesomeIcon icon={faArrowRight} />
-						</Button>
-					</div>
+			<h2 className='heading tx-center'>Client <span>Testimonials</span></h2>
+			<p className="block-sub-heading">let's know what our career aspirants have to say about our evolving community career finding services</p>
+			<div className={style.testimonialBox}>
+				<div ref={scrollBox} >
+					{testimonials.map(testimonial => <TestimonialCard data={testimonial} key={testimonial.id} />)}
+				</div>
+				<div className={style.sliderBtn}>
+					<Button type="btn-tertiary" handler={handlePreviousClick}>
+						<FontAwesomeIcon icon={faArrowLeft} />
+					</Button>
+					<Button type="btn-tertiary" handler={handleNextClick}>
+						<FontAwesomeIcon icon={faArrowRight} />
+					</Button>
 				</div>
 			</div>
 		</div >
