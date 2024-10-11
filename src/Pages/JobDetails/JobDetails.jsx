@@ -51,12 +51,10 @@ const JobDetails = () => {
 		skills: matchedJob.skills.split(',')
 	}
 	const similerJobs = allJobs.filter(job => {
-		const isMatched = job.jobTitle.split(' ').some((item) => matchedJob.jobTitle.includes(item));
-		if (isMatched) {
-			return job;
-		}
+		const isActive = new Date(job.expirationDate) > new Date();
+		const isMatched = matchedJob.jobTags.split(',').some(tag => job.jobTags.includes(tag.trim()));
+		return isActive && isMatched;
 	})
-
 	const allEmployers = JSON.parse(localStorage.getItem("employersDetails")) || [];
 	const companyInfo = allEmployers.find(employer => employer.companyId === matchedJob.companyId) || {};
 	return (
