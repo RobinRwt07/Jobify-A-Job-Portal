@@ -23,7 +23,7 @@ const Footer = () => {
 							<h3>Quick Links</h3>
 							<ul>
 								<li><Link to={'/'}>Home </Link></li>
-								<li><Link to={'/about'}>Contact </Link></li>
+								<li><Link to={'/about'}>Admin </Link></li>
 								<li><Link to={'/signup'}>Signup </Link></li>
 								<li><Link to={'/login'}>Login </Link></li>
 							</ul>
@@ -46,7 +46,7 @@ const Footer = () => {
 						</div>
 					</div>
 					<div className={style.copyright}>
-						<p>2024 @ JobHuntly. All rights reserved</p>
+						<p>{new Date().getFullYear()} @ JobHuntly. All rights reserved</p>
 						<div>
 							<a href="#">
 								<img src={instagramLogo} alt="instagram" />
