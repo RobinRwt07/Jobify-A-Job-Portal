@@ -6,8 +6,10 @@ import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import { Outlet } from 'react-router-dom';
 import DashboardSideBar from '../../Component/DashboardSideBar';
 import CandidateSideBar from './Component/CandidateSidebar';
+import { useCandidateAuth } from '../../hooks/useCandidateAuth';
 
 const Candidate = () => {
+	const { candidateLogout } = useCandidateAuth();
 	const [sideBarActive, setSideBarActive] = useState(false);
 	function handleOpen() {
 		setSideBarActive(true);
@@ -24,7 +26,8 @@ const Candidate = () => {
 				}
 
 				{
-					sideBarActive && <DashboardSideBar sideBarActive={sideBarActive} setSideBarActive={setSideBarActive} type={"candidate"}>
+					sideBarActive &&
+					<DashboardSideBar sideBarActive={sideBarActive} setSideBarActive={setSideBarActive} logoutHandler={candidateLogout}>
 						<CandidateSideBar setSideBarActive={setSideBarActive} />
 					</DashboardSideBar>
 				}

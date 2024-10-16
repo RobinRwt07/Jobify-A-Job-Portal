@@ -12,6 +12,7 @@ import avatar from '../Assest/Images/profileAvatar.png';
 
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import useAdminAuth from '../hooks/useAdminAuth';
 
 const Header = () => {
 	const [isNavActive, setNavActive] = useState(false);
@@ -19,6 +20,7 @@ const Header = () => {
 	const navigate = useNavigate();
 	const { candidateAuthed, candidateLogout } = useCandidateAuth();
 	const { employerAuthed, employerLogout } = useEmployerAuth();
+	const isAdminAuthed = useAdminAuth();
 
 	const [anchorEl, setAnchorEl] = useState(null);
 	useEffect(() => {
@@ -104,16 +106,18 @@ const Header = () => {
 										<NavLink to={'/candidate'} onClick={closeNavBar}>Dashboard</NavLink> :
 										(employerAuthed) ?
 											<NavLink to={'/employer'} onClick={closeNavBar}>Dashboard</NavLink> :
-											<>
-												<NavLink to={'/employer'} onClick={closeNavBar} >Employer</NavLink>
-												<NavLink to={'/candidate'} onClick={closeNavBar}>Candidate</NavLink>
-											</>
+											(isAdminAuthed) ?
+												<NavLink to={'/admin'} onClick={closeNavBar}>Dashboard</NavLink> :
+												<>
+													<NavLink to={'/employer'} onClick={closeNavBar} >Employer</NavLink>
+													<NavLink to={'/candidate'} onClick={closeNavBar}>Candidate</NavLink>
+												</>
 								}
 								<NavLink to={'/about'} end onClick={closeNavBar}>About Us</NavLink>
 							</div>
 						</nav>
 						{
-							!(candidateAuthed || employerAuthed) &&
+							!(candidateAuthed || employerAuthed || isAdminAuthed) &&
 							<div className={style.btnGroup}>
 								<Button type='btn-secondary' handler={() => handleNavigate('/login')} >Login</Button>
 								<Button type='btn-primary' handler={() => handleNavigate('/signup')}>Signup</Button>

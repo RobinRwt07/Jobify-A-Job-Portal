@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import { EmployerInfoProvider } from './useEmployerInfo';
 import DashboardSideBar from '../../Component/DashboardSideBar';
+import { useEmployerAuth } from '../../hooks/useEmployerAuth';
 
 const Employer = () => {
+	const { employerLogout } = useEmployerAuth();
 	const [sideBarActive, setSideBarActive] = useState(false);
 	function handleOpen() {
 		setSideBarActive(true);
@@ -25,7 +27,7 @@ const Employer = () => {
 
 				{
 					sideBarActive &&
-					<DashboardSideBar sideBarActive={sideBarActive} setSideBarActive={setSideBarActive} type={'employer'} >
+					<DashboardSideBar sideBarActive={sideBarActive} setSideBarActive={setSideBarActive} logoutHandler={employerLogout} >
 						<EmployerSideBar setSideBarActive={setSideBarActive} />
 					</DashboardSideBar>
 				}

@@ -1,18 +1,15 @@
-.jobApplicationTable {
+.tableContainer {
   overflow-x: scroll;
   scrollbar-width: none;
 }
 
-.jobApplicationContainer {
+.table {
   min-width: 100%;
   width: 800px;
   margin-block: var(--m-lg);
 }
 
-.jobApplicationRow {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-md);
+.tableRow {
   padding: var(--p-xl);
   box-shadow: inset 0px 0px 0px 2px var(--bg-light-2);
 
@@ -22,7 +19,7 @@
   }
 
   & span {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     color: var(--text-light);
   }
@@ -50,28 +47,12 @@
       }
     }
   }
-
-  &>div:last-of-type {
-    display: flex;
-    gap: var(--gap-sm);
-    align-items: center;
-    margin-right: var(--m-2xl);
-
-    &>span {
-      color: inherit;
-    }
-  }
-
-  &>a,
-  button {
-    flex-shrink: 0;
-  }
 }
 
 .iconBox {
   display: flex;
   flex-direction: row;
-  gap: var(--gap-sm);
+  gap: var(--gap-xl);
   flex-wrap: wrap;
 
   & svg {
@@ -86,36 +67,12 @@
   }
 }
 
-.candidateDetail {
+.tableCell {
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);
 
   &>h3 {
     font-size: 20px;
-  }
-
-  &>div:first-child {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-md);
-
-    &>div {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-sm);
-      font-size: 14px;
-      font-weight: bold;
-      background-color: rgba(0, 72, 255, 0.191);
-      color: var(--primary);
-      border-radius: var(--br-sm);
-      padding: var(--p-sm) var(--p-md);
-    }
-  }
-}
-
-.expire {
-  &>* {
-    color: red !important;
   }
 }

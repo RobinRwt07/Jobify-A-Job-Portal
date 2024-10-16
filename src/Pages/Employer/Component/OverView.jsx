@@ -20,7 +20,6 @@ const OverView = () => {
 	const allApplications = JSON.parse(localStorage.getItem('jobApplications')) || [];
 	totalApplications = allApplications.filter(application => application.companyId === companyInfo.companyId).length;
 	useEffect(() => {
-		// fetch all job with the same company id
 		fetchAllPostedJobs(companyInfo.companyId);
 	}, []);
 

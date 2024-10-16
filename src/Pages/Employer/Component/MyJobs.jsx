@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import style from '../style/recentActivity.module.css';
-import style2 from '../style/myjobs.module.css';
 import Message from '../../../Component/Message';
 import { useEmployerInfo } from '../useEmployerInfo';
 import JobRow from './JobRow';
@@ -73,7 +72,7 @@ const MyJobs = () => {
 	}
 
 	return (
-		<section className={`${style.joblist} ${style2.myJobs}`}>
+		<section className={style.joblist}>
 			<h2>My Jobs</h2>
 			<div className={style.jobsTable}>
 				<table>

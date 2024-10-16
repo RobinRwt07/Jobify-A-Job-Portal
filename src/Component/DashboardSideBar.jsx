@@ -6,12 +6,7 @@ import { useEmployerAuth } from '../hooks/useEmployerAuth';
 import { useCandidateAuth } from '../hooks/useCandidateAuth';
 import { faLessThan, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-const DashboardSideBar = ({ sideBarActive, setSideBarActive, type, children }) => {
-	const { employerLogout } = useEmployerAuth();
-	const { candidateLogout } = useCandidateAuth();
-
-	const logoutHandler = (type === "employer") ? employerLogout : candidateLogout;
-
+const DashboardSideBar = ({ sideBarActive, setSideBarActive, logoutHandler, children }) => {
 	function handleClose() {
 		setSideBarActive(false);
 	}

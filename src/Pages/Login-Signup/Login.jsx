@@ -2,32 +2,37 @@ import { useState, useEffect } from "react";
 import Button from "../../Component/Button";
 import Card from "../../Component/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuildingUser, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBuildingUser, faUser, faUserShield } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate, useLocation, Outlet } from "react-router-dom";
 import style from './Style/signup.module.css';
 import bgImage from '../../Assest/Images/bgImageLogin.jpg';
 import { useCandidateAuth } from "../../hooks/useCandidateAuth";
 import { useEmployerAuth } from "../../hooks/useEmployerAuth";
+import useAdminAuth from "../../hooks/useAdminAuth";
 
 const Login = () => {
 	const [activeForm, setActiveFrom] = useState('');
 	const { candidateAuthed } = useCandidateAuth();
 	const { employerAuthed } = useEmployerAuth();
+	const isAdminAuthed = useAdminAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 
 	useEffect(() => {
 		const formType = location.pathname.split('/').at(-1);
-		if (formType == 'employer') {
+		if (formType === 'employer') {
 			setActiveFrom('employer');
 		}
-		else {
+		if (formType === 'admin') {
+			setActiveFrom('admin');
+		}
+		if (formType === 'candidate') {
 			setActiveFrom('candidate');
 		}
 	}, [])
 
 	useEffect(() => {
-		if (candidateAuthed || employerAuthed) {
+		if (candidateAuthed || employerAuthed || isAdminAuthed) {
 			navigate('/', { replace: true });
 		}
 	}, [])
@@ -40,6 +45,10 @@ const Login = () => {
 	function handleCandidateClick() {
 		navigate('/login/candidate')
 		setActiveFrom("candidate");
+	}
+	function handleAdminClick() {
+		navigate('/login/admin');
+		setActiveFrom("admin");
 	}
 	return (
 		<section className={`${style.loginBox} container`}>
@@ -57,6 +66,10 @@ const Login = () => {
 							<Button type={activeForm === 'employer' ? "active-btn" : "btn-tertiary"} handler={handleEmployerClick}>
 								<FontAwesomeIcon icon={faBuildingUser} />
 								Employer
+							</Button>
+							<Button type={activeForm === 'admin' ? "active-btn" : "btn-tertiary"} handler={handleAdminClick}>
+								<FontAwesomeIcon icon={faUserShield} />
+								Admin
 							</Button>
 						</div>
 					</Card>

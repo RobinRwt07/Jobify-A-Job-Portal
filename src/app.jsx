@@ -29,6 +29,11 @@ import JobApplications from "./Pages/Employer/Component/JobApplications";
 import About from "./Pages/About/About";
 import UpdateCandidateProfile from "./Pages/Candidate/Component/UpdateCandidateProfile";
 import Error from "./Component/Error";
+import AdminLogin from "./Pages/Login-Signup/Component/AdminLogin";
+import Admin from "./Pages/Admin/Admin";
+import AdminOverview from "./Pages/Admin/Components/AdminOverview";
+import AdminCandidates from "./Pages/Admin/Components/AdminCandidates";
+import AdminEmployers from "./Pages/Admin/Components/AdminEmployers";
 
 
 const App = () => {
@@ -73,6 +78,7 @@ const AppRoutes = () => {
 						<Route index element={<CandidateLogin />} />
 						<Route path="/login/candidate" element={<CandidateLogin />} />
 						<Route path="/login/employer" element={<EmployerLogin />} />
+						<Route path="/login/admin" element={<AdminLogin />} />
 					</Route>
 
 					<Route path={'/jobs'} element={<FindJobs />} />
@@ -97,6 +103,15 @@ const AppRoutes = () => {
 							<Route path="/employer/job_applications/:jobId" element={<JobApplications />} />
 						</Route>
 					</Route>
+
+					<Route element={<ProtectedRoute type='admin' redirectTo={'/login/admin'} />} >
+						<Route path="/admin" element={<Admin />}>
+							<Route index element={<AdminOverview />} />
+							<Route path="/admin/candidates" element={<AdminCandidates />} />
+							<Route path="/admin/employers" element={<AdminEmployers />} />
+						</Route>
+					</Route>
+
 					<Route path={'/about'} element={<About />} />
 				</Route>
 				<Route path="*" element={<Error />} />

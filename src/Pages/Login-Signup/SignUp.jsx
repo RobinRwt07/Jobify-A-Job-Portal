@@ -8,12 +8,14 @@ import { faUser, faBuildingUser } from "@fortawesome/free-solid-svg-icons";
 import backgroundImage from '../../Assest/Images/bgImageLogin.jpg';
 import { useCandidateAuth } from "../../hooks/useCandidateAuth";
 import { useEmployerAuth } from "../../hooks/useEmployerAuth";
+import useAdminAuth from "../../hooks/useAdminAuth";
 
 
 const SignUp = () => {
 	const [activeForm, setActiveFrom] = useState('');
 	const { candidateAuthed } = useCandidateAuth();
 	const { employerAuthed } = useEmployerAuth();
+	const isAdminAuthed = useAdminAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -28,7 +30,7 @@ const SignUp = () => {
 	}, [])
 
 	useEffect(() => {
-		if (candidateAuthed || employerAuthed) {
+		if (candidateAuthed || employerAuthed || isAdminAuthed) {
 			navigate('/', { replace: true });
 		}
 	}, [])

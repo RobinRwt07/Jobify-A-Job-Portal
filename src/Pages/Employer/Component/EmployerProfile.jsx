@@ -9,7 +9,6 @@ import CompanyInfo from './CompanyInfo';
 import UpdateProfile from './UpdateProfile';
 import AccoutSetting from './AccoutSetting';
 
-// import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -25,7 +24,6 @@ const EmployerProfile = () => {
 	const [error, setError] = useState('');
 	const [previewData, setPreviewData] = useState(null);
 	const fileInputRef = useRef(null);
-
 
 	useEffect(() => {
 		const allEmployerDetails = JSON.parse(localStorage.getItem('employersDetails')) || [];
