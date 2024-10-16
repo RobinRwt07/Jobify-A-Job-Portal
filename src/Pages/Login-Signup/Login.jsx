@@ -11,7 +11,7 @@ import { useEmployerAuth } from "../../hooks/useEmployerAuth";
 import useAdminAuth from "../../hooks/useAdminAuth";
 
 const Login = () => {
-	const [activeForm, setActiveFrom] = useState('');
+	const [activeForm, setActiveFrom] = useState('candidate');
 	const { candidateAuthed } = useCandidateAuth();
 	const { employerAuthed } = useEmployerAuth();
 	const isAdminAuthed = useAdminAuth();
