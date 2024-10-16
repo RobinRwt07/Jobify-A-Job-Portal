@@ -1,12 +1,52 @@
+import { useState } from 'react';
 import style from '../../../Styles/dashboard.module.css';
+import BarChart from './BarChart';
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
 
+Chart.register(CategoryScale);
 
 const AdminOverview = () => {
+	const [allApplications, setApplications] = useState(JSON.parse(localStorage.getItem('jobApplications')) || []);
+	const obj = {}
+
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+	months.forEach((month, index) => {
+		if (index in obj) {
+			return;
+		}
+		else {
+			obj[index] = 0;
+		}
+	})
+
+	allApplications.forEach(application => {
+		const month = new Date(application.dateApplied).getMonth();
+		if (month in obj) {
+			obj[month] += 1;
+		}
+		else {
+			obj[month] = 1;
+		}
+	});
+
+	const [chartData, setChartData] = useState({
+		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		datasets: [
+			{
+				label: "Appications  Received ",
+				data: Object.values(obj),
+				backgroundColor: [
+					"#50AF95",
+					"#f3ba2f",
+					"#2a71d0"
+				],
+			}]
+	});
 	const allJobs = JSON.parse(localStorage.getItem('allJobs')) || [];
-	const allApplications = JSON.parse(localStorage.getItem('jobApplications')) || [];
 	const totalEmployer = JSON.parse(localStorage.getItem('registeredOrg')) || [];
 	const totalCandidates = JSON.parse(localStorage.getItem('registeredCandidate')) || [];
-
 	return (
 		<div className={style.overview}>
 			<div>
@@ -25,6 +65,10 @@ const AdminOverview = () => {
 					<span>{totalCandidates.length}</span><br />
 					Candidates
 				</div>
+			</div>
+
+			<div className={style.charts}>
+				<BarChart chartData={chartData} />
 			</div>
 		</div>
 	)
