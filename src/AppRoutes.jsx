@@ -26,7 +26,16 @@ import { AppLayout } from "./app";
 
 
 // lazily loading component
-const Home = React.lazy(() => import('./Pages/Home/Home'));
+// const Home = React.lazy(() => {
+// 	return new Promise(resolve => setTimeout(resolve, 2000)).then(
+// 		() =>
+// 			Math.floor(Math.random() * 10) >= 4
+// 				? import('./Pages/Home/Home')
+// 				: Promise.reject(new Error())
+// 	);
+// });
+
+const Home = React.lazy(() => import('./Pages/Home/Home'))
 const FindJobs = React.lazy(() => import('./Pages/Jobs/FindJobs'));
 const JobDetails = React.lazy(() => import('./Pages/JobDetails/JobDetails'));
 const Login = React.lazy(() => import('./Pages/Login-Signup/Login'));

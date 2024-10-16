@@ -6,6 +6,7 @@ import { EmployerAuthProvider } from "./hooks/useEmployerAuth";
 import AppRoutes from "./AppRoutes";
 import { Suspense } from "react";
 import Loader from "./Component/Loader";
+import ErrorBoundary from "./Component/ErrorBoundary";
 
 const App = () => {
 	return (
@@ -25,12 +26,14 @@ const App = () => {
 const AppLayout = () => {
 	return (
 		<>
-			<Header />
-			<Suspense fallback={<Loader />}>
-				<main>
-					<Outlet />
-				</main>
-			</Suspense>
+			<ErrorBoundary>
+				<Header />
+				<Suspense fallback={<Loader />}>
+					<main>
+						<Outlet />
+					</main>
+				</Suspense>
+			</ErrorBoundary>
 		</>
 	)
 }

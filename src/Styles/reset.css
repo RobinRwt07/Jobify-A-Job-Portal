@@ -277,10 +277,11 @@ h3 {
 .loaderContainer {
   width: 100%;
   height: calc(100vh - 90px);
-  align-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &>div {
-    margin-inline: auto;
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid var(--primary);

@@ -1,8 +1,4 @@
 import React from 'react'
-const style = {
-
-}
-
 const Loader = () => {
 	return (
 		<div className="loaderContainer">
