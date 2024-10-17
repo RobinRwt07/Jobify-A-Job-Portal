@@ -8,9 +8,9 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(3, auto);
-    gap: var(--gap-md);
+    gap: var(--gap-lg);
 
-    @media (min-width:768px) {
+    @media (min-width:700px) {
       gap: var(--gap-xl);
     }
   }

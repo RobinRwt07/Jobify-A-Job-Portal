@@ -30,7 +30,14 @@ const testimonials = [
     userName: "James",
     userDesignation: "Software Engineer",
     image: "https://statinfer.com/wp-content/uploads/dummy-user.png"
-  }
+  }, {
+    id: 5,
+    rating: 4,
+    testimonial: "“The variety of job listings on Jobify is impressive. I found part-time, remote work that fit my schedule perfectly. The whole process, was seamless.”",
+    userName: "Jones",
+    userDesignation: "Project Manager",
+    image: "https://statinfer.com/wp-content/uploads/dummy-user.png"
+  },
 ];
 
 export default testimonials;

@@ -8,12 +8,12 @@ const BottomPanel = () => {
 		<div className={`container inner-container ${style.bottmPanel} `}>
 			<BottomPanelCard type={"candidate"} image={candidateImage}>
 				<h2>Became a Candidate</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus a dolor convallis efficitur.
+				<p>Take the first step towards your dream career. Create your profile, explore thousands of job opportunities, and apply with just one click.
 				</p>
 			</BottomPanelCard>
 			<BottomPanelCard type={"employer"} image={employerImage} >
 				<h2>Became a Employer</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus a dolor convallis efficitur.</p>
+				<p>Connect with top talent and grow your business. Post job openings, manage applications, and find the perfect candidates for your company.</p>
 			</BottomPanelCard >
 		</div >
 	)

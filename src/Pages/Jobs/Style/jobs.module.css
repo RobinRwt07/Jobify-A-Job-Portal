@@ -28,7 +28,8 @@
   gap: var(--gap-lg);
   justify-content: center;
 
-  @container jobCardBox (width>600px) {
+  @container jobCardBox (width>640px) {
+    gap: var(--gap-xl);
     grid-template-columns: 1fr 1fr;
   }
 

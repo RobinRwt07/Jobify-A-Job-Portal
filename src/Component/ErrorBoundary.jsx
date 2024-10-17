@@ -5,14 +5,14 @@ const style = {
 	display: "flex",
 	justifyContent: "center",
 	flexDirection: "column",
-	alignItem: 'center',
-	height: 'calc(100vh - 90px)',
+	alignItems: 'center',
+	height: '100vh',
 }
 const Fallback = () => {
 	return (
 		<div style={style}>
 			<GoAlert style={{ color: "orange", fontSize: "42px" }} />
-			<h2 className='tx-center'>Something went wrong.</h2>
+			<h2 className='tx-center'>Something went wrong</h2>
 		</div>
 	)
 }

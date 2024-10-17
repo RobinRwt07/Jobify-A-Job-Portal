@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import style from '../../../Styles/dashboard.module.css';
-import BarChart from './BarChart';
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
+import React from 'react';
+import Loader from '../../../Component/Loader';
+
+const BarChart = React.lazy(() => import('./BarChart'));
 
 Chart.register(CategoryScale);
-
 const AdminOverview = () => {
 	const [allApplications, setApplications] = useState(JSON.parse(localStorage.getItem('jobApplications')) || []);
 	const obj = {}
-
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 	months.forEach((month, index) => {
@@ -32,10 +33,10 @@ const AdminOverview = () => {
 	});
 
 	const [chartData, setChartData] = useState({
-		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		labels: months,
 		datasets: [
 			{
-				label: "Appications  Received ",
+				label: "Applications received ",
 				data: Object.values(obj),
 				backgroundColor: [
 					"#50AF95",
@@ -68,7 +69,9 @@ const AdminOverview = () => {
 			</div>
 
 			<div className={style.charts}>
-				<BarChart chartData={chartData} />
+				<Suspense fallback={<Loader />}>
+					<BarChart chartData={chartData} />
+				</Suspense>
 			</div>
 		</div>
 	)
