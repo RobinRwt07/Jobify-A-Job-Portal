@@ -23,6 +23,7 @@ import EmployerLogin from "./Pages/Login-Signup/Component/EmployerLogin";
 import 'react-toastify/dist/ReactToastify.css';
 import React from "react";
 import { AppLayout } from "./app";
+import ForgetPassword from "./Component/ForgetPassword";
 
 
 // lazily loading component
@@ -96,7 +97,8 @@ const AppRoutes = () => {
 						</Route>
 					</Route>
 
-					<Route path={'/about'} element={<About />} />
+					<Route path='/about' element={<About />} />
+					<Route path="/forget_password" element={<ForgetPassword />} />
 				</Route>
 				<Route path="*" element={<Error />} />
 			</Routes>

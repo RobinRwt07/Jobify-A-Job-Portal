@@ -11,7 +11,7 @@ const EmployerLogin = () => {
 	});
 	const [errors, setErrors] = useState({});
 	const navigate = useNavigate();
-	const { employerAuthed, setEmployerAuth } = useEmployerAuth();
+	const { setEmployerAuth } = useEmployerAuth();
 
 	function handleFormChange(e) {
 		setEmployerLoginData({
@@ -74,7 +74,7 @@ const EmployerLogin = () => {
 				{errors.password && <span> {errors.password}</span>}
 			</label>
 			<div className={style.forgetPassword}>
-				<Link to={"/"}>Forget Password?</Link>
+				<Link to={'/forget_password'} state={{ type: "employer" }}>Forget Password?</Link>
 			</div>
 			<button className="btn btn-primary">Sign In</button>
 		</form >

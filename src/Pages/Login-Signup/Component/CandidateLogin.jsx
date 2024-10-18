@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../../../Public/utils.js";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ const CandidateLogin = () => {
 	});
 	const [errors, setErrors] = useState({});
 	const navigate = useNavigate();
-	const { candidateAuthed, setCandidateAuth } = useCandidateAuth();
+	const { setCandidateAuth } = useCandidateAuth();
 
 	function handleFormChange(e) {
 		setCandidateLoginData({
@@ -98,7 +98,7 @@ const CandidateLogin = () => {
 				{errors.password && <span> {errors.password}</span>}
 			</label>
 			<div className={style.forgetPassword}>
-				<Link to={"/"}>Forget Password?</Link>
+				<Link to={'/forget_password'} state={{ type: "candidate" }} >Forget Password?</Link>
 			</div>
 			<button className="btn btn-primary">Sign In</button>
 		</form >
