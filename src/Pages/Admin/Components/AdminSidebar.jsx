@@ -15,11 +15,6 @@ const AdminSidebar = ({ setSideBarActive }) => {
 				<span>Overview</span>
 			</NavLink>
 
-			<NavLink to={'/admin/candidates'} onClick={closeSideBar} end>
-				<FontAwesomeIcon icon={faUser} />
-				<span>Candidates</span>
-			</NavLink>
-
 			<NavLink to={'/admin/employers'} onClick={closeSideBar} end>
 				<FontAwesomeIcon icon={faUserGraduate} />
 				<span>Employers</span>
