@@ -129,9 +129,12 @@ const JobDetailsHeader = ({ jobInfo: { jobId, companyId, jobTitle, experience, s
 						<p>At {companyInfo.companyName || ""}</p>
 					</div>
 				</div>
-				<div className={style.bookMarkBtn} onClick={() => handleSaveClick(jobId)}>
-					<FaBookmark />
-				</div>
+				{
+					candidateAuthed &&
+					<div className={style.bookMarkBtn} onClick={() => handleSaveClick(jobId)}>
+						<FaBookmark />
+					</div>
+				}
 			</div>
 			<div>
 				<div>
