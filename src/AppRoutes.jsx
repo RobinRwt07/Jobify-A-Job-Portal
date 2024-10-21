@@ -65,7 +65,6 @@ const AppRoutes = () => {
 							<Route path='/candidate/update_profile' element={<UpdateCandidateProfile />} />
 						</Route>
 					</Route>
-
 					<Route element={<ProtectedRoute type="employer" redirectTo={'/login/employer'} />}>
 						<Route path="/employer" element={<Employer />} >
 							<Route index element={<Overview />} />

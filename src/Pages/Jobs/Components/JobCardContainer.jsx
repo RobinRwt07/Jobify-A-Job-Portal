@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import JobCard from '../../../Component/JobCard';
 import style from '../Style/jobs.module.css';
 import { FilterContext } from '../context';
@@ -9,27 +9,29 @@ import Message from '../../../Component/Message';
 import Button from '../../../Component/Button';
 
 const JobCardContainer = ({ searchParam: { title = "", location = "", companyId = "" } }) => {
-	const navigate = useNavigate();
-	const [allJobs, setAllJobs] = useState(JSON.parse(localStorage.getItem("allJobs")) || []);
 	const { selectedTag, setSelectedTag } = useContext(FilterContext);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	let jobs = allJobs.filter(job => new Date(job.expirationDate) > new Date());
+	const searchResult = useMemo(() => {
+		const allJobs = JSON.parse(localStorage.getItem("allJobs")) || [];
+		const jobs = allJobs.filter(job => new Date(job.expirationDate) > new Date());
+		return jobs.filter(job => {
+			const matchedLocation = location.length === 0 || job.jobLocation.toLowerCase().includes(location.toLowerCase());
+			const matchedTitle = title.length === 0 || job.jobTitle.toLowerCase().includes(title.toLowerCase());
+			const matchedCompany = companyId.length === 0 || job.companyId === companyId;
+			return matchedLocation && matchedTitle && matchedCompany;
+		});
+	}, [title, location, companyId]);
 
-	const searchResult = jobs.filter(job => {
-		const matchedLocation = location.length === 0 || job.jobLocation.toLowerCase().includes(location.toLowerCase());
-		const matchedTitle = title.length === 0 || job.jobTitle.toLowerCase().includes(title.toLowerCase());
-		const matchedCompany = companyId.length === 0 || job.companyId === companyId;
-		return matchedLocation && matchedTitle && matchedCompany;
-	});
+	const filteredJobs = useMemo(() => {
+		return searchResult.filter((job => {
+			const matchedJobType = selectedTag.jobType.length === 0 || selectedTag.jobType.includes(job.jobType);
+			const matcheWorkMode = selectedTag.workMode.length === 0 || selectedTag.workMode.includes(job.workMode);
+			return matcheWorkMode && matchedJobType;
+		}))
+	}, [selectedTag, title, location, companyId]);
 
-	const filteredJobs = searchResult.filter((job => {
-		const matchedJobType = selectedTag.jobType.length === 0 || selectedTag.jobType.includes(job.jobType);
-		const matcheWorkMode = selectedTag.workMode.length === 0 || selectedTag.workMode.includes(job.workMode);
-		return matcheWorkMode && matchedJobType;
-	}))
-
-	const itemPerPage = 10;
+	const itemPerPage = 9;
 	const lastItem = currentPage * itemPerPage;
 	const firstItem = lastItem - itemPerPage;
 
